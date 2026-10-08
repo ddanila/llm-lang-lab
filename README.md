@@ -14,10 +14,18 @@ The [first six-run pilot](reports/20261008T085856492366Z/README.md) is published
 with metrics and generated source revisions: Go passed 3/3 interval-merging trials,
 C passed 2/3. This is exploratory evidence, not a stable language ranking.
 
-**Protocol v2 calibration is underway.** The [short calibration](reports/20261008T160452882425Z/README.md)
-finished with six timeout-censored trials; a separate full-suite calibration
-uses confirmation limits before the frozen [replication study](experiments/README.md).
-Historical v1 results cannot be pooled with v2.
+**Protocol v2 calibration is complete.** The [full-suite calibration](reports/20261008T162135502883Z/README.md)
+passed its infrastructure audit; C solved 4/10 trials and Go 6/10. This is exploratory,
+not a stable ranking. The [short calibration](reports/20261008T160452882425Z/README.md)
+had six timeout-censored trials and remains separate.
+
+The frozen [A/B study](experiments/README.md) contains 800 trials, with a measured
+runtime estimate of about 17 hours total (20–26 hours planning allowance).
+[Execution and freeze record](experiments/execution.md). The sequential runner
+publishes [the joint confirmation report](reports/c-go-controlled-v2/README.md)
+only after both complete batches pass validation; until that report exists,
+confirmation has no published conclusion. Historical v1 results cannot be pooled
+with v2.
 
 ## Run locally
 
@@ -172,6 +180,7 @@ before committing:
 
 ```sh
 python3 export_report.py runs/YOUR_BATCH
+python3 audit_batch.py runs/YOUR_BATCH > reports/YOUR_BATCH/audit.json
 ```
 
 The export includes metrics, model metadata, and generated source revisions.
@@ -193,6 +202,8 @@ VM/container before evaluating untrusted models or sources.
 `bench.py` orchestrates pi and reports; `pi/benchmark.ts` supplies its tool;
 `judge.py` owns compilation and testing; `tasks.py` owns specifications and oracles.
 `extra_tasks.py` extends the workload suite; `analysis.py` checks replication.
+`audit_batch.py` reconciles raw traces; `run_study.py` runs the frozen A/B sequence
+and can publish validated reports when explicitly invoked with `--publish`.
 `config.json` and `Modelfile` specify the pilot; `experiments/` freezes confirmation.
 
 References:

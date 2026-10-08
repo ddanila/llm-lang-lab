@@ -1,9 +1,14 @@
 # C versus Go: controlled protocol v2
 
-Status: **calibration in progress**. The [12-trial short pilot](../reports/20261008T160452882425Z/README.md)
-is complete; six trials reached its short timeout. A separate full-suite calibration
-uses the already frozen confirmation limits. Confirmation has not started.
-The historical six-run report used protocol v1 and cannot be pooled with these experiments.
+Status: **calibration complete; confirmation execution authorized**.
+The [full-suite calibration](../reports/20261008T162135502883Z/README.md) completed
+20 trials without timeouts or infrastructure errors. The earlier
+[short pilot](../reports/20261008T160452882425Z/README.md) had six timeout-censored
+trials. These are separate exploratory batches. See the
+[execution/freeze record](execution.md) for the audit, difficulty decision, runtime
+estimate, and execution commands. Confirmation has no published conclusion until
+the [joint report](../reports/c-go-controlled-v2/README.md) exists.
+Historical protocol-v1 results cannot be pooled with these experiments.
 
 ## The question
 
@@ -39,7 +44,27 @@ python3 bench.py run --config experiments/confirm-b.json
 python3 analysis.py runs/BATCH_A runs/BATCH_B
 ```
 
-Run A and B separately, sequentially on the same laptop. Do not inspect A and
+Run A and B separately, sequentially on the same laptop. The sequential runner
+performs both runs, trace audits, portable exports, and the frozen comparison:
+
+```sh
+mkdir -p .local
+caffeinate -i python3 -u run_study.py --publish > .local/confirmation.log 2>&1
+```
+
+This explicitly runs inference for many hours. `--publish` additionally authorizes
+committing and pushing the validated reports; omit it to keep exports local.
+`.local/study-run.json` records the active phase, batch IDs, completion, or errors.
+Keep the laptop powered and awake; closing its lid or stopping Ollama can interrupt
+the experiment. `caffeinate` prevents idle sleep, not every kind of interruption.
+The runner refuses an existing execution record and never resumes a partial batch
+or retries individual rows. An invalid A batch prevents B from starting. It also
+checks that analysis of the portable exports matches analysis of raw artifacts.
+Publication stops if tracked files changed or the automated privacy scan flags
+an export. Raw traces remain local. A stopped run requires inspection; it is never
+silently relabeled complete.
+
+ Do not inspect A and
 change B's tasks, budgets, model, thresholds, or sample size. Neither confirmation
 profile permits CLI task/repetition overrides.
 

@@ -1,0 +1,134 @@
+{
+  "batch": "20261008T162135502883Z",
+  "trials": 20,
+  "checks": [
+    {
+      "trial": "000-merge_intervals-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7a0f94e4b4a9ffea6ee0258891c56d03b7df2bc41a5c122c34c08350dda28b34"
+    },
+    {
+      "trial": "001-merge_intervals-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9feb17987f73620eae4827f8f3af8b2c0d29aa2f457556037486c7354c02ab2d"
+    },
+    {
+      "trial": "002-edit_distance-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "111a4755606521e6d6af44b8d32ae6df09dc58c429a6f2f3fee65ebbd30d98bc"
+    },
+    {
+      "trial": "003-edit_distance-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "aeb3b9cdbf6208212580db8aa4a06dd9f59cdb0df2557c4fa5bbfff15b88432d"
+    },
+    {
+      "trial": "004-grid_distance-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "097aa15a697eef2b5d1bbad17d3daa0d9c5a33d1173c352374f92811458f775b"
+    },
+    {
+      "trial": "005-grid_distance-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "139be08a726d5bb8106d9af12ab6a402fe992a0bb723887f729caf92dcad07ab"
+    },
+    {
+      "trial": "006-rational_sum-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0f12b43cc4804020ac25813fcc6b834d84234041e53232fd0488538cda1749ec"
+    },
+    {
+      "trial": "007-rational_sum-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4754ccdbc2ff7bf59eebdb4fb5f7e1bf429a6a643f9ebbd84c9e2acaae3b0291"
+    },
+    {
+      "trial": "008-csv_fields-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "680330468517e4714f2e7abd0b7d193b7e41d23ec9c356593573ed949f07abbc"
+    },
+    {
+      "trial": "009-csv_fields-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "3c8516791aefe7ff0f220c9e01b115fa3fd337b4c520d667237c3cf0c0f21fe9"
+    },
+    {
+      "trial": "010-lower_bounds-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "74f46bafec3ea2ebc35659ced99a827d9672d50535fa27b08efb490bfe76be31"
+    },
+    {
+      "trial": "011-lower_bounds-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "3489af273638f67f2c0317b0c4c117aba790bb95b906ffb98abb92fd43ac7c1a"
+    },
+    {
+      "trial": "012-rpn-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "00657256968cd0a2494fef101334f2aa61711c28d07fcb99afa0f02144a1b183"
+    },
+    {
+      "trial": "013-rpn-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d6b388a95782f2e595c7c7c7271475e4de34b9e750cc7cf9a15b6287ad4b0a95"
+    },
+    {
+      "trial": "014-transaction_ledger-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e61b329b4c15c84674c04ee5ad035598aba3c4bfc567cf2e06a2d4ef4d12893f"
+    },
+    {
+      "trial": "015-transaction_ledger-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "bb4ca70aaa10afe53e5f8f5638c5956f7028da23aa65d60d494173e5f0330bb1"
+    },
+    {
+      "trial": "016-word_counts-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "3608efc467cb576ad919b267dc28f0d1e0887a2aeb58bbe41715795dedb8912e"
+    },
+    {
+      "trial": "017-word_counts-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6d73e6944c6d2c5a1c4d4ea285792060b281f7d438a16f83f21ddd884467ab4c"
+    },
+    {
+      "trial": "018-dependency_order-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "638c084281c908c5b2b3fa165688f6360aa0ff1df6acc74b5d7fc22a1254078e"
+    },
+    {
+      "trial": "019-dependency_order-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "16e1e7d3684ac304c7f1da58ef04f365fab85f4a8b5cb85cbc2a035d9c7a4d26"
+    }
+  ],
+  "batch_unchanged": true,
+  "agent_seconds": 1494.5171242049994,
+  "wall_seconds_approx": 1521.9555640220642,
+  "timeouts": 0,
+  "compiler_or_case_wall_timeout_trials": 0,
+  "incomplete_usage_trials": 0,
+  "infrastructure_errors": 0,
+  "note": "Usage checks reconcile completed messages only; interrupted responses may have unreported tokens. Wall time uses the original summary file timestamp."
+}
