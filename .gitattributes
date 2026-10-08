@@ -1,0 +1,2 @@
+# Model-generated evidence is preserved byte-for-byte, including whitespace.
+reports/**/sources/** -whitespace
