@@ -62,7 +62,9 @@ def evaluate(work, language, task, hidden=False):
     count = 0
     failures = []
     for case in test_cases:
-        result = execute([str(binary)], work, case["input"], timeout=2, restricted=True)
+        # CPU work is independently capped at 3s by limits(). Leave enough wall
+        # time for cold executable/Seatbelt startup and laptop scheduling delays.
+        result = execute([str(binary)], work, case["input"], timeout=10, restricted=True)
         ok = (result["returncode"] == 0 and not result["timeout"]
               and result["stdout"].split() == case["expected"].split())
         count += int(ok)

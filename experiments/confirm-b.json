@@ -8,20 +8,28 @@
   "tasks": [
     "merge_intervals",
     "word_counts",
-    "rpn"
+    "rpn",
+    "lower_bounds",
+    "grid_distance",
+    "rational_sum",
+    "edit_distance",
+    "transaction_ledger",
+    "dependency_order",
+    "csv_fields"
   ],
-  "repeats": 2,
+  "repeats": 20,
   "temperature": 0.7,
   "top_p": 0.8,
   "context": 16384,
   "max_output_per_turn": 2048,
   "max_turns": 4,
   "max_submissions": 4,
-  "max_seconds": 120,
+  "max_seconds": 600,
   "protocol_version": 2,
   "model_digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977",
-  "schedule_seed": 31001,
-  "sampling_seed": 30000000,
-  "purpose": "calibration",
-  "study_id": "c-go-controlled-v2"
+  "schedule_seed": 41002,
+  "sampling_seed": 20000000,
+  "purpose": "confirmation",
+  "study_id": "c-go-controlled-v2",
+  "replication": "B"
 }

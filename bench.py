@@ -18,11 +18,14 @@ import sys
 import threading
 import time
 import urllib.request
+from urllib.parse import urlparse
 
 from judge import evaluate
 from tasks import SPECS, cases
 
 ROOT = Path(__file__).resolve().parent
+SOURCE_FILES = ["bench.py", "judge.py", "tasks.py", "extra_tasks.py", "pi/benchmark.ts",
+                "analysis.py", "experiments/study.json", "Modelfile"]
 SYSTEM = """You are solving a programming benchmark. Use only the requested language
 and its standard library. Your only tool is submit_source: send the entire source
 file to compile and test. Use its feedback to repair failures. When public tests
@@ -42,9 +45,49 @@ def api(base, path, payload=None, timeout=120):
 def version(command):
     return subprocess.check_output(command, text=True, stderr=subprocess.STDOUT).splitlines()[0]
 
+def source_hashes():
+    return {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in SOURCE_FILES}
+
+def validate_config(config):
+    if config.get("protocol_version") != 2:
+        raise ValueError("New runs require protocol_version 2; historical batches remain reportable.")
+    if config.get("languages") != ["c", "go"]:
+        raise ValueError("This comparison requires languages ['c', 'go'].")
+    if not config.get("tasks") or len(set(config["tasks"])) != len(config["tasks"]):
+        raise ValueError("Task list must be nonempty and unique.")
+    if set(config["tasks"]) - SPECS.keys():
+        raise ValueError("Unknown task in config.")
+    for key in ("repeats", "max_turns", "max_submissions", "max_seconds", "max_output_per_turn", "context"):
+        if type(config[key]) is not int or config[key] < 1:
+            raise ValueError(key + " must be a positive integer.")
+    for key in ("sampling_seed", "schedule_seed"):
+        if type(config[key]) is not int or config[key] < 0:
+            raise ValueError(key + " must be a nonnegative integer.")
+    if config["sampling_seed"] + len(config["tasks"]) * config["repeats"] >= 2**31:
+        raise ValueError("Sampling seed range must fit signed 32-bit integers.")
+    if not 0 <= config["temperature"] <= 2 or not 0 < config["top_p"] <= 1:
+        raise ValueError("Invalid sampling parameters.")
+    url = urlparse(config["ollama_url"])
+    if url.scheme != "http" or url.hostname not in ("localhost", "127.0.0.1", "::1"):
+        raise ValueError("This local experiment requires a loopback HTTP Ollama endpoint.")
+    if config.get("purpose") == "confirmation":
+        study = json.loads((ROOT / "experiments/study.json").read_text())
+        phase = config.get("replication")
+        if phase not in study["replications"]:
+            raise ValueError("Unregistered replication.")
+        expected = {**study["run_settings"], **study["replications"][phase],
+                    "replication": phase, "purpose": "confirmation", "study_id": study["study_id"]}
+        if config != expected:
+            raise ValueError("Confirmation config differs from the frozen study; prepare a new study for changes.")
+
 def environment(config):
-    return {
+    hardware = {"cpu": platform.processor() or platform.machine(), "logical_cpus": os.cpu_count()}
+    if sys.platform == "darwin":
+        hardware.update(cpu=version(["sysctl", "-n", "machdep.cpu.brand_string"]),
+                        memory_bytes=int(version(["sysctl", "-n", "hw.memsize"])))
+    snapshot = {
         "platform": platform.platform(), "machine": platform.machine(),
+        "hardware": hardware,
         "python": platform.python_version(), "pi": version(["pi", "--version"]),
         "clang": version(["clang", "--version"]), "go": version(["go", "version"]),
         "ollama": api(config["ollama_url"], "/api/version"),
@@ -52,23 +95,36 @@ def environment(config):
         "model_tags": api(config["ollama_url"], "/api/tags"),
         "git_commit": subprocess.run(["git", "rev-parse", "--verify", "HEAD"], cwd=ROOT,
                                      capture_output=True, text=True).stdout.strip() or None,
-        "source_sha256": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                          for p in [ROOT / f for f in
-                          ["bench.py", "judge.py", "tasks.py", "pi/benchmark.ts", "config.json", "Modelfile"]]},
+        "source_sha256": source_hashes(),
     }
+    model_id = config["model"] if ":" in config["model"] else config["model"] + ":latest"
+    model = next(m for m in snapshot["model_tags"]["models"] if m["name"] == model_id)
+    snapshot["model_digest"] = model["digest"]
+    if config.get("model_digest") and model["digest"] != config["model_digest"]:
+        raise ValueError("Model digest changed. Freeze a new protocol instead of silently replacing weights/settings.")
+    parameters = snapshot["model"].get("parameters", "")
+    import re
+    context = re.search(r"^num_ctx\s+(\d+)", parameters, re.MULTILINE)
+    if not context or int(context[1]) != config["context"]:
+        raise ValueError("The model alias num_ctx must match the configured context.")
+    return snapshot
 
 def schedule(config):
     rng = random.Random(config["schedule_seed"])
+    first_languages = {task: rng.randrange(2) for task in config["tasks"]}
+    task_indices = {task: i for i, task in enumerate(config["tasks"])}
     jobs = []
     for repeat in range(config["repeats"]):
         tasks = list(config["tasks"])
         rng.shuffle(tasks)
         for task in tasks:
             languages = list(config["languages"])
-            rng.shuffle(languages)
+            if (first_languages[task] + repeat) % 2:
+                languages.reverse()
             for language in languages:
                 jobs.append({"task": task, "language": language, "repeat": repeat,
-                             "sampling_seed": config["schedule_seed"] + repeat})
+                             "sampling_seed": config.get("sampling_seed", config["schedule_seed"])
+                             + task_indices[task] * config["repeats"] + repeat})
     return jobs
 
 def prompt_for(task, language, max_submissions):
@@ -87,9 +143,15 @@ def parse_events(events):
         if event["type"] == "message_end" and event.get("message", {}).get("role") == "assistant":
             message = event["message"]
             turns += 1
-            missing_usage |= "usage" not in message
+            reported = message.get("usage") or {}
+            missing_usage |= any(type(reported.get(key)) is not int or reported[key] < 0
+                                 for key in ("input", "output"))
             for key in usage:
-                usage[key] += message.get("usage", {}).get(key, 0) or 0
+                value = reported.get(key, 0)
+                if type(value) is int and value >= 0:
+                    usage[key] += value
+                else:
+                    missing_usage = True
             if message.get("stopReason") in ("error", "aborted"):
                 errors.append(message.get("errorMessage", message["stopReason"]))
         if event["type"] == "tool_execution_start":
@@ -157,8 +219,17 @@ def run_one(batch, config, job, index):
                     event = json.loads(line)
                 except json.JSONDecodeError:
                     stop = "invalid_event_stream"
-                    continue
+                    break
                 events.append(event)
+                if event["type"] == "tool_execution_end" and event.get("toolName") == "submit_source":
+                    details = event.get("result", {}).get("details", {})
+                    reason = details.get("controller_stop")
+                    if reason in ("public_pass", "submission_budget"):
+                        stop = reason
+                        break
+                    if event.get("isError") and "Judge infrastructure error" in str(event.get("result")):
+                        stop = "infrastructure_error"
+                        break
                 if event["type"] == "turn_end":
                     turns += 1
                     if (turns >= config["max_turns"]
@@ -166,13 +237,25 @@ def run_one(batch, config, job, index):
                         stop = "turn_budget"
                         break
         finally:
+            if stop == "completed":
+                # EOF may precede process exit by a few milliseconds. Do not turn
+                # a normal completion into SIGTERM/error, or race a disappearing group.
+                try:
+                    proc.wait(timeout=3)
+                except subprocess.TimeoutExpired:
+                    stop = "shutdown_timeout"
             if proc.poll() is None:
                 try:
-                    os.killpg(proc.pid, signal.SIGTERM)
+                    try:
+                        os.killpg(proc.pid, signal.SIGTERM)
+                    except PermissionError:
+                        proc.terminate()
                     proc.wait(timeout=3)
                 except (ProcessLookupError, subprocess.TimeoutExpired):
                     try:
                         os.killpg(proc.pid, signal.SIGKILL)
+                    except PermissionError:
+                        proc.kill()
                     except ProcessLookupError:
                         pass
             proc.wait()
@@ -194,15 +277,25 @@ def run_one(batch, config, job, index):
         shutil.copyfile(revision, first_work / filename)
         first = evaluate(first_work, job["language"], job["task"], hidden=True)
     infrastructure = ((proc.returncode != 0 and stop == "completed") or bool(metrics["errors"])
-                      or stop == "invalid_event_stream"
+                      or stop in ("invalid_event_stream", "infrastructure_error", "shutdown_timeout")
+                      or (stop == "timeout" and config.get("purpose") == "confirmation")
                       or any("Judge infrastructure error" in e for e in metrics["tool_errors"]))
-    valid_finish = stop == "completed" and proc.returncode == 0 and not infrastructure
-    success = valid_finish and hidden["passed"]
+    if config.get("purpose") == "confirmation":
+        # Wall-clock limits cannot distinguish OS/startup stalls from program hangs.
+        # Keep them out of the language-accuracy inference; CPU-limit failures still count.
+        for feedback in attempts + [hidden, first]:
+            infrastructure |= bool(feedback.get("build", {}).get("timeout"))
+            infrastructure |= any(f.get("timeout", False) for f in feedback.get("failures", []))
+    controlled = stop in ("public_pass", "submission_budget")
+    valid_finish = (controlled or (stop == "completed" and proc.returncode == 0)) and not infrastructure
+    success = valid_finish and bool(attempts and attempts[-1]["passed"]) and hidden["passed"]
     result = {**job, **metrics, "stop": stop, "returncode": proc.returncode,
               "infrastructure_error": infrastructure, "elapsed_seconds": elapsed,
               "submissions": len(list(revisions.glob("*"))) if revisions.exists() else 0,
               "compile_failures": sum(a["kind"] == "compile_error" for a in attempts),
-              "success": success, "first_submission_passed": first["passed"],
+              "success": success, "first_submission_passed": bool(attempts and attempts[0]["passed"] and first["passed"]),
+              "usage_complete": not metrics["usage_missing"] and stop not in
+                  ("timeout", "invalid_event_stream", "infrastructure_error", "shutdown_timeout") and not metrics["errors"],
               "hidden": hidden, "first_hidden": first,
               "par2_seconds": elapsed if success else 2 * config["max_seconds"]}
     dump(trial / "result.json", result)
@@ -243,15 +336,19 @@ def summarize(results, config):
         if "c" in pair and "go" in pair:
             by_task[task].append(int(pair["go"]["success"]) - int(pair["c"]["success"]))
     differences = {task: statistics.mean(diffs) for task, diffs in by_task.items()}
-    return {"languages": langs, "go_minus_c_success_by_task": differences,
+    summary = {"languages": langs, "go_minus_c_success_by_task": differences,
             "go_minus_c_success_task_bootstrap_95": bootstrap_interval(differences),
             "stability": "exploratory_only",
             "note": "A small task suite cannot establish a general language advantage. "
                     "Repeat a preregistered larger suite in a second independent batch."}
+    if config.get("protocol_version") == 2:
+        summary.pop("go_minus_c_success_task_bootstrap_95")
+        summary["note"] = "Single-batch descriptive results. Use analysis.py on frozen A/B confirmation batches for a decision."
+    return summary
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["doctor", "run", "report"])
+    parser.add_argument("command", choices=["plan", "doctor", "run", "report"])
     parser.add_argument("--config", default=str(ROOT / "config.json"))
     parser.add_argument("--repeats", type=int)
     parser.add_argument("--tasks", nargs="+", choices=list(SPECS))
@@ -262,6 +359,17 @@ def main():
         if args.repeats < 1: parser.error("--repeats must be positive")
         config["repeats"] = args.repeats
     if args.tasks: config["tasks"] = args.tasks
+    if args.command != "report":
+        validate_config(config)
+    if config.get("purpose") == "confirmation" and (args.tasks or args.repeats is not None):
+        parser.error("Confirmation profiles are fixed; create a new preregistered study to change them.")
+    if args.command == "plan":
+        jobs = schedule(config)
+        print(json.dumps({"config": config, "trials": len(jobs), "pairs": len(jobs)//2,
+                          "maximum_agent_minutes": len(jobs)*config["max_seconds"]/60,
+                          "note": "Excludes warmup and post-trial judging; no inference has been run.",
+                          "source_sha256": source_hashes(), "schedule": jobs}, indent=2))
+        return
     if args.command == "doctor":
         snapshot = environment(config)
         print(json.dumps({k:v for k,v in snapshot.items() if k not in ("model", "model_tags")}, indent=2))
@@ -278,16 +386,35 @@ def main():
         batch.mkdir(parents=True)
         dump(batch / "config.json", config)
         dump(batch / "environment.json", snapshot)
+        dump(batch / "status.json", {"state": "running"})
         jobs = schedule(config)
         dump(batch / "schedule.json", jobs)
         print("Batch:", batch, flush=True)
-        print("Warming model (excluded from trial timing)...", flush=True)
-        api(config["ollama_url"], "/api/chat", {
-            "model": config["model"], "messages": [{"role": "user", "content": "Reply OK."}],
-            "think": False, "stream": False, "keep_alive": "30m",
-            "options": {"num_predict": 8, "num_ctx": config["context"]}}, timeout=240)
-        dump(batch / "loaded_models.json", api(config["ollama_url"], "/api/ps"))
-        results = [run_one(batch, config, job, i) for i, job in enumerate(jobs)]
+        try:
+            print("Warming model (excluded from trial timing)...", flush=True)
+            api(config["ollama_url"], "/api/chat", {
+                "model": config["model"], "messages": [{"role": "user", "content": "Reply OK."}],
+                "think": False, "stream": False, "keep_alive": "30m",
+                "options": {"num_predict": 8, "num_ctx": config["context"]}}, timeout=240)
+            dump(batch / "loaded_models.json", api(config["ollama_url"], "/api/ps"))
+            results = []
+            for i, job in enumerate(jobs):
+                if source_hashes() != snapshot["source_sha256"]:
+                    raise RuntimeError("Harness changed during the batch; refusing to mix protocols.")
+                results.append(run_one(batch, config, job, i))
+                if config.get("purpose") == "confirmation" and results[-1]["infrastructure_error"]:
+                    raise RuntimeError("Confirmation invalidated by an infrastructure error; retained artifacts, stopped remaining trials.")
+                if source_hashes() != snapshot["source_sha256"]:
+                    raise RuntimeError("Harness changed during a trial; this batch is invalid.")
+            final_snapshot = environment(config)
+            for key in ("source_sha256", "model_digest", "pi", "clang", "go", "python", "ollama", "hardware"):
+                if snapshot[key] != final_snapshot[key]:
+                    raise RuntimeError("Environment changed during the batch: " + key)
+            dump(batch / "status.json", {"state": "complete", "source_sha256": source_hashes(),
+                                         "model_digest": snapshot["model_digest"]})
+        except BaseException as error:
+            dump(batch / "status.json", {"state": "interrupted_or_invalid", "reason": str(error)})
+            raise
     summary = summarize(results, config)
     dump(batch / "summary.json", summary)
     print(json.dumps(summary, indent=2))

@@ -1,5 +1,6 @@
 """Language-neutral task specifications and deterministic black-box test cases."""
 import random
+from extra_tasks import EXTRA_SPECS, extra_inputs, extra_oracle
 
 SPECS = {
     "merge_intervals": """Read N (0..200), then N pairs of signed decimal integers L R,
@@ -22,7 +23,11 @@ Integers have optional leading + or - and at least one digit; no other syntax.
 All valid integer tokens and intermediate results fit signed 64-bit integers.""",
 }
 
+SPECS.update(EXTRA_SPECS)
+
 def oracle(task, text):
+    if task in EXTRA_SPECS:
+        return extra_oracle(task, text)
     if task == "merge_intervals":
         nums = list(map(int, text.split()))
         pairs = sorted(zip(nums[1::2], nums[2::2]))
@@ -55,6 +60,8 @@ def oracle(task, text):
     raise ValueError(task)
 
 def cases(task, hidden=False):
+    if task in EXTRA_SPECS:
+        return [{"input": s, "expected": oracle(task, s)} for s in extra_inputs(task, hidden)]
     public = {
         "merge_intervals": ["3\n1 3\n2 4\n7 9\n", "0\n", "2\n1 2\n3 4\n"],
         "word_counts": ["Hello, hello WORLD!\n", "123---\n", "b A b a C\n"],

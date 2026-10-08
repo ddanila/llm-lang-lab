@@ -15,6 +15,9 @@ def export(batch, destination):
     trials = sorted(batch.glob("*/result.json"))
     if len(trials) != len(schedule):
         raise ValueError("Batch is incomplete; export only a completed batch.")
+    status = json.loads((batch/"status.json").read_text()) if (batch/"status.json").exists() else None
+    if config.get("protocol_version") == 2 and (not status or status.get("state") != "complete"):
+        raise ValueError("Protocol v2 exports require a completed, unchanged batch.")
     destination.mkdir(parents=True, exist_ok=False)
     records = []
     for path in trials:
@@ -32,16 +35,16 @@ def export(batch, destination):
     model_id = config["model"] if ":" in config["model"] else config["model"] + ":latest"
     model = next(m for m in environment["model_tags"]["models"] if m["name"] == model_id)
     payload = {
-        "batch": batch.name, "config": config, "summary": summary, "runs": records,
+        "batch": batch.name, "config": config, "summary": summary, "runs": records, "batch_status": status,
         "environment": {k: environment[k] for k in
-                        ("platform", "machine", "python", "pi", "clang", "go", "ollama",
-                         "git_commit", "source_sha256")},
+                        ("platform", "machine", "hardware", "python", "pi", "clang", "go", "ollama",
+                         "git_commit", "source_sha256") if k in environment},
         "model": {"name": model["name"], "digest": model["digest"],
                   "size_bytes": model["size"], "details": environment["model"]["details"],
                   "parameters": environment["model"]["parameters"]},
     }
     (destination / "results.json").write_text(json.dumps(payload, indent=2) + "\n")
-    lines = ["# Local C/Go pilot", "",
+    lines = ["# Local C/Go experiment", "",
              f"Batch: {batch.name}. Model: {config['model']}.", "",
              f"Tasks: {', '.join(config['tasks'])}. Repeats per language/task: {config['repeats']}.", "",
              "This is exploratory evidence on a small fixed task suite, not a language ranking.",
@@ -56,10 +59,14 @@ def export(batch, destination):
                      f"{stats['first_submission_successes']}/{stats['runs']} | "
                      f"{stats['mean_submissions']:.2f} | {token_text} | {stats['median_seconds']:.1f} |")
     lines.extend(["", "See results.json for all settings, per-run metrics, model digest, and source hashes.",
-                  "First-source scoring is independent of whether the agent later finishes successfully.",
-                  "Effort includes any unnecessary resubmissions after public tests pass.",
-                  "The current runner asks the agent to stop after a public pass but does not force it.",
-                  "This behavior must be considered when interpreting effort differences.", ""])
+                  "First-source scoring is independent of whether the agent later finishes successfully."])
+    if config.get("protocol_version") == 2:
+        lines.extend(["The controller stopped at the first public pass or submission limit.",
+                      "A public pass is not a held-out success. Protocol v1 results cannot be pooled with this batch."])
+    else:
+        lines.extend(["Effort includes any unnecessary resubmissions after public tests pass.",
+                      "This historical protocol asked the agent to stop but did not force it."])
+    lines.append("")
     (destination / "README.md").write_text("\n".join(lines))
     return destination
 

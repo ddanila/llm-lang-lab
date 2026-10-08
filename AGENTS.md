@@ -10,6 +10,11 @@ harness or task files during an active batch: judges load them for each submissi
 Task or protocol changes require a new batch. Do not pool smoke runs and scored
 runs or tune hidden tests to favor observed solutions.
 
+The confirmation study is frozen in experiments/study.json. Keep calibration
+results exploratory. Do not change settings, decision thresholds, or analysis
+after seeing confirmation results; prepare a new study instead. Never rerun only
+failed rows to repair an invalid confirmation batch.
+
 Run python3 -m unittest discover -s tests -v after harness changes.
 
 The user's pi fork is https://github.com/ddanila/pi. If pi itself needs changes,

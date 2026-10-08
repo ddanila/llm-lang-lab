@@ -28,6 +28,10 @@ class Tasks(unittest.TestCase):
             self.assertTrue(any(c["input"] not in public for c in cases(task, True)))
 
 class Metrics(unittest.TestCase):
+    def test_empty_usage_is_not_a_measured_zero_cost(self):
+        metrics = parse_events([{"type":"message_end", "message":{"role":"assistant", "usage":{}}}])
+        self.assertTrue(metrics["usage_missing"])
+
     def test_only_authoritative_messages_count(self):
         message = {"role": "assistant", "usage": {"input": 10, "output": 4}, "stopReason": "stop"}
         events = [{"type": "message_update", "usage": message["usage"]},
@@ -41,9 +45,9 @@ class Metrics(unittest.TestCase):
     def test_schedule_has_every_pair_once(self):
         cfg = {"schedule_seed": 42, "repeats": 3, "tasks": list(SPECS), "languages": ["c", "go"]}
         jobs = schedule(cfg)
-        self.assertEqual(len(jobs), 18)
+        self.assertEqual(len(jobs), 6*len(SPECS))
         self.assertEqual(jobs, schedule(cfg))
-        self.assertEqual(len({(j["task"], j["repeat"], j["language"]) for j in jobs}), 18)
+        self.assertEqual(len({(j["task"], j["repeat"], j["language"]) for j in jobs}), 6*len(SPECS))
         for a,b in zip(jobs[::2], jobs[1::2]):
             self.assertEqual((a["task"],a["repeat"],a["sampling_seed"]),
                              (b["task"],b["repeat"],b["sampling_seed"]))

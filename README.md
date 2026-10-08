@@ -14,6 +14,10 @@ The [first six-run pilot](reports/20261008T085856492366Z/README.md) is published
 with metrics and generated source revisions: Go passed 3/3 interval-merging trials,
 C passed 2/3. This is exploratory evidence, not a stable language ranking.
 
+**Protocol v2 is prepared, not run.** It enforces stopping and adds a frozen
+[replication study](experiments/README.md). Historical v1 results cannot be
+pooled with v2.
+
 ## Run locally
 
 Requirements: Python 3.9+, pi 1.1.0 with extension support, Ollama, Clang, Go.
@@ -34,8 +38,8 @@ ollama pull qwen3.5:9b                # skip if already installed
 ollama create llm-lang-lab-qwen35-9b -f Modelfile
 python3 bench.py doctor
 python3 -m unittest discover -s tests -v
-python3 bench.py run --tasks merge_intervals --repeats 3  # six runs
-python3 bench.py run                 # three tasks × two languages × three repeats
+python3 bench.py plan                # inspect the 12-trial pilot without inference
+python3 bench.py run                 # explicitly launch that pilot
 ```
 
 Model selection is intentionally modest: the initial machine is an Apple M3 Pro
@@ -51,7 +55,9 @@ the upstream model tag itself is mutable.
 A fresh pi process receives one language-neutral task, the target language, and
 public examples. Its only tool is `submit_source`, which saves a complete source
 file and returns compiler/public-test feedback. It can repair and resubmit up to
-four times. Bash, file-reading tools, personal settings, credentials, context
+four times. The controller stops at the first public pass or submission limit
+and freezes the source, including when the model emits multiple tool calls.
+Bash, file-reading tools, personal settings, credentials, context
 files, MCP, skills, and other extensions are not loaded.
 
 The runner then compiles and checks the last submission against separate
@@ -66,6 +72,15 @@ Included task families:
 | Interval merging | sorting, boundaries, state updates |
 | Word counts | ASCII parsing, case folding, maps/dynamic storage, ordering |
 | RPN calculator | token validation, stacks, signed arithmetic, invalid inputs |
+| Lower bounds | binary search, duplicates, empty arrays |
+| Grid distance | breadth-first search, blocked and unreachable cells |
+| Rational sum | exact arithmetic and fraction normalization |
+| Edit distance | dynamic programming and empty strings |
+| Transaction ledger | nested state, commit, rollback, invalid transitions |
+| Dependency order | directed graphs, ordering, duplicates, cycles |
+| CSV fields | quoting, escaping, empty fields, significant spaces |
+
+The pilot uses the original three tasks; confirmation uses all ten workloads.
 
 This is a **constrained pi agent benchmark**, not a benchmark of unrestricted
 repository editing. Whole-file submission has a token cost; it is deliberate,
@@ -77,8 +92,8 @@ Correctness is the primary result. There is no opaque blended score.
 
 | Metric | Interpretation |
 | --- | --- |
-| Held-out success rate | Fraction of runs that finish normally and pass every hidden case |
-| First-submission successes | First saved source passes hidden cases, before repairs |
+| Held-out success rate | Fraction of trials whose final source passes public and hidden cases within budget |
+| First-submission successes | First saved source passes public and hidden cases, before repairs |
 | Output tokens per verified success | All run output tokens, including failures, divided by successful runs |
 | Mean submissions / compile failures | Repair burden |
 | PAR-2 seconds | Successful elapsed time; unsuccessful runs cost twice the time budget |
@@ -91,26 +106,41 @@ may have unreported tokens: token totals on interrupted runs are lower bounds.
 PAR-2 is a budget-sensitive operational metric, not a measure of reasoning ability.
 
 Defaults: temperature 0.7, top-p 0.8, top-k 20, thinking disabled,
-4,096 maximum output tokens per turn, eight turns, four submissions, 240 seconds.
-These limits apply equally to both languages. Model warmup is outside timing.
-Run order is seeded and shuffled within paired task/repeat blocks. Both languages
-get the same requested sampling seed in a block; this does not imply equivalent
-random draws or bit-for-bit reproducibility on Metal.
+2,048 maximum output tokens per turn, four turns and four submissions.
+The calibration pilot has a 120-second per-trial time limit; confirmation has
+a generous 600-second safety timeout, which invalidates a confirmation batch
+instead of becoming evidence of language difficulty. These limits apply equally
+to both languages. Model warmup is outside timing.
+Task order is seeded and shuffled. Language order is balanced within each task.
+Each task/repeat pair gets a unique seed shared by its two languages; this does
+not imply equivalent random draws or bit-for-bit reproducibility on Metal.
 
 ## When is the comparison stable?
 
-A six-run pilot proves the plumbing and reveals gross failure modes. It cannot
-establish a language winner. Repeating one task does not create new independent
-task families. The report offers an exploratory task-cluster bootstrap interval
-when multiple task families exist; with three families even that is weak evidence.
+A small pilot checks the plumbing and failure modes; it cannot establish a winner.
+The prepared [study](experiments/README.md) has two separate confirmation batches,
+each containing 10 workloads × 20 repetitions × 2 languages (400 trials).
+They use disjoint seeds and identical pinned settings.
 
-Before language design, freeze a larger protocol: at least 10 task families and
-20 repeats per language, then a second batch with disjoint seeds. Choose the
-primary metric and meaningful effect threshold in advance. Require the same
-direction in both batches, examine task-level results and paired uncertainty,
-and reject batches affected by infrastructure failures. If correctness is near
-100% for both languages, use harder tasks or a preregistered smaller budget;
-do not retrospectively choose whichever metric gives a winner.
+The prespecified meaningful differences are five percentage points in correctness
+and 15% in output tokens per verified success. Correctness takes priority; effort
+can decide only after correctness is practically equivalent. Paired Bayesian
+credible intervals, prior-sensitivity checks, paired effort bootstraps, and
+leave-one-workload-out diagnostics feed the decision. The same conclusion must
+hold in both complete batches. A practical tie and an inconclusive result are
+both legitimate outcomes; nothing guarantees that 20 repetitions will suffice.
+
+```sh
+python3 bench.py plan --config experiments/confirm-a.json
+python3 bench.py plan --config experiments/confirm-b.json
+# After separately running both complete confirmation batches:
+python3 analysis.py runs/BATCH_A runs/BATCH_B
+```
+
+Planning and analysis do not run inference. Confirmation is a many-hour experiment,
+not the short pilot. The comparison rejects incomplete, duplicated, mixed-protocol,
+changed-model, or infrastructure-broken batches. Do not repeatedly sample until
+a preferred winner appears.
 
 A result is conditional on model, quantization, task distribution, tools, prompt,
 and budget. Training familiarity, standard libraries, compiler diagnostics, and
@@ -125,6 +155,7 @@ results on a second model before claiming general LLM friendliness.
 Each batch under ignored `runs/` contains:
 
 - Frozen config, paired schedule, environment/model snapshot, source hashes.
+- Completion status with final model/source checks.
 - Per-trial prompts, isolated pi config, raw JSONL events, stderr.
 - Every source revision, public feedback, and first/final hidden evaluation.
 - Per-run metrics and `summary.json`.
@@ -160,7 +191,8 @@ VM/container before evaluating untrusted models or sources.
 
 `bench.py` orchestrates pi and reports; `pi/benchmark.ts` supplies its tool;
 `judge.py` owns compilation and testing; `tasks.py` owns specifications and oracles.
-`config.json` and `Modelfile` specify the experiment.
+`extra_tasks.py` extends the workload suite; `analysis.py` checks replication.
+`config.json` and `Modelfile` specify the pilot; `experiments/` freezes confirmation.
 
 References:
 [Pi custom models](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/models.md),
