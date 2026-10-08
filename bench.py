@@ -22,10 +22,11 @@ from urllib.parse import urlparse
 
 from judge import evaluate
 from tasks import SPECS, cases
+from checkpoints import check_environment, resume_rows, seal, write as atomic_write
 
 ROOT = Path(__file__).resolve().parent
 SOURCE_FILES = ["bench.py", "judge.py", "tasks.py", "extra_tasks.py", "pi/benchmark.ts",
-                "analysis.py", "experiments/study.json", "Modelfile"]
+                "analysis.py", "experiments/study.json", "Modelfile", "checkpoints.py"]
 SYSTEM = """You are solving a programming benchmark. Use only the requested language
 and its standard library. Your only tool is submit_source: send the entire source
 file to compile and test. Use its feedback to repair failures. When public tests
@@ -34,7 +35,7 @@ Implement the full specification, not just examples. No filesystem access, netwo
 subprocesses, or environment inspection in the submitted program: stdin/stdout only."""
 
 def dump(path, obj):
-    Path(path).write_text(json.dumps(obj, indent=2) + "\n")
+    atomic_write(path, obj)
 
 def api(base, path, payload=None, timeout=120):
     data = None if payload is None else json.dumps(payload).encode()
@@ -281,11 +282,12 @@ def run_one(batch, config, job, index):
                       or (stop == "timeout" and config.get("purpose") == "confirmation")
                       or any("Judge infrastructure error" in e for e in metrics["tool_errors"]))
     if config.get("purpose") == "confirmation":
-        # Wall-clock limits cannot distinguish OS/startup stalls from program hangs.
-        # Keep them out of the language-accuracy inference; CPU-limit failures still count.
+        # V3 defines candidate execution limits as part of correctness within budget.
+        # Compiler, provider and agent timeouts remain infrastructure failures.
         for feedback in attempts + [hidden, first]:
             infrastructure |= bool(feedback.get("build", {}).get("timeout"))
-            infrastructure |= any(f.get("timeout", False) for f in feedback.get("failures", []))
+            if config.get("case_timeout_policy") != "candidate_failure":
+                infrastructure |= any(f.get("timeout", False) for f in feedback.get("failures", []))
     controlled = stop in ("public_pass", "submission_budget")
     valid_finish = (controlled or (stop == "completed" and proc.returncode == 0)) and not infrastructure
     success = valid_finish and bool(attempts and attempts[-1]["passed"]) and hidden["passed"]
@@ -352,8 +354,12 @@ def main():
     parser.add_argument("--config", default=str(ROOT / "config.json"))
     parser.add_argument("--repeats", type=int)
     parser.add_argument("--tasks", nargs="+", choices=list(SPECS))
-    parser.add_argument("--batch", help="Existing run directory for report")
+    parser.add_argument("--batch", help="Existing directory for report, or clean checkpoint to resume")
+    parser.add_argument("--chunk-seconds", type=int, default=0,
+                        help="Stop at a C/Go pair boundary after this duration (0 = uninterrupted)")
     args = parser.parse_args()
+    if args.chunk_seconds < 0:
+        parser.error("--chunk-seconds must be nonnegative")
     config = json.loads(Path(args.config).read_text())
     if args.repeats is not None:
         if args.repeats < 1: parser.error("--repeats must be positive")
@@ -382,14 +388,22 @@ def main():
         results = [json.loads(p.read_text()) for p in sorted(batch.glob("*/result.json"))]
     else:
         snapshot = environment(config)
-        batch = ROOT / "runs" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-        batch.mkdir(parents=True)
-        dump(batch / "config.json", config)
-        dump(batch / "environment.json", snapshot)
-        dump(batch / "status.json", {"state": "running"})
         jobs = schedule(config)
-        dump(batch / "schedule.json", jobs)
+        if args.batch:
+            batch = Path(args.batch).resolve()
+            results = resume_rows(batch, config, snapshot, jobs)
+            snapshot = json.loads((batch / "environment.json").read_text())
+        else:
+            batch = ROOT / "runs" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+            batch.mkdir(parents=True)
+            dump(batch / "config.json", config)
+            dump(batch / "environment.json", snapshot)
+            dump(batch / "schedule.json", jobs)
+            results = []
+        dump(batch / "status.json", {"state": "running", "completed_trials": len(results)})
         print("Batch:", batch, flush=True)
+        chunk_started = time.monotonic()
+        checkpoint_due = False
         try:
             print("Warming model (excluded from trial timing)...", flush=True)
             api(config["ollama_url"], "/api/chat", {
@@ -397,8 +411,8 @@ def main():
                 "think": False, "stream": False, "keep_alive": "30m",
                 "options": {"num_predict": 8, "num_ctx": config["context"]}}, timeout=240)
             dump(batch / "loaded_models.json", api(config["ollama_url"], "/api/ps"))
-            results = []
-            for i, job in enumerate(jobs):
+            for i in range(len(results), len(jobs)):
+                job = jobs[i]
                 if source_hashes() != snapshot["source_sha256"]:
                     raise RuntimeError("Harness changed during the batch; refusing to mix protocols.")
                 results.append(run_one(batch, config, job, i))
@@ -406,12 +420,20 @@ def main():
                     raise RuntimeError("Confirmation invalidated by an infrastructure error; retained artifacts, stopped remaining trials.")
                 if source_hashes() != snapshot["source_sha256"]:
                     raise RuntimeError("Harness changed during a trial; this batch is invalid.")
+                if (args.chunk_seconds and (i + 1) % 2 == 0 and i + 1 < len(jobs)
+                        and time.monotonic() - chunk_started >= args.chunk_seconds):
+                    checkpoint_due = True
+                    break
             final_snapshot = environment(config)
-            for key in ("source_sha256", "model_digest", "pi", "clang", "go", "python", "ollama", "hardware"):
-                if snapshot[key] != final_snapshot[key]:
-                    raise RuntimeError("Environment changed during the batch: " + key)
-            dump(batch / "status.json", {"state": "complete", "source_sha256": source_hashes(),
-                                         "model_digest": snapshot["model_digest"]})
+            check_environment(snapshot, final_snapshot)
+            if checkpoint_due:
+                dump(batch / "summary.json", summarize(results, config))
+                seal(batch, len(results), snapshot)
+                print(f"Checkpoint: {len(results)}/{len(jobs)} trials; resume with --batch {batch}", flush=True)
+                return
+            else:
+                dump(batch / "status.json", {"state": "complete", "source_sha256": source_hashes(),
+                                             "model_digest": snapshot["model_digest"]})
         except BaseException as error:
             dump(batch / "status.json", {"state": "interrupted_or_invalid", "reason": str(error)})
             raise

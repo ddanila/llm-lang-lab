@@ -1,17 +1,14 @@
-# C versus Go: checkpointed study v3
+# C versus Go: controlled protocol v2
 
-Status: **registered for a fresh overnight A/B run**. The earlier v2 confirmation
-attempt stopped after 5/400 trials. Its [portable evidence and diagnosis](../checkpoints/c-go-controlled-v2/20261008T165022880692Z/diagnosis.md)
-are retained; none of those trials enter this study. The [v2 calibration](../reports/20261008T162135502883Z/README.md)
-remains exploratory. [Execution plan](execution.md), [progress backups](../checkpoints/README.md).
-
-V3 adds approximately hourly, resumable pair-boundary checkpoints and explicitly
-scores candidate execution-time exhaustion as a failed submission/test. Provider,
-compiler, and agent failures still invalidate a batch. The new study uses disjoint
-seeds; tasks, hidden tests, model, generation budgets, sample size, and decision
-thresholds are unchanged. The on-disk schema remains `protocol_version: 2`.
-The [joint confirmation report](../reports/c-go-checkpointed-v3/README.md) is created
-only after both complete 400-trial batches validate.
+Status: **calibration complete; confirmation execution authorized**.
+The [full-suite calibration](../reports/20261008T162135502883Z/README.md) completed
+20 trials without timeouts or infrastructure errors. The earlier
+[short pilot](../reports/20261008T160452882425Z/README.md) had six timeout-censored
+trials. These are separate exploratory batches. See the
+[execution/freeze record](execution.md) for the audit, difficulty decision, runtime
+estimate, and execution commands. Confirmation has no published conclusion until
+the [joint report](../reports/c-go-controlled-v2/README.md) exists.
+Historical protocol-v1 results cannot be pooled with these experiments.
 
 ## The question
 
@@ -47,43 +44,29 @@ python3 bench.py run --config experiments/confirm-b.json
 python3 analysis.py runs/BATCH_A runs/BATCH_B
 ```
 
-Run A then B sequentially on the same laptop. The runner stops at the first complete
-C/Go pair after approximately one hour, seals evidence, exports progress, commits,
-pushes, and resumes the next scheduled pair. A checkpoint is an execution segment,
-not an independent statistical replication. A and B still require 400 trials each.
+Run A and B separately, sequentially on the same laptop. The sequential runner
+performs both runs, trace audits, portable exports, and the frozen comparison:
 
 ```sh
 mkdir -p .local
-caffeinate -i python3 -u run_study.py --publish --checkpoint-seconds 3600 --first-checkpoint-seconds 1 > .local/confirmation.log 2>&1
+caffeinate -i python3 -u run_study.py --publish > .local/confirmation.log 2>&1
 ```
 
-The early first checkpoint verifies publication after the first pair. Later segments
-target 3,600 seconds, measured from segment startup including warmup/judging. No
-trial is interrupted to meet the clock. Typical overshoot is a few minutes; a pair
-can consume up to 20 minutes of agent budget plus judging. Git publication adds time.
+This explicitly runs inference for many hours. `--publish` additionally authorizes
+committing and pushing the validated reports; omit it to keep exports local.
+`.local/study-run.json` records the active phase, batch IDs, completion, or errors.
+Keep the laptop powered and awake; closing its lid or stopping Ollama can interrupt
+the experiment. `caffeinate` prevents idle sleep, not every kind of interruption.
+The runner refuses an existing execution record and never resumes a partial batch
+or retries individual rows. An invalid A batch prevents B from starting. It also
+checks that analysis of the portable exports matches analysis of raw artifacts.
+Publication stops if tracked files changed or the automated privacy scan flags
+an export. Raw traces remain local. A stopped run requires inspection; it is never
+silently relabeled complete.
 
-`--publish` commits and pushes privacy-checked portable progress and final reports.
-Raw event traces and local agent state remain on the laptop; this is not a full
-raw-data off-device backup. Every completed trial, including failures, and every
-saved source revision is retained. Git history preserves earlier checkpoints.
-An invalid batch also gets an explicitly invalid progress report before stopping.
-No interim language winner is declared or used to change the study.
-
-`.local/study-run.json` records phase, batch IDs, latest checkpoint and pushed commit.
-Keep the laptop powered and open; `caffeinate` prevents idle sleep, not lid closure.
-A stopped process can continue from a **clean, sealed checkpoint** using:
-
-```sh
-caffeinate -i python3 -u run_study.py --resume --publish --checkpoint-seconds 3600 >> .local/confirmation.log 2>&1
-```
-
-Resume verifies the complete evidence prefix, model, tool versions, and protocol.
-It refuses running/invalid batches or any unfinished trial; it never replays rows
-or rolls back to an older checkpoint and drops newly observed results. A crash in
-the middle of a segment requires inspection, and can require a new whole batch.
-Earlier committed progress is still retained. Failed pushes are retried twice,
-then the runner stops at the checkpoint rather than accumulating unbacked progress.
-Do not edit tracked files during the overnight run; unrelated changes block publication.
+ Do not inspect A and
+change B's tasks, budgets, model, thresholds, or sample size. Neither confirmation
+profile permits CLI task/repetition overrides.
 
 | Profile | Workloads | Repeats per language/workload | Trials | Purpose |
 | --- | --- | --- | --- | --- |
@@ -98,7 +81,7 @@ end-to-end limit. Confirmation uses a 600-second safety timeout; it is a
 substantial, likely many-hour experiment, not the short pilot. The plan command
 prints maximum agent time, excluding warmup/judging. The added full-suite calibration
 uses the same 600-second limit, four submissions, and 2,048 output tokens per turn
-as confirmation (with the historical v2 timeout policy), with schedule seed 31002 and sampling seeds 40,000,000 onward.
+as confirmation, with schedule seed 31002 and sampling seeds 40,000,000 onward.
 It is diagnostic only; it does not change the registered A/B settings or decision rule.
 
 Twenty repeats are a starting sample size, not a power guarantee. Differences
@@ -120,10 +103,8 @@ inconclusive; a larger study needs a new plan, frozen before collecting more dat
   evidence that the language is harder. Pilot timeout data are only diagnostic.
 - Executables have a three-second CPU limit and a ten-second wall-clock guard
   per case. The wider wall guard allows cold macOS executable/Seatbelt startup.
-  A candidate test wall timeout is a failed test under the new resource-budget
-  definition; it does not invalidate the batch. Compiler wall timeouts still do.
-  Scheduling stalls can affect this operational endpoint; it is not a pure
-  measure of reasoning or language difficulty.
+  Compiler or test wall-timeouts also invalidate confirmation: a wall timeout
+  cannot reliably distinguish a program hang from a laptop scheduling stall.
 
 The stop rule is mechanical rather than dependent on the model obeying “stop.”
 The first public pass is not an oracle for hidden correctness; we intentionally
@@ -139,8 +120,7 @@ inference.
 Each task/repeat block has a unique sampling seed, shared by its C and Go trials.
 Language order alternates within each task with a seeded initial order, so each
 language goes first equally often across 20 repetitions. Task order is shuffled.
-Replication A uses seeds 50,000,000 onward; B uses 60,000,000 onward.
-Schedule seeds are 51001 and 51002. They are disjoint from all previous runs.
+Replication A uses seeds 10,000,000 onward; B uses 20,000,000 onward.
 
 Every trial gets a fresh pi process, private config, and empty working directory.
 The model digest includes the local alias parameters and is pinned to the actual
@@ -222,7 +202,3 @@ References:
 [Dirichlet distribution (Stan)](https://mc-stan.org/docs/2_31/functions-reference/dirichlet-distribution.html),
 [Conjugate multinomial inference (Duke)](https://www2.stat.duke.edu/~scs/Courses/Stat340/LectureSlides/Lec11_BayesianStats_Handouts.pdf),
 [Agent evaluation and repeated trials (Anthropic)](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents).
-
-For deliberate one-segment execution, add `--pause-after-checkpoint`. It exits
-cleanly after publishing that segment; a later `--resume` continues without
-replaying trials. The overnight invocation omits this flag after startup validation.

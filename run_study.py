@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Run frozen A then B, audit/export/analyze, and optionally commit/push reports.
 
-This is an explicit many-hour inference command. It never resumes partial batches
-or retries failed rows. Progress and errors are retained in .local/study-run.json.
+This is an explicit many-hour inference command. Clean pair-boundary checkpoints
+can resume; running/invalid trials are never replayed. Progress is backed up hourly.
 """
 import argparse
 from datetime import datetime, timezone
@@ -11,11 +11,13 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import time
 
 import analysis
 from audit_batch import audit
 from bench import dump, source_hashes, validate_config
 from export_report import export
+from checkpoints import export_progress, read
 
 ROOT = Path(__file__).resolve().parent
 STATE = ROOT / ".local/study-run.json"
@@ -87,10 +89,20 @@ def report_markdown(result, batches, audits):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--publish", action="store_true", help="Commit and push only validated portable reports")
+    parser.add_argument("--resume", action="store_true", help="Continue an existing clean checkpoint")
+    parser.add_argument("--checkpoint-seconds", type=int, default=3600)
+    parser.add_argument("--first-checkpoint-seconds", type=int, default=3600,
+                        help="Optional earlier first checkpoint to verify publication")
+    parser.add_argument("--pause-after-checkpoint", action="store_true",
+                        help="Exit cleanly after one checkpoint; continue later with --resume")
     args = parser.parse_args()
+    if min(args.checkpoint_seconds, args.first_checkpoint_seconds) <= 0:
+        parser.error("Checkpoint durations must be positive")
     STATE.parent.mkdir(exist_ok=True)
-    if STATE.exists():
+    if STATE.exists() and not args.resume:
         raise ValueError("An execution record already exists; inspect/archive it before starting a new full study")
+    if args.resume and not STATE.exists():
+        raise ValueError("No study execution record to resume")
     clean_tracked_tree()
     branch = command(["git", "branch", "--show-current"])
     if not branch:
@@ -104,9 +116,17 @@ def main():
     destination = ROOT / "reports" / study["study_id"]
     if destination.exists():
         raise ValueError("Study report destination already exists; refusing to overwrite evidence")
-    state = {"stage": "starting", "started_utc": datetime.now(timezone.utc).isoformat(),
+    state = read(STATE) if args.resume else {"stage": "starting", "started_utc": datetime.now(timezone.utc).isoformat(),
              "registration_commit": command(["git", "rev-parse", "HEAD"]), "batches": [],
-             "publish_requested": args.publish}
+             "publish_requested": args.publish, "source_sha256": frozen,
+             "checkpoint_seconds": args.checkpoint_seconds, "checkpoints_published": 0}
+    if (state.get("source_sha256") != frozen or state["publish_requested"] != args.publish
+            or state["checkpoint_seconds"] != args.checkpoint_seconds):
+        raise ValueError("Resume protocol/publication settings differ")
+    if args.resume:
+        for name in state["batches"]:
+            if read(ROOT / "runs" / name / "status.json")["state"] not in ("checkpoint", "complete"):
+                raise ValueError("Cannot resume a running/invalid batch; evidence retained")
 
     def update(stage):
         state["stage"] = stage
@@ -114,29 +134,89 @@ def main():
         dump(STATE, state)
         print(stage, flush=True)
 
+    def publish_paths(paths, message):
+        if command(["git", "branch", "--show-current"]) != branch:
+            raise ValueError("Branch changed during execution")
+        if command(["git", "diff", "--cached", "--name-only"]):
+            raise ValueError("Unrelated staged changes; refusing publication")
+        names = [str(p.relative_to(ROOT)) for p in paths]
+        for changed in command(["git", "diff", "--name-only"]).splitlines():
+            if not any(changed == name or changed.startswith(name + "/") for name in names):
+                raise ValueError("Unrelated tracked changes; refusing publication")
+        command(["git", "add", "--"] + names)
+        command(["git", "diff", "--cached", "--check"])
+        if command(["git", "diff", "--cached", "--name-only"]):
+            print(command(["git", "commit", "-m", message]), flush=True)
+        state["last_publication_commit"] = command(["git", "rev-parse", "HEAD"])
+        for attempt in range(3):
+            try:
+                print(command(["git", "push", "origin", branch]), flush=True)
+                break
+            except subprocess.CalledProcessError:
+                if attempt == 2:
+                    raise
+                time.sleep(15)
+        if command(["git", "rev-parse", "HEAD"]) != command(["git", "rev-parse", "origin/" + branch]):
+            raise RuntimeError("Remote-tracking revision differs from published commit")
+
+    def checkpoint_report(batch_path):
+        clean_tracked_tree()
+        target = ROOT / "checkpoints" / study["study_id"] / batch_path.name
+        export_progress(batch_path, target)
+        privacy_check(target)
+        count = len(list(batch_path.glob("*/result.json")))
+        if args.publish:
+            publish_paths([target], f"Checkpoint {batch_path.name}: {count} trials retained")
+            state["checkpoints_published"] += 1
+        state["last_checkpoint"] = {"batch": batch_path.name, "completed_trials": count,
+                                    "report": str(target.relative_to(ROOT))}
+        dump(STATE, state)
+        print(f"Progress backed up: {count} trials", flush=True)
+
     try:
+        if args.resume and args.publish:
+            # A prior push may have failed after a successful local checkpoint commit.
+            print(command(["git", "push", "origin", branch]), flush=True)
+        state.pop("error", None)
         batches, audits = [], []
-        for profile, config in zip(profiles, configs):
+        for phase_index, (profile, config) in enumerate(zip(profiles, configs)):
             if source_hashes() != frozen or json.loads(profile.read_text()) != config:
                 raise ValueError("Protocol/profile changed before replication")
             update("running_" + config["replication"])
-            batch_path = None
-            with subprocess.Popen([sys.executable, "-u", "bench.py", "run", "--config", str(profile)],
-                                  cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True) as process:
-                for line in process.stdout:
-                    print(line, end="", flush=True)
-                    if line.startswith("Batch: "):
-                        batch_path = Path(line[7:].strip())
-                        state["batches"].append(batch_path.name)
-                        dump(STATE, state)
-                code = process.wait()
-            if code or batch_path is None:
-                raise RuntimeError("Replication failed; artifacts retained, no automatic retry")
+            batch_path = ROOT / "runs" / state["batches"][phase_index] if len(state["batches"]) > phase_index else None
+            while batch_path is None or read(batch_path / "status.json")["state"] != "complete":
+                seconds = args.first_checkpoint_seconds if batch_path is None and phase_index == 0 else args.checkpoint_seconds
+                invocation = [sys.executable, "-u", "bench.py", "run", "--config", str(profile),
+                              "--chunk-seconds", str(seconds)]
+                if batch_path is not None:
+                    invocation += ["--batch", str(batch_path)]
+                with subprocess.Popen(invocation, cwd=ROOT, stdout=subprocess.PIPE,
+                                      stderr=subprocess.STDOUT, text=True) as process:
+                    for line in process.stdout:
+                        print(line, end="", flush=True)
+                        if line.startswith("Batch: "):
+                            batch_path = Path(line[7:].strip())
+                            if batch_path.name not in state["batches"]:
+                                state["batches"].append(batch_path.name)
+                            dump(STATE, state)
+                    code = process.wait()
+                if code or batch_path is None:
+                    if batch_path is not None and (batch_path / "status.json").exists():
+                        checkpoint_report(batch_path)
+                    raise RuntimeError("Replication failed; artifacts retained and progress backed up, no automatic retry")
+                if read(batch_path / "status.json")["state"] == "checkpoint":
+                    checkpoint_report(batch_path)
+                    if args.pause_after_checkpoint:
+                        update("paused_checkpoint")
+                        return
+                elif read(batch_path / "status.json")["state"] != "complete":
+                    raise ValueError("Unexpected batch exit state")
             batch = analysis.load_batch(batch_path)
             analysis.validate_batch(batch, study)
             evidence = audit(batch_path)
-            if evidence["compiler_or_case_wall_timeout_trials"]:
+            if evidence["compiler_or_case_wall_timeout_trials"] and config.get("case_timeout_policy") != "candidate_failure":
                 raise ValueError("Wall-timeout evidence invalidates confirmation")
+            checkpoint_report(batch_path)
             batches.append(batch)
             audits.append(evidence)
         update("validating_and_exporting")
@@ -164,16 +244,8 @@ def main():
         state["report"] = str(destination.relative_to(ROOT))
         if args.publish:
             update("publishing")
-            clean_tracked_tree()
-            if command(["git", "branch", "--show-current"]) != branch:
-                raise ValueError("Branch changed during execution")
-            command(["git", "add", "--"] + [str(p.relative_to(ROOT)) for p in destinations])
-            command(["git", "diff", "--cached", "--check"])
-            print(command(["git", "commit", "-m", "Publish audited frozen C/Go confirmation results"]), flush=True)
+            publish_paths(destinations, "Publish audited frozen C/Go confirmation results")
             state["results_commit"] = command(["git", "rev-parse", "HEAD"])
-            print(command(["git", "push", "origin", branch]), flush=True)
-            if command(["git", "rev-parse", "HEAD"]) != command(["git", "rev-parse", "origin/" + branch]):
-                raise RuntimeError("Remote-tracking revision does not match published commit")
         update("complete")
     except BaseException as error:
         state["error"] = str(error)

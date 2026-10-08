@@ -19,13 +19,19 @@ passed its infrastructure audit; C solved 4/10 trials and Go 6/10. This is explo
 not a stable ranking. The [short calibration](reports/20261008T160452882425Z/README.md)
 had six timeout-censored trials and remains separate.
 
-The frozen [A/B study](experiments/README.md) contains 800 trials, with a measured
-runtime estimate of about 17 hours total (20–26 hours planning allowance).
-[Execution and freeze record](experiments/execution.md). The sequential runner
-publishes [the joint confirmation report](reports/c-go-controlled-v2/README.md)
-only after both complete batches pass validation; until that report exists,
-confirmation has no published conclusion. Historical v1 results cannot be pooled
-with v2.
+The first v2 confirmation attempt stopped after five trials; its
+[evidence and diagnosis](checkpoints/c-go-controlled-v2/20261008T165022880692Z/diagnosis.md)
+are preserved separately. The new [checkpointed v3 study](experiments/README.md)
+contains 800 fresh-seed trials, with roughly hourly commits and pushes of
+[intermediate progress](checkpoints/README.md). Candidate program execution
+limit failures now count as failed tests; infrastructure failures still stop the run.
+
+Runtime is estimated at about 17 hours total (20–26 hours planning allowance),
+based on historical calibration rather than a guarantee for the revised study.
+[Execution and freeze record](experiments/execution.md). The runner publishes
+[the joint confirmation report](reports/c-go-checkpointed-v3/README.md) only after
+both complete batches validate. Until then there is no confirmation conclusion.
+Historical studies and incomplete checkpoints are never pooled with v3.
 
 ## Run locally
 
@@ -202,7 +208,8 @@ VM/container before evaluating untrusted models or sources.
 `bench.py` orchestrates pi and reports; `pi/benchmark.ts` supplies its tool;
 `judge.py` owns compilation and testing; `tasks.py` owns specifications and oracles.
 `extra_tasks.py` extends the workload suite; `analysis.py` checks replication.
-`audit_batch.py` reconciles raw traces; `run_study.py` runs the frozen A/B sequence
+`audit_batch.py` reconciles raw traces; `checkpoints.py` seals and exports progress.
+`run_study.py` runs the frozen A/B sequence
 and can publish validated reports when explicitly invoked with `--publish`.
 `config.json` and `Modelfile` specify the pilot; `experiments/` freezes confirmation.
 

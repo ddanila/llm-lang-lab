@@ -1,57 +1,49 @@
 {
-  "study_id": "c-go-controlled-v2",
-  "frozen_utc": "2026-10-08T16:49:52.964652+00:00",
-  "decision": "Proceed unchanged to registered A and B; no calibration data enters confirmation analysis.",
-  "benchmark_revision": "c6bc841ec62d3657909874d2ec17a7e8ed46f5ad",
+  "study_id": "c-go-checkpointed-v3",
+  "registered_utc": "2026-10-08T17:35:54.811469+00:00",
+  "previous_invalid_batch": "20261008T165022880692Z",
   "source_sha256": {
-    "bench.py": "3bb132ed62d72621dd6df0cc98fd53d5f3f12d96f28c0f90b2e3437328d74e70",
+    "bench.py": "77205c76a524bedb6d881a5d8859c89575ff76cc7f6df1e412f085b56fb26145",
     "judge.py": "8934214aab0f915d29bcdc198b2340471b855d21d17422d61b628eeb814d988e",
     "tasks.py": "e417dc76c1f02fa0eaed873ea9ddc3498dc8003b63625001d635373cd0ad20eb",
     "extra_tasks.py": "e2d55a666320c1a059bc4912107b668249b5d06c024958f5e26ac9137cf89874",
     "pi/benchmark.ts": "2065b7f78d70267598a4d590055edec07aa575328f1ab96d5bd6695444ed60e5",
-    "analysis.py": "1ef9ab0e08a7f1a2f15d3f969c37e6b21603c5b13368c0b772d7102c6ca54405",
-    "experiments/study.json": "ed6ca147bf737ff67db3207a1b12ae2a2894741559c9e69999147b437517118b",
-    "Modelfile": "09a4faef37eef6afe2c9b9edc7cf8318029a51660c0fc6c5c38d8a8b8722a422"
+    "analysis.py": "5fdbfa114a08cf866fa4c7bebd55e82eb39702920dc81f76a419cb2806d3e9fb",
+    "experiments/study.json": "4b76b5ab2fc92ab5a6f2d2621429046c700b3024e9911e9a3e08166930d5079f",
+    "Modelfile": "09a4faef37eef6afe2c9b9edc7cf8318029a51660c0fc6c5c38d8a8b8722a422",
+    "checkpoints.py": "13c1c1c9f2d4941ef679fdc954c5ebfa36e07d9dc975716f231d50f0348b1dac"
   },
-  "supporting_file_sha256": {
+  "supporting_sha256": {
+    "run_study.py": "9089bb6b4bd831699cd990abee214879e6c15ec8d65cc42df700ea7c441e90cf",
     "audit_batch.py": "d9b9338f683f9487d7c7f1c519b014f5f3fcf67442e60195a86ea1836fd51722",
-    "run_study.py": "d033867deb32998a7c30cb929612756ab49667b9f41c5c9e91074922e659eec1",
     "export_report.py": "25ec4e7d35943fce7454a478e80fec64a91e08c675731355d725fb187d519e22",
-    "experiments/confirm-a.json": "0d25a0b29dbd0cf56f882141003a4096909a063d760c4de76a1276ba107a5981",
-    "experiments/confirm-b.json": "09c246348a2358b5311337bf810274828d16170a6bb63e43b94fe67c0ea9f94c"
+    "experiments/confirm-a.json": "eed0015e4ade08626e9f7520ccf5d084c0d815a00851784609370a9ebb526ee2",
+    "experiments/confirm-b.json": "07005ba53221fdbb8e5fc70b63497f1b9bf22f03188494fd8b86f3e0947b8d96"
   },
-  "calibration_batches": [
-    "20261008T160452882425Z",
-    "20261008T162135502883Z"
-  ],
   "validation": {
-    "tests_passed": 40,
-    "test_log_sha256": "cb1804d43b474c75cf60f4032dfb15e62a7da022706fd896d3d9b2770fdf848b"
+    "offline_tests_passed": 48,
+    "test_log_sha256": "cdc31e480e324399b521560fcd89867fcee2af6757108972eebe359b9f581f3f",
+    "runner_recheck_tests_passed": 8
   },
-  "runtime_estimate": {
-    "per_batch_hours": 8.455308689,
-    "total_hours": 16.910617378,
-    "planning_allowance_hours": [
-      20,
-      26
-    ],
-    "allowance_is_statistical_interval": false
+  "checkpoint_seconds": 3600,
+  "first_checkpoint": "After first complete C/Go pair; startup pause/resume verifies publication and recovery before continuous hourly segments.",
+  "trial_count": 800,
+  "schema_protocol_version": 2,
+  "case_timeout_policy": "candidate_failure",
+  "unchanged_from_v2": [
+    "tasks and hidden tests",
+    "model and quantization",
+    "generation budgets and sampling parameters",
+    "20 repeats per language per workload",
+    "decision thresholds and statistical methods"
+  ],
+  "new_seed_bases": {
+    "A": 50000000,
+    "B": 60000000
   },
-  "environment": {
-    "platform": "macOS-26.6.2-arm64-arm-64bit",
-    "machine": "arm64",
-    "hardware": {
-      "cpu": "Apple M3 Pro",
-      "logical_cpus": 12,
-      "memory_bytes": 38654705664
-    },
-    "python": "3.9.6",
-    "pi": "1.1.0",
-    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
-    "go": "go version go1.27.1 darwin/arm64",
-    "ollama": {
-      "version": "0.33.3"
-    }
-  },
-  "model_digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977"
+  "planning_hours": [
+    20,
+    26
+  ],
+  "raw_traces_backed_up_remotely": false
 }

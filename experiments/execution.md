@@ -1,78 +1,96 @@
-# Calibration, freeze, and confirmation execution
+# Overnight study v3: execution and recovery
 
-## Completed before confirmation
+## Why this is a new study
 
-1. Ran the [12-trial short pilot](../reports/20261008T160452882425Z/README.md).
-   C passed 1/6 and Go 4/6, but six trials were cut off at 120 seconds. Its effort
-   totals are lower bounds and cannot support an efficiency decision.
-2. Audited all traces, then ran a separate [20-trial full-suite calibration](../reports/20261008T162135502883Z/README.md)
-   at the already registered confirmation limits. All twenty passed schedule,
-   source, usage, and stopping checks. No provider error, agent cutoff, compiler
-   timeout, or test wall timeout occurred. All twenty have complete usage.
-3. Checked difficulty: C passed 4/10 and Go 6/10, with successes in both languages,
-   failures in both, and different workload-specific directions. This is neither
-   an overall floor nor ceiling. One pair per workload cannot establish a ranking.
-   Keep the original ten workloads and hidden tests unchanged.
-4. Estimated runtime from the 25.4-minute complete calibration: 8.46 hours per
-   400-trial batch, 16.91 hours total. Allow 20–26 hours operationally; this is a
-   heuristic allowance, not a statistical interval. The earlier short pilot is
-   unsuitable for runtime extrapolation because half its trials were interrupted.
-5. Reaffirmed the frozen A/B protocol and passed all **40 offline tests** before
-   confirmation. Tests use fake completions, not extra local-model benchmark data.
-   The eight fingerprinted benchmark files and both confirmation profiles remain
-   byte-for-byte identical to revision `c6bc841ec62d3657909874d2ec17a7e8ed46f5ad`.
-   Added audit/execution/reporting helpers do not change prompts, tasks, budgets,
-   sample size, seeds, stopping criteria, or statistical thresholds.
+The v2 confirmation attempt `20261008T165022880692Z` stopped after 5/400 trials,
+when a generated Go RPN program entered an infinite allocation loop and exhausted
+its ten-second test watchdog. The v2 rule treated any candidate wall timeout as
+infrastructure failure. [Evidence and diagnosis](../checkpoints/c-go-controlled-v2/20261008T165022880692Z/diagnosis.md)
+are preserved; v2 B never started and no valid A/B conclusion exists.
 
-[execution.json](execution.json) records source/helper fingerprints, environment,
-model digest, calibration IDs, and the test-log hash. Each confirmation batch
-records the exact pre-execution Git commit and repeats source/model checks.
-No pi fork customization was needed; generation still runs through installed pi.
+V3 registers a new operational endpoint: candidate code must pass each case within
+its execution budget. A candidate wall timeout fails that test/submission; it is
+ordinary repair feedback, not a reason to invalidate the whole study. Compiler
+wall timeouts, provider errors, and the 600-second agent watchdog still stop the
+batch. Machine scheduling can affect this operational endpoint. No hidden tests
+were changed and no observed solution was patched into a benchmark candidate.
 
-## Authorized confirmation workflow
+This change follows a diagnosed execution failure, not a search for a language
+winner. V3 starts both replications anew with disjoint sampling seeds 50,000,000
+and 60,000,000, and schedule seeds 51001 and 51002. No v2 rows are reused. The ten
+workloads, 20 repeats per language/workload, model, sampling parameters, generation
+budgets, accuracy margins, statistical methods, and decision thresholds remain
+unchanged. Historical registration files are preserved under `history/v2/` and in
+Git commit `c4b5866ae9e01c81f4b3776f8bce3c4459cfb70d`.
 
-Run A then B, each 10 workloads × 20 repetitions × 2 languages. Keep every trial,
-including wrong answers and exhausted submission budgets. Neither calibration
-batch enters confirmation analysis. Do not inspect A and alter B. An infrastructure
-fault stops the sequence; preserve the invalid batch, diagnose it, and make a new
-whole-batch execution plan rather than replacing selected rows.
+## Hourly execution segments
 
-The sequential runner is:
+A and B each still require 400 trials. Execution is split at a complete C/Go pair
+boundary after roughly 3,600 seconds, including model warmup and post-trial judging.
+The first pair gets an early checkpoint to verify end-to-end publication. No trial
+is interrupted to meet the clock. Normal overshoot is a few minutes; the configured
+pair budget permits up to 20 minutes of agent time plus judging. Checkpoint segments
+are not new independent replications and are not analyzed to select a winner.
+
+At each boundary the runner:
+
+1. Checks source/model/tool fingerprints and seals the complete evidence prefix.
+2. Exports every recorded trial, failures included, and every saved source revision.
+3. Scans the portable export, commits it, and pushes it to GitHub. Git history
+   retains earlier snapshots. Raw logs, agent configuration, binaries, and weights
+   remain local; raw-log hashes are included in the portable backup.
+4. Starts a fresh runner process for the next exact scheduled pair, verifying
+   config, schedule, model, compiler/tool versions, and sealed evidence first.
+
+A push failure gets two retries, then stops execution at the checkpoint. An
+infrastructure failure gets an explicitly invalid progress snapshot before stopping.
+No failed row is selectively rerun. All 800 trials and final integrity checks are
+required before the usual analysis, final report commit, and push.
+
+## Runtime and validation
+
+Historical full-suite calibration completed twenty trials in 25.4 minutes, with
+C 4/10 and Go 6/10; it was neither an overall floor nor ceiling. Its extrapolation
+is 16.9 hours for 800 trials. Plan for 20–26 hours, not a guaranteed overnight finish.
+The changed timeout policy and hourly warmups/publication mean this is an estimate,
+not a measured v3 duration or statistical prediction interval.
+
+The pre-launch validation suite has **48 offline tests**. It includes a two-segment
+run proving that failed rows are preserved and not replayed, rejection of tampered
+source, changed environments and incomplete trials, portable checkpoint labeling,
+and real pi with fake completions checking candidate versus compiler timeouts.
+No model inference is used by these tests. `execution.json` records fingerprints
+and validation evidence before the new confirmation launch.
+
+## Operate and recover
+
+The actual overnight run is detached, with idle-sleep prevention and its process
+group in `.local/confirmation.pid`. Equivalent foreground invocation:
 
 ```sh
 mkdir -p .local
-caffeinate -i python3 -u run_study.py --publish > .local/confirmation.log 2>&1
+caffeinate -i python3 -u run_study.py --publish --checkpoint-seconds 3600 --first-checkpoint-seconds 1 > .local/confirmation.log 2>&1
 ```
 
-The actual run is detached from the interactive terminal, with its process-group
-ID in `.local/confirmation.pid`. It retains idle-sleep prevention while running.
-The laptop was on AC power at launch preparation. Closing the lid, stopping Ollama,
-or changing the environment can still interrupt the run.
-
-Inspect progress without inference:
+The first checkpoint occurs after the first pair; later ones target an hour.
+Keep the laptop powered and open. Inspect `.local/study-run.json` and
+`.local/confirmation.log` for progress and the latest pushed checkpoint commit.
+Only a clean sealed checkpoint may resume:
 
 ```sh
-cat .local/study-run.json
-tail -20 .local/confirmation.log
+caffeinate -i python3 -u run_study.py --resume --publish --checkpoint-seconds 3600 >> .local/confirmation.log 2>&1
 ```
 
-Stages are `running_A`, `running_B`, `validating_and_exporting`, `publishing`,
-then `complete`, or `stopped_with_error`. A successful exit means both full batches
-passed validation, portable reports reproduced the raw analysis, privacy checks
-passed, and (with `--publish`) the report commit was pushed. The runner never
-silently resumes incomplete data or retries failed rows. The execution record
-prevents accidental duplicate launches.
+An unfinished/running/invalid batch is rejected rather than replayed. A crash
+mid-segment requires inspection and can require a new whole batch. Existing commits
+and local evidence are never discarded or rewritten to rescue a comparison. Do not
+edit tracked files during execution: unrelated modifications block publication.
 
-The final [joint report](../reports/c-go-controlled-v2/README.md) and machine-readable
-analysis are created only after both batches validate. Until then, no confirmation
-conclusion has been published. An inconclusive result is legitimate and will be
-published as such. No language design decision follows from calibration alone.
+[Intermediate backups](../checkpoints/README.md) are explicitly not final results.
+The [joint report](../reports/c-go-checkpointed-v3/README.md) appears only after both
+complete replications validate. Publish an inconclusive outcome as inconclusive;
+do not keep sampling until a preferred winner appears.
 
-## What follows the result
-
-Use a replicated result or useful tie as a baseline. Then test new workload families
-and a second model before making a broad claim about LLM-friendly languages.
-For language design, change one feature at a time and budget documentation/examples
-explicitly for both the experimental language and existing-language baselines.
-If A/B is inconclusive, report that outcome and preregister a new study before
-collecting additional confirmation data.
+For deliberate one-segment execution, add `--pause-after-checkpoint`. It exits
+cleanly after publishing that segment; a later `--resume` continues without
+replaying trials. The overnight invocation omits this flag after startup validation.

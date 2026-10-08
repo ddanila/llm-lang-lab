@@ -10,7 +10,7 @@ import statistics
 
 ROOT = Path(__file__).resolve().parent
 REQUIRED_SOURCES = {"bench.py", "judge.py", "tasks.py", "extra_tasks.py", "pi/benchmark.ts",
-                    "analysis.py", "experiments/study.json", "Modelfile"}
+                    "analysis.py", "experiments/study.json", "Modelfile", "checkpoints.py"}
 
 def interval(values):
     values = sorted(values)

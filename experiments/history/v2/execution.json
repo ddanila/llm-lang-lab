@@ -1,0 +1,57 @@
+{
+  "study_id": "c-go-controlled-v2",
+  "frozen_utc": "2026-10-08T16:49:52.964652+00:00",
+  "decision": "Proceed unchanged to registered A and B; no calibration data enters confirmation analysis.",
+  "benchmark_revision": "c6bc841ec62d3657909874d2ec17a7e8ed46f5ad",
+  "source_sha256": {
+    "bench.py": "3bb132ed62d72621dd6df0cc98fd53d5f3f12d96f28c0f90b2e3437328d74e70",
+    "judge.py": "8934214aab0f915d29bcdc198b2340471b855d21d17422d61b628eeb814d988e",
+    "tasks.py": "e417dc76c1f02fa0eaed873ea9ddc3498dc8003b63625001d635373cd0ad20eb",
+    "extra_tasks.py": "e2d55a666320c1a059bc4912107b668249b5d06c024958f5e26ac9137cf89874",
+    "pi/benchmark.ts": "2065b7f78d70267598a4d590055edec07aa575328f1ab96d5bd6695444ed60e5",
+    "analysis.py": "1ef9ab0e08a7f1a2f15d3f969c37e6b21603c5b13368c0b772d7102c6ca54405",
+    "experiments/study.json": "ed6ca147bf737ff67db3207a1b12ae2a2894741559c9e69999147b437517118b",
+    "Modelfile": "09a4faef37eef6afe2c9b9edc7cf8318029a51660c0fc6c5c38d8a8b8722a422"
+  },
+  "supporting_file_sha256": {
+    "audit_batch.py": "d9b9338f683f9487d7c7f1c519b014f5f3fcf67442e60195a86ea1836fd51722",
+    "run_study.py": "d033867deb32998a7c30cb929612756ab49667b9f41c5c9e91074922e659eec1",
+    "export_report.py": "25ec4e7d35943fce7454a478e80fec64a91e08c675731355d725fb187d519e22",
+    "experiments/confirm-a.json": "0d25a0b29dbd0cf56f882141003a4096909a063d760c4de76a1276ba107a5981",
+    "experiments/confirm-b.json": "09c246348a2358b5311337bf810274828d16170a6bb63e43b94fe67c0ea9f94c"
+  },
+  "calibration_batches": [
+    "20261008T160452882425Z",
+    "20261008T162135502883Z"
+  ],
+  "validation": {
+    "tests_passed": 40,
+    "test_log_sha256": "cb1804d43b474c75cf60f4032dfb15e62a7da022706fd896d3d9b2770fdf848b"
+  },
+  "runtime_estimate": {
+    "per_batch_hours": 8.455308689,
+    "total_hours": 16.910617378,
+    "planning_allowance_hours": [
+      20,
+      26
+    ],
+    "allowance_is_statistical_interval": false
+  },
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "hardware": {
+      "cpu": "Apple M3 Pro",
+      "logical_cpus": 12,
+      "memory_bytes": 38654705664
+    },
+    "python": "3.9.6",
+    "pi": "1.1.0",
+    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "go": "go version go1.27.1 darwin/arm64",
+    "ollama": {
+      "version": "0.33.3"
+    }
+  },
+  "model_digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977"
+}

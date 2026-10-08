@@ -6,6 +6,7 @@ import shutil
 import tempfile
 import threading
 import unittest
+from unittest.mock import patch
 
 from bench import ROOT, run_one
 
@@ -133,6 +134,25 @@ class PiAdapter(unittest.TestCase):
         self.assertEqual(result["stop"],"public_pass")
         self.assertTrue(result["success"],result)
         self.assertEqual(result["tokens"]["output"],14)
+
+    def test_candidate_wall_timeout_policy_is_explicit_and_keeps_failure(self):
+        feedback = {"passed": False, "kind": "tests", "failures": [{"timeout": True}]}
+        for policy, invalid in [("candidate_failure", False), ("invalidate_batch", True)]:
+            with self.subTest(policy=policy), patch("bench.evaluate", return_value=feedback):
+                result, requests, _ = self.run_script([[CORRECT]], purpose="confirmation",
+                                                      case_timeout_policy=policy)
+            self.assertFalse(result["success"])
+            self.assertEqual(result["infrastructure_error"], invalid)
+            self.assertTrue(result["usage_complete"])
+            self.assertEqual(len(requests), 1)
+
+    def test_compiler_timeout_still_invalidates_new_study(self):
+        feedback = {"passed": False, "kind": "compile_error", "build": {"timeout": True}}
+        with patch("bench.evaluate", return_value=feedback):
+            result, _, _ = self.run_script([[CORRECT]], purpose="confirmation",
+                                           case_timeout_policy="candidate_failure")
+        self.assertTrue(result["infrastructure_error"])
+        self.assertFalse(result["success"])
 
 if __name__ == "__main__":
     unittest.main()

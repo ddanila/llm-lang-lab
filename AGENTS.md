@@ -13,7 +13,10 @@ runs or tune hidden tests to favor observed solutions.
 The confirmation study is frozen in experiments/study.json. Keep calibration
 results exploratory. Do not change settings, decision thresholds, or analysis
 after seeing confirmation results; prepare a new study instead. Never rerun only
-failed rows to repair an invalid confirmation batch.
+failed rows to repair an invalid confirmation batch. Clean sealed checkpoints may
+resume the exact remaining schedule after validation. Never resume a running or
+invalid batch, discard observed rows, or replay an unfinished trial. Checkpoints
+are execution segments, not independent statistical replications.
 
 Run python3 -m unittest discover -s tests -v after harness changes.
 
@@ -22,4 +25,6 @@ use a dedicated custom branch in that fork, never its main branch. Prefer the
 existing extension interface when it is sufficient.
 
 Do not commit raw runs/, credentials, model weights, executables, or local pi state.
-Publish only reviewed portable reports and selected generated sources.
+Publish only reviewed portable reports and selected generated sources. Hourly
+checkpoint publication is authorized for the current overnight study; keep raw
+traces and local agent state off GitHub. Clearly label interim/invalid evidence.
