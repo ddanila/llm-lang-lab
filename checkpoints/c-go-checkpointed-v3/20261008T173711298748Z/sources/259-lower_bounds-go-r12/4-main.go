@@ -1,0 +1,72 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	reader := bufio.NewReader(os.Stdin)
+	
+	// Read all input at once
+	input, _ := reader.ReadString('\n')
+	tokens := strings.Fields(input)
+	
+	// If we haven't got enough tokens yet, read more
+	if len(tokens) < 2 {
+		moreInput, _ := reader.ReadString('\n')
+		tokens = append(tokens, strings.Fields(moreInput)...)
+	}
+	
+	if len(tokens) == 0 {
+		return
+	}
+
+	n, err := strconv.Atoi(tokens[0])
+	if err != nil {
+		return
+	}
+
+	q, err := strconv.Atoi(tokens[1])
+	if err != nil {
+		return
+	}
+
+	// Handle n=0 case specially
+	if n > 0 {
+		a := make([]int64, n)
+		for i := 0; i < n; i++ {
+			a[i], _ = strconv.ParseInt(tokens[2+i], 10, 64)
+		}
+
+		if q == 0 {
+			return
+		}
+
+		queryStart := 2 + n
+		queryTokens := tokens[queryStart:]
+
+		for _, qStr := range queryTokens {
+			x, _ := strconv.ParseInt(qStr, 10, 64)
+			
+			// Binary search for first element >= x
+			left, right := 0, n-1
+			result := n
+			
+			for left <= right {
+				mid := left + (right-left)/2
+				if a[mid] >= x {
+					result = mid
+					right = mid - 1
+				} else {
+					left = mid + 1
+				}
+			}
+			
+			fmt.Println(result)
+		}
+	}
+}
