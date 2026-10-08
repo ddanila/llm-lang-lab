@@ -1,0 +1,15 @@
+{
+  "model": "llm-lang-lab-qwen35-9b",
+  "ollama_url": "http://127.0.0.1:11434",
+  "languages": ["c", "go"],
+  "tasks": ["merge_intervals", "word_counts", "rpn"],
+  "repeats": 3,
+  "schedule_seed": 20261008,
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "context": 16384,
+  "max_output_per_turn": 4096,
+  "max_turns": 8,
+  "max_submissions": 4,
+  "max_seconds": 240
+}
