@@ -10,6 +10,10 @@ The first comparison is C17 versus Go, using **pi** as the agent and a local
 **Qwen3.5 9B Q4_K_M** model through Ollama. Python orchestrates the experiment; it
 does not generate the candidate solutions.
 
+The [first six-run pilot](reports/20261008T085856492366Z/README.md) is published
+with metrics and generated source revisions: Go passed 3/3 interval-merging trials,
+C passed 2/3. This is exploratory evidence, not a stable language ranking.
+
 ## Run locally
 
 Requirements: Python 3.9+, pi 1.1.0 with extension support, Ollama, Clang, Go.
@@ -130,6 +134,16 @@ Recompute an existing summary with:
 ```sh
 python3 bench.py report --batch runs/YOUR_BATCH
 ```
+
+Export a completed batch into a new portable report directory, then review it
+before committing:
+
+```sh
+python3 export_report.py runs/YOUR_BATCH
+```
+
+The export includes metrics, model metadata, and generated source revisions.
+It omits raw traces and compiler diagnostics containing local paths.
 
 Raw traces and local environment details stay local by default. Reviewed,
 portable reports can be committed under `reports/`. Do not pool batches with

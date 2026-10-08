@@ -1,0 +1,239 @@
+{
+  "batch": "20261008T085856492366Z",
+  "config": {
+    "model": "llm-lang-lab-qwen35-9b",
+    "ollama_url": "http://127.0.0.1:11434",
+    "languages": [
+      "c",
+      "go"
+    ],
+    "tasks": [
+      "merge_intervals"
+    ],
+    "repeats": 3,
+    "schedule_seed": 20261008,
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "context": 16384,
+    "max_output_per_turn": 4096,
+    "max_turns": 8,
+    "max_submissions": 4,
+    "max_seconds": 240
+  },
+  "summary": {
+    "languages": {
+      "c": {
+        "runs": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "first_submission_successes": 0,
+        "mean_par2_seconds": 243.53789454166665,
+        "output_tokens_per_success": 4428.5,
+        "mean_output_tokens": 2952.3333333333335,
+        "mean_submissions": 3.6666666666666665,
+        "infrastructure_errors": 0,
+        "median_seconds": 132.10392687499996
+      },
+      "go": {
+        "runs": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "first_submission_successes": 2,
+        "mean_par2_seconds": 89.9415356666667,
+        "output_tokens_per_success": 1683.0,
+        "mean_output_tokens": 1683,
+        "mean_submissions": 2,
+        "infrastructure_errors": 0,
+        "median_seconds": 109.009160625
+      }
+    },
+    "go_minus_c_success_by_task": {
+      "merge_intervals": 0.3333333333333333
+    },
+    "go_minus_c_success_task_bootstrap_95": null,
+    "stability": "exploratory_only",
+    "note": "Three task families cannot establish a general language advantage. Repeat a preregistered larger suite in a second independent batch."
+  },
+  "runs": [
+    {
+      "task": "merge_intervals",
+      "language": "c",
+      "repeat": 0,
+      "sampling_seed": 20261008,
+      "tokens": {
+        "input": 3418,
+        "output": 2269,
+        "cacheRead": 5297,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 4,
+      "tool_calls": 3,
+      "usage_missing": false,
+      "stop": "completed",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 118.50975675,
+      "submissions": 3,
+      "compile_failures": 0,
+      "success": true,
+      "first_submission_passed": false,
+      "par2_seconds": 118.50975675
+    },
+    {
+      "task": "merge_intervals",
+      "language": "go",
+      "repeat": 0,
+      "sampling_seed": 20261008,
+      "tokens": {
+        "input": 2900,
+        "output": 2075,
+        "cacheRead": 2209,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 3,
+      "tool_calls": 2,
+      "usage_missing": false,
+      "stop": "completed",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 109.009160625,
+      "submissions": 2,
+      "compile_failures": 0,
+      "success": true,
+      "first_submission_passed": false,
+      "par2_seconds": 109.009160625
+    },
+    {
+      "task": "merge_intervals",
+      "language": "go",
+      "repeat": 1,
+      "sampling_seed": 20261009,
+      "tokens": {
+        "input": 3053,
+        "output": 2383,
+        "cacheRead": 4520,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 4,
+      "tool_calls": 3,
+      "usage_missing": false,
+      "stop": "completed",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 127.02122516700001,
+      "submissions": 3,
+      "compile_failures": 1,
+      "success": true,
+      "first_submission_passed": true,
+      "par2_seconds": 127.02122516700001
+    },
+    {
+      "task": "merge_intervals",
+      "language": "c",
+      "repeat": 1,
+      "sampling_seed": 20261009,
+      "tokens": {
+        "input": 5055,
+        "output": 4190,
+        "cacheRead": 18011,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 8,
+      "tool_calls": 8,
+      "usage_missing": false,
+      "stop": "turn_budget",
+      "returncode": 143,
+      "infrastructure_error": false,
+      "elapsed_seconds": 215.154504459,
+      "submissions": 4,
+      "compile_failures": 0,
+      "success": false,
+      "first_submission_passed": false,
+      "par2_seconds": 480
+    },
+    {
+      "task": "merge_intervals",
+      "language": "c",
+      "repeat": 2,
+      "sampling_seed": 20261010,
+      "tokens": {
+        "input": 4562,
+        "output": 2398,
+        "cacheRead": 8138,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 5,
+      "tool_calls": 4,
+      "usage_missing": false,
+      "stop": "completed",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 132.10392687499996,
+      "submissions": 4,
+      "compile_failures": 1,
+      "success": true,
+      "first_submission_passed": false,
+      "par2_seconds": 132.10392687499996
+    },
+    {
+      "task": "merge_intervals",
+      "language": "go",
+      "repeat": 2,
+      "sampling_seed": 20261010,
+      "tokens": {
+        "input": 1320,
+        "output": 591,
+        "cacheRead": 681,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 2,
+      "tool_calls": 1,
+      "usage_missing": false,
+      "stop": "completed",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 33.79422120800007,
+      "submissions": 1,
+      "compile_failures": 0,
+      "success": true,
+      "first_submission_passed": true,
+      "par2_seconds": 33.79422120800007
+    }
+  ],
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "pi": "1.1.0",
+    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "go": "go version go1.27.1 darwin/arm64",
+    "ollama": {
+      "version": "0.33.3"
+    },
+    "git_commit": "dacbec8ab106ea70a3d8d65bf1838a4f3d7a3a15",
+    "source_sha256": {
+      "bench.py": "400709edde020c18230901737b6c6f38983b1d9bb7bb8ee4c15bd261a957d6c7",
+      "judge.py": "48634d8987b8a1dcdc0f9553a453709e2956aac0ee84c07d85cd1674491d489c",
+      "tasks.py": "b62dcea03e74c1ad935d57d0206c42684d1fe02ff4e415617b5729f5b39dfa03",
+      "pi/benchmark.ts": "02ef1fee4466fcf646ad44be198a59941ea75fdcc1b9f18ae5f393a4ad3178a3",
+      "config.json": "3a2bb262084fdce476bc64489fdb3ffe7e6475c3dd51228894bc9c72a2d96c2f",
+      "Modelfile": "09a4faef37eef6afe2c9b9edc7cf8318029a51660c0fc6c5c38d8a8b8722a422"
+    }
+  },
+  "model": {
+    "name": "llm-lang-lab-qwen35-9b:latest",
+    "digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977",
+    "size_bytes": 6594474485,
+    "details": {
+      "parent_model": "qwen3.5:9b",
+      "format": "gguf",
+      "family": "qwen35",
+      "families": [
+        "qwen35"
+      ],
+      "parameter_size": "9.7B",
+      "quantization_level": "Q4_K_M"
+    },
+    "parameters": "presence_penalty               1.5\nrepeat_penalty                 1\ntemperature                    0.7\ntop_k                          20\ntop_p                          0.8\nnum_ctx                        16384"
+  }
+}
