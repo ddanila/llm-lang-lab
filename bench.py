@@ -137,7 +137,8 @@ def run_one(batch, config, job, index):
             for line in proc.stdout:
                 records.put(line)
             records.put(None)
-        threading.Thread(target=read, daemon=True).start()
+        reader = threading.Thread(target=read, daemon=True)
+        reader.start()
         turns = 0
         try:
             while True:
@@ -160,7 +161,8 @@ def run_one(batch, config, job, index):
                 events.append(event)
                 if event["type"] == "turn_end":
                     turns += 1
-                    if turns >= config["max_turns"]:
+                    if (turns >= config["max_turns"]
+                            and event.get("message", {}).get("stopReason") == "toolUse"):
                         stop = "turn_budget"
                         break
         finally:
@@ -174,6 +176,8 @@ def run_one(batch, config, job, index):
                     except ProcessLookupError:
                         pass
             proc.wait()
+            reader.join(timeout=1)
+            proc.stdout.close()
     elapsed = time.monotonic() - started
     metrics = parse_events(events)
     attempts_file = work / "attempts.jsonl"
@@ -242,7 +246,7 @@ def summarize(results, config):
     return {"languages": langs, "go_minus_c_success_by_task": differences,
             "go_minus_c_success_task_bootstrap_95": bootstrap_interval(differences),
             "stability": "exploratory_only",
-            "note": "Three task families cannot establish a general language advantage. "
+            "note": "A small task suite cannot establish a general language advantage. "
                     "Repeat a preregistered larger suite in a second independent batch."}
 
 def main():

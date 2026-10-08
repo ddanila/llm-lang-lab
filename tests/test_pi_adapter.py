@@ -50,7 +50,7 @@ class PiAdapter(unittest.TestCase):
         try:
             config = json.loads((ROOT / "config.json").read_text())
             config.update(model="fake", ollama_url=f"http://127.0.0.1:{server.server_port}",
-                          max_seconds=30)
+                          max_seconds=30, max_turns=2)
             with tempfile.TemporaryDirectory() as d:
                 result = run_one(Path(d), config, {
                     "language": "c", "task": "merge_intervals", "repeat": 0, "sampling_seed": 123
@@ -66,6 +66,7 @@ class PiAdapter(unittest.TestCase):
             self.assertEqual(result["tokens"]["output"], 14)
             self.assertEqual(result["submissions"], 1)
             self.assertFalse(result["infrastructure_error"])
+            self.assertEqual(result["stop"], "completed")
             self.assertFalse(result["success"])
             self.assertEqual(result["par2_seconds"], 60)
         finally:
