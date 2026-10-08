@@ -1,7 +1,9 @@
 # C versus Go: controlled protocol v2
 
-Status: **prepared, not run**. The published six-run report used protocol v1 and
-cannot be pooled with these experiments. No new model results are claimed.
+Status: **calibration in progress**. The [12-trial short pilot](../reports/20261008T160452882425Z/README.md)
+is complete; six trials reached its short timeout. A separate full-suite calibration
+uses the already frozen confirmation limits. Confirmation has not started.
+The historical six-run report used protocol v1 and cannot be pooled with these experiments.
 
 ## The question
 
@@ -44,6 +46,7 @@ profile permits CLI task/repetition overrides.
 | Profile | Workloads | Repeats per language/workload | Trials | Purpose |
 | --- | --- | --- | --- | --- |
 | pilot.json / default config.json | 3 | 2 | 12 | Check the controlled loop and find infrastructure problems |
+| calibration-full.json | 10 | 1 | 20 | Assess all workloads at confirmation limits; separate seeds |
 | confirm-a.json | 10 | 20 | 400 | First confirmation batch |
 | confirm-b.json | Same 10 | 20, different seeds | 400 | Independent generation replication |
 
@@ -51,8 +54,10 @@ The pilot has a 120-second limit per agent trial: at most 24 minutes of agent
 time, plus model warmup and post-trial judging. This is not a hard 30-minute
 end-to-end limit. Confirmation uses a 600-second safety timeout; it is a
 substantial, likely many-hour experiment, not the short pilot. The plan command
-prints maximum agent time, excluding warmup/judging. Preparation launches none
-of these runs.
+prints maximum agent time, excluding warmup/judging. The added full-suite calibration
+uses the same 600-second limit, four submissions, and 2,048 output tokens per turn
+as confirmation, with schedule seed 31002 and sampling seeds 40,000,000 onward.
+It is diagnostic only; it does not change the registered A/B settings or decision rule.
 
 Twenty repeats are a starting sample size, not a power guarantee. Differences
 near the decision thresholds may remain unresolved. An inconclusive result means

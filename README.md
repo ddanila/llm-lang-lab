@@ -14,9 +14,10 @@ The [first six-run pilot](reports/20261008T085856492366Z/README.md) is published
 with metrics and generated source revisions: Go passed 3/3 interval-merging trials,
 C passed 2/3. This is exploratory evidence, not a stable language ranking.
 
-**Protocol v2 is prepared, not run.** It enforces stopping and adds a frozen
-[replication study](experiments/README.md). Historical v1 results cannot be
-pooled with v2.
+**Protocol v2 calibration is underway.** The [short calibration](reports/20261008T160452882425Z/README.md)
+finished with six timeout-censored trials; a separate full-suite calibration
+uses confirmation limits before the frozen [replication study](experiments/README.md).
+Historical v1 results cannot be pooled with v2.
 
 ## Run locally
 

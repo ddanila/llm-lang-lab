@@ -1,0 +1,34 @@
+{
+  "model": "llm-lang-lab-qwen35-9b",
+  "ollama_url": "http://127.0.0.1:11434",
+  "languages": [
+    "c",
+    "go"
+  ],
+  "tasks": [
+    "merge_intervals",
+    "word_counts",
+    "rpn",
+    "lower_bounds",
+    "grid_distance",
+    "rational_sum",
+    "edit_distance",
+    "transaction_ledger",
+    "dependency_order",
+    "csv_fields"
+  ],
+  "repeats": 1,
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "context": 16384,
+  "max_output_per_turn": 2048,
+  "max_turns": 4,
+  "max_submissions": 4,
+  "max_seconds": 600,
+  "protocol_version": 2,
+  "model_digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977",
+  "schedule_seed": 31002,
+  "sampling_seed": 40000000,
+  "purpose": "calibration",
+  "study_id": "c-go-controlled-v2"
+}

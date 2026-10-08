@@ -1,0 +1,109 @@
+{
+  "batch": "20261008T160452882425Z",
+  "trials": 12,
+  "checks": [
+    {
+      "trial": "000-rpn-go-r0",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "3a7c4acd1a5a3bd2316c57c8c7a3b6eb08e051b53318a061fb5acbcedf0a804e"
+    },
+    {
+      "trial": "001-rpn-c-r0",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "b71a2a16e21a743640bff71b30e90e5025c8468bc718296260643e53ac765dea"
+    },
+    {
+      "trial": "002-merge_intervals-c-r0",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "f01fada1c97583cd8f4034bce233738288b50f38d389b7d5f0f58a47c1a9cdc3"
+    },
+    {
+      "trial": "003-merge_intervals-go-r0",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "c2aae72a51f4cd300c6cd7030c2c538678f7ae8aec8b78492d294198589d99b9"
+    },
+    {
+      "trial": "004-word_counts-c-r0",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "7215ad4c622e290d5c5ef1066dac3ba914d5f48d5bc9da27e4a5f226ab05db16"
+    },
+    {
+      "trial": "005-word_counts-go-r0",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "df81e60fe6aac7eed9af43f5d590e82cd34ef4b2109031f34f454c768782b737"
+    },
+    {
+      "trial": "006-merge_intervals-go-r1",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "83de22f9c2266206bab64a576ffa5afe76078e8656494c537e09a52f79946128"
+    },
+    {
+      "trial": "007-merge_intervals-c-r1",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "7c1fa4d803a77e6cc3709568c3a46237f3dc853678d2aa86a3a73cab103befad"
+    },
+    {
+      "trial": "008-word_counts-go-r1",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "bb4fe918316cd307cb1c30d3482da62f05734ea4596808787dbc970ac19f8a89"
+    },
+    {
+      "trial": "009-word_counts-c-r1",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "e9fb2e9565d36e9c6fe3fafe442e415ab7d95d7d18e466f747076a8831e7b1eb"
+    },
+    {
+      "trial": "010-rpn-c-r1",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "7dd5f5e8c0dc4ba2d0a30448d468c38f5d3bb155a66341c3559aea6db28ec99a"
+    },
+    {
+      "trial": "011-rpn-go-r1",
+      "schedule_matches": true,
+      "usage_matches_completed_events": true,
+      "source_frozen": true,
+      "no_submission_after_public_pass": true,
+      "event_log_sha256": "90da8f9609d789fab4274263662f3a7b70edfa9092a5097f0348246854c3890d"
+    }
+  ],
+  "batch_unchanged": true,
+  "agent_seconds": 969.6897048339999,
+  "wall_seconds_approx": 994.5954332351685,
+  "timeouts": 6,
+  "incomplete_usage_trials": 6,
+  "infrastructure_errors": 0,
+  "warning": "Calibration only. Timeout token counts are incomplete lower bounds; no language ranking."
+}

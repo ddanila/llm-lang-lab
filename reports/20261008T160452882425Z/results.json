@@ -1,0 +1,424 @@
+{
+  "batch": "20261008T160452882425Z",
+  "config": {
+    "model": "llm-lang-lab-qwen35-9b",
+    "ollama_url": "http://127.0.0.1:11434",
+    "languages": [
+      "c",
+      "go"
+    ],
+    "tasks": [
+      "merge_intervals",
+      "word_counts",
+      "rpn"
+    ],
+    "repeats": 2,
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "context": 16384,
+    "max_output_per_turn": 2048,
+    "max_turns": 4,
+    "max_submissions": 4,
+    "max_seconds": 120,
+    "protocol_version": 2,
+    "model_digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977",
+    "schedule_seed": 31001,
+    "sampling_seed": 30000000,
+    "purpose": "calibration",
+    "study_id": "c-go-controlled-v2"
+  },
+  "summary": {
+    "languages": {
+      "c": {
+        "runs": 6,
+        "successes": 1,
+        "success_rate": 0.16666666666666666,
+        "first_submission_successes": 0,
+        "mean_par2_seconds": 208.90657919449998,
+        "output_tokens_per_success": 10372.0,
+        "mean_output_tokens": 1728.6666666666667,
+        "mean_submissions": 2.3333333333333335,
+        "infrastructure_errors": 0,
+        "median_seconds": 120.01853208350002
+      },
+      "go": {
+        "runs": 6,
+        "successes": 4,
+        "success_rate": 0.6666666666666666,
+        "first_submission_successes": 2,
+        "mean_par2_seconds": 108.78846140283332,
+        "output_tokens_per_success": 1393.25,
+        "mean_output_tokens": 928.8333333333334,
+        "mean_submissions": 1.8333333333333333,
+        "infrastructure_errors": 0,
+        "median_seconds": 44.359109645499984
+      }
+    },
+    "go_minus_c_success_by_task": {
+      "rpn": 0.5,
+      "merge_intervals": 0.5,
+      "word_counts": 0.5
+    },
+    "stability": "exploratory_only",
+    "note": "Single-batch descriptive results. Use analysis.py on frozen A/B confirmation batches for a decision."
+  },
+  "runs": [
+    {
+      "task": "rpn",
+      "language": "go",
+      "repeat": 0,
+      "sampling_seed": 30000004,
+      "tokens": {
+        "input": 2038,
+        "output": 1766,
+        "cacheRead": 1957,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 3,
+      "tool_calls": 3,
+      "usage_missing": false,
+      "stop": "timeout",
+      "returncode": 143,
+      "infrastructure_error": false,
+      "elapsed_seconds": 120.010483083,
+      "submissions": 3,
+      "compile_failures": 1,
+      "success": false,
+      "first_submission_passed": false,
+      "usage_complete": false,
+      "par2_seconds": 240
+    },
+    {
+      "task": "rpn",
+      "language": "c",
+      "repeat": 0,
+      "sampling_seed": 30000004,
+      "tokens": {
+        "input": 2371,
+        "output": 1642,
+        "cacheRead": 686,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 2,
+      "tool_calls": 2,
+      "usage_missing": false,
+      "stop": "timeout",
+      "returncode": 143,
+      "infrastructure_error": false,
+      "elapsed_seconds": 120.018444875,
+      "submissions": 2,
+      "compile_failures": 1,
+      "success": false,
+      "first_submission_passed": false,
+      "usage_complete": false,
+      "par2_seconds": 240
+    },
+    {
+      "task": "merge_intervals",
+      "language": "c",
+      "repeat": 0,
+      "sampling_seed": 30000000,
+      "tokens": {
+        "input": 2250,
+        "output": 1864,
+        "cacheRead": 2143,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 3,
+      "tool_calls": 3,
+      "usage_missing": false,
+      "stop": "timeout",
+      "returncode": 143,
+      "infrastructure_error": false,
+      "elapsed_seconds": 120.0207045,
+      "submissions": 3,
+      "compile_failures": 0,
+      "success": false,
+      "first_submission_passed": false,
+      "usage_complete": false,
+      "par2_seconds": 240
+    },
+    {
+      "task": "merge_intervals",
+      "language": "go",
+      "repeat": 0,
+      "sampling_seed": 30000000,
+      "tokens": {
+        "input": 685,
+        "output": 737,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 1,
+      "tool_calls": 1,
+      "usage_missing": false,
+      "stop": "public_pass",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 37.70878200000004,
+      "submissions": 1,
+      "compile_failures": 0,
+      "success": true,
+      "first_submission_passed": true,
+      "usage_complete": true,
+      "par2_seconds": 37.70878200000004
+    },
+    {
+      "task": "word_counts",
+      "language": "c",
+      "repeat": 0,
+      "sampling_seed": 30000002,
+      "tokens": {
+        "input": 2784,
+        "output": 2145,
+        "cacheRead": 2298,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 3,
+      "tool_calls": 3,
+      "usage_missing": false,
+      "stop": "timeout",
+      "returncode": 143,
+      "infrastructure_error": false,
+      "elapsed_seconds": 120.02083758399993,
+      "submissions": 3,
+      "compile_failures": 1,
+      "success": false,
+      "first_submission_passed": false,
+      "usage_complete": false,
+      "par2_seconds": 240
+    },
+    {
+      "task": "word_counts",
+      "language": "go",
+      "repeat": 0,
+      "sampling_seed": 30000002,
+      "tokens": {
+        "input": 1653,
+        "output": 1007,
+        "cacheRead": 1818,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 3,
+      "tool_calls": 3,
+      "usage_missing": false,
+      "stop": "public_pass",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 53.89838741699998,
+      "submissions": 3,
+      "compile_failures": 0,
+      "success": true,
+      "first_submission_passed": false,
+      "usage_complete": true,
+      "par2_seconds": 53.89838741699998
+    },
+    {
+      "task": "merge_intervals",
+      "language": "go",
+      "repeat": 1,
+      "sampling_seed": 30000001,
+      "tokens": {
+        "input": 685,
+        "output": 602,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 1,
+      "tool_calls": 1,
+      "usage_missing": false,
+      "stop": "public_pass",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 30.114161708999973,
+      "submissions": 1,
+      "compile_failures": 0,
+      "success": true,
+      "first_submission_passed": true,
+      "usage_complete": true,
+      "par2_seconds": 30.114161708999973
+    },
+    {
+      "task": "merge_intervals",
+      "language": "c",
+      "repeat": 1,
+      "sampling_seed": 30000001,
+      "tokens": {
+        "input": 1480,
+        "output": 1056,
+        "cacheRead": 683,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 2,
+      "tool_calls": 2,
+      "usage_missing": false,
+      "stop": "public_pass",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 53.439475166999955,
+      "submissions": 2,
+      "compile_failures": 0,
+      "success": true,
+      "first_submission_passed": false,
+      "usage_complete": true,
+      "par2_seconds": 53.439475166999955
+    },
+    {
+      "task": "word_counts",
+      "language": "go",
+      "repeat": 1,
+      "sampling_seed": 30000003,
+      "tokens": {
+        "input": 669,
+        "output": 458,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 1,
+      "tool_calls": 1,
+      "usage_missing": false,
+      "stop": "public_pass",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 23.416737624999996,
+      "submissions": 1,
+      "compile_failures": 0,
+      "success": false,
+      "first_submission_passed": false,
+      "usage_complete": true,
+      "par2_seconds": 240
+    },
+    {
+      "task": "word_counts",
+      "language": "c",
+      "repeat": 1,
+      "sampling_seed": 30000003,
+      "tokens": {
+        "input": 2460,
+        "output": 1773,
+        "cacheRead": 667,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 2,
+      "tool_calls": 2,
+      "usage_missing": false,
+      "stop": "timeout",
+      "returncode": 143,
+      "infrastructure_error": false,
+      "elapsed_seconds": 120.01861929200004,
+      "submissions": 2,
+      "compile_failures": 1,
+      "success": false,
+      "first_submission_passed": false,
+      "usage_complete": false,
+      "par2_seconds": 240
+    },
+    {
+      "task": "rpn",
+      "language": "c",
+      "repeat": 1,
+      "sampling_seed": 30000005,
+      "tokens": {
+        "input": 1891,
+        "output": 1892,
+        "cacheRead": 686,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 2,
+      "tool_calls": 2,
+      "usage_missing": false,
+      "stop": "timeout",
+      "returncode": 143,
+      "infrastructure_error": false,
+      "elapsed_seconds": 120.01363429100002,
+      "submissions": 2,
+      "compile_failures": 1,
+      "success": false,
+      "first_submission_passed": false,
+      "usage_complete": false,
+      "par2_seconds": 240
+    },
+    {
+      "task": "rpn",
+      "language": "go",
+      "repeat": 1,
+      "sampling_seed": 30000005,
+      "tokens": {
+        "input": 1340,
+        "output": 1003,
+        "cacheRead": 684,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 2,
+      "tool_calls": 2,
+      "usage_missing": false,
+      "stop": "public_pass",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 51.00943729099993,
+      "submissions": 2,
+      "compile_failures": 0,
+      "success": true,
+      "first_submission_passed": false,
+      "usage_complete": true,
+      "par2_seconds": 51.00943729099993
+    }
+  ],
+  "batch_status": {
+    "state": "complete",
+    "source_sha256": {
+      "bench.py": "3bb132ed62d72621dd6df0cc98fd53d5f3f12d96f28c0f90b2e3437328d74e70",
+      "judge.py": "8934214aab0f915d29bcdc198b2340471b855d21d17422d61b628eeb814d988e",
+      "tasks.py": "e417dc76c1f02fa0eaed873ea9ddc3498dc8003b63625001d635373cd0ad20eb",
+      "extra_tasks.py": "e2d55a666320c1a059bc4912107b668249b5d06c024958f5e26ac9137cf89874",
+      "pi/benchmark.ts": "2065b7f78d70267598a4d590055edec07aa575328f1ab96d5bd6695444ed60e5",
+      "analysis.py": "1ef9ab0e08a7f1a2f15d3f969c37e6b21603c5b13368c0b772d7102c6ca54405",
+      "experiments/study.json": "ed6ca147bf737ff67db3207a1b12ae2a2894741559c9e69999147b437517118b",
+      "Modelfile": "09a4faef37eef6afe2c9b9edc7cf8318029a51660c0fc6c5c38d8a8b8722a422"
+    },
+    "model_digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977"
+  },
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "hardware": {
+      "cpu": "Apple M3 Pro",
+      "logical_cpus": 12,
+      "memory_bytes": 38654705664
+    },
+    "python": "3.9.6",
+    "pi": "1.1.0",
+    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "go": "go version go1.27.1 darwin/arm64",
+    "ollama": {
+      "version": "0.33.3"
+    },
+    "git_commit": "c6bc841ec62d3657909874d2ec17a7e8ed46f5ad",
+    "source_sha256": {
+      "bench.py": "3bb132ed62d72621dd6df0cc98fd53d5f3f12d96f28c0f90b2e3437328d74e70",
+      "judge.py": "8934214aab0f915d29bcdc198b2340471b855d21d17422d61b628eeb814d988e",
+      "tasks.py": "e417dc76c1f02fa0eaed873ea9ddc3498dc8003b63625001d635373cd0ad20eb",
+      "extra_tasks.py": "e2d55a666320c1a059bc4912107b668249b5d06c024958f5e26ac9137cf89874",
+      "pi/benchmark.ts": "2065b7f78d70267598a4d590055edec07aa575328f1ab96d5bd6695444ed60e5",
+      "analysis.py": "1ef9ab0e08a7f1a2f15d3f969c37e6b21603c5b13368c0b772d7102c6ca54405",
+      "experiments/study.json": "ed6ca147bf737ff67db3207a1b12ae2a2894741559c9e69999147b437517118b",
+      "Modelfile": "09a4faef37eef6afe2c9b9edc7cf8318029a51660c0fc6c5c38d8a8b8722a422"
+    }
+  },
+  "model": {
+    "name": "llm-lang-lab-qwen35-9b:latest",
+    "digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977",
+    "size_bytes": 6594474485,
+    "details": {
+      "parent_model": "qwen3.5:9b",
+      "format": "gguf",
+      "family": "qwen35",
+      "families": [
+        "qwen35"
+      ],
+      "parameter_size": "9.7B",
+      "quantization_level": "Q4_K_M"
+    },
+    "parameters": "presence_penalty               1.5\nrepeat_penalty                 1\ntemperature                    0.7\ntop_k                          20\ntop_p                          0.8\nnum_ctx                        16384"
+  }
+}
