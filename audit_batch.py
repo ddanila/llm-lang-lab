@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 from checkpoints import read_jsonl
+from recovery import validate_raw_prefix
 
 
 def require(condition, message):
@@ -57,16 +58,23 @@ def audit(batch):
         checks.append({"trial": path.parent.name, "schedule_usage_source_stop_checks": "passed",
                        "compiler_or_case_wall_timeout": wall_timeout,
                        "event_log_sha256": hashlib.sha256(log.read_bytes()).hexdigest()})
-    start = datetime.strptime(batch.name, "%Y%m%dT%H%M%S%fZ").replace(tzinfo=timezone.utc)
+    validate_raw_prefix(batch, config, results)
+    provenance = json.loads((batch / "recovery.json").read_text()) if (batch / "recovery.json").exists() else None
+    start_name = provenance["original_batch"] if provenance else batch.name
+    start = datetime.strptime(start_name, "%Y%m%dT%H%M%S%fZ").replace(tzinfo=timezone.utc)
+    known_times = [r["elapsed_seconds"] for r in results if r["elapsed_seconds"] is not None]
     return {"batch": batch.name, "trials": len(results), "checks": checks,
-            "batch_unchanged": True,
-            "agent_seconds": sum(r["elapsed_seconds"] for r in results),
+            "batch_unchanged": not bool(provenance),
+            "recovery": provenance,
+            "agent_seconds": sum(known_times) if len(known_times) == len(results) else None,
+            "recorded_agent_seconds": sum(known_times),
+            "missing_timing_trials": len(results) - len(known_times),
             "wall_seconds_approx": (batch / "summary.json").stat().st_mtime - start.timestamp(),
             "timeouts": sum(r["stop"] == "timeout" for r in results),
             "compiler_or_case_wall_timeout_trials": sum(c["compiler_or_case_wall_timeout"] for c in checks),
             "incomplete_usage_trials": sum(not r["usage_complete"] for r in results),
             "infrastructure_errors": sum(r["infrastructure_error"] for r in results),
-            "note": "Usage checks reconcile completed messages only; interrupted responses may have unreported tokens. Wall time uses the original summary file timestamp."}
+            "note": "Usage checks reconcile completed messages only. Wall time uses the original batch start, including recovery downtime if applicable. Missing agent time is not imputed."}
 
 
 if __name__ == "__main__":

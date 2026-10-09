@@ -19,23 +19,15 @@ passed its infrastructure audit; C solved 4/10 trials and Go 6/10. This is explo
 not a stable ranking. The [short calibration](reports/20261008T160452882425Z/README.md)
 had six timeout-censored trials and remains separate.
 
-The first v2 confirmation attempt stopped after five trials; its
-[evidence and diagnosis](checkpoints/c-go-controlled-v2/20261008T165022880692Z/diagnosis.md)
-are preserved separately. The new [checkpointed v3 study](experiments/README.md)
-contains 800 fresh-seed trials, with roughly hourly commits and pushes of
-[intermediate progress](checkpoints/README.md). Candidate program execution
-limit failures now count as failed tests; infrastructure failures still stop the run.
+The original v3 run stopped after 320 completed trials because of a JSONL parser
+bug. The user authorized a [recovery amendment](experiments/recovery-amendment.md):
+retain those results, recover trial 321 without another model call, and continue
+at trial 322. Its missing timing is explicit. Original evidence remains unchanged.
 
-Runtime is estimated at about 17 hours total (20–26 hours planning allowance),
-based on historical calibration rather than a guarantee for the revised study.
-[Execution and freeze record](experiments/execution.md). The runner publishes
-[the joint confirmation report](reports/c-go-checkpointed-v3/README.md) only after
-both complete batches validate. Until then there is no confirmation conclusion.
-Historical studies and incomplete checkpoints are never pooled with v3.
-
-**Current status:** v3 stopped after 320 completed trials because a JSONL parser
-misread Unicode diagnostic output. The reader is fixed and 53 tests pass, but the
-invalid batch has not been resumed or relabeled. [Incident and recovery limits](checkpoints/c-go-checkpointed-v3/20261008T173711298748Z/parser-incident.md).
+The amended study keeps the original 800-trial schedule and decision thresholds,
+with hourly [progress backups](checkpoints/README.md). The final
+[joint report](reports/c-go-recovered-v3a/README.md) will identify the amendment;
+it will not claim to be the original unamended frozen confirmation.
 
 ## Run locally
 

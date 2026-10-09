@@ -1,49 +1,37 @@
 {
-  "study_id": "c-go-checkpointed-v3",
-  "registered_utc": "2026-10-08T17:35:54.811469+00:00",
-  "previous_invalid_batch": "20261008T165022880692Z",
+  "study_id": "c-go-recovered-v3a",
+  "amendment": "jsonl-recovery-2026-10-09",
+  "registered_utc": "2026-10-09T11:36:54.632760+00:00",
+  "original_batch": "20261008T173711298748Z",
+  "amended_batch": "20261009T113047097658Z",
+  "imported_results_unchanged": 320,
+  "recovered_trials": 1,
+  "next_trial_number": 322,
+  "remaining_model_trials": 479,
   "source_sha256": {
-    "bench.py": "77205c76a524bedb6d881a5d8859c89575ff76cc7f6df1e412f085b56fb26145",
+    "bench.py": "1511ee91336ac5170c364a126aa539f1ff27c20c4efc386797a70b40a992cdc2",
     "judge.py": "8934214aab0f915d29bcdc198b2340471b855d21d17422d61b628eeb814d988e",
     "tasks.py": "e417dc76c1f02fa0eaed873ea9ddc3498dc8003b63625001d635373cd0ad20eb",
     "extra_tasks.py": "e2d55a666320c1a059bc4912107b668249b5d06c024958f5e26ac9137cf89874",
     "pi/benchmark.ts": "2065b7f78d70267598a4d590055edec07aa575328f1ab96d5bd6695444ed60e5",
-    "analysis.py": "5fdbfa114a08cf866fa4c7bebd55e82eb39702920dc81f76a419cb2806d3e9fb",
-    "experiments/study.json": "4b76b5ab2fc92ab5a6f2d2621429046c700b3024e9911e9a3e08166930d5079f",
+    "analysis.py": "67eac6b36f07ca1eeb1099d23fc214c62530f042b9f5499465805d769c1ad9b8",
+    "experiments/study.json": "bebb2cf037d88d04a0fdeba0478b41a136971ad041f398e03e182c5f5cc61cf9",
     "Modelfile": "09a4faef37eef6afe2c9b9edc7cf8318029a51660c0fc6c5c38d8a8b8722a422",
-    "checkpoints.py": "13c1c1c9f2d4941ef679fdc954c5ebfa36e07d9dc975716f231d50f0348b1dac"
+    "checkpoints.py": "b1be4b89425f272aa2a4aa2c468e31b147b8557895911a5c1f73d0d12579cf16",
+    "recovery.py": "e766c16e8760aad2072583b604ca7f846573eae8bb7a8e02f61506f3c6e80069",
+    "experiments/recovery-prefix.json": "4fe395e1aa173d9dd63f80d19a2ac81c31523d0d976cee5588ecd3340b3f05e1"
   },
   "supporting_sha256": {
-    "run_study.py": "9089bb6b4bd831699cd990abee214879e6c15ec8d65cc42df700ea7c441e90cf",
-    "audit_batch.py": "d9b9338f683f9487d7c7f1c519b014f5f3fcf67442e60195a86ea1836fd51722",
-    "export_report.py": "25ec4e7d35943fce7454a478e80fec64a91e08c675731355d725fb187d519e22",
-    "experiments/confirm-a.json": "eed0015e4ade08626e9f7520ccf5d084c0d815a00851784609370a9ebb526ee2",
-    "experiments/confirm-b.json": "07005ba53221fdbb8e5fc70b63497f1b9bf22f03188494fd8b86f3e0947b8d96"
+    "audit_batch.py": "7929c3e086a27717739cd46402287b1e21984309fb550db14e04410d2ac40e62",
+    "export_report.py": "1e337a9ddfec97e2bc55a142f752c3bc6846fa70bcdbbb1ab59f81f557401af9",
+    "run_study.py": "258fb896dcd3cd584c56b9038709582c375648480fc65c96190ffd29a148cc96",
+    "experiments/confirm-a.json": "1bfa3722f7fbdd0ff1bfb9122097003f4e5d217ba145e525e63f66d201000917",
+    "experiments/confirm-b.json": "48e5cc8cf18c0e1fa53cc2e1cb059642abc1ad1afde2f28724bd8712b406d286"
   },
   "validation": {
-    "offline_tests_passed": 48,
-    "test_log_sha256": "cdc31e480e324399b521560fcd89867fcee2af6757108972eebe359b9f581f3f",
-    "runner_recheck_tests_passed": 8
+    "offline_tests_passed": 63,
+    "test_log_sha256": "7db93ff5d1dea5a430c37e018b62b3eb041de50e057b56baa62c8b82fac13780",
+    "synthetic_suffix_raw_portable_analysis_equal": true
   },
-  "checkpoint_seconds": 3600,
-  "first_checkpoint": "After first complete C/Go pair; startup pause/resume verifies publication and recovery before continuous hourly segments.",
-  "trial_count": 800,
-  "schema_protocol_version": 2,
-  "case_timeout_policy": "candidate_failure",
-  "unchanged_from_v2": [
-    "tasks and hidden tests",
-    "model and quantization",
-    "generation budgets and sampling parameters",
-    "20 repeats per language per workload",
-    "decision thresholds and statistical methods"
-  ],
-  "new_seed_bases": {
-    "A": 50000000,
-    "B": 60000000
-  },
-  "planning_hours": [
-    20,
-    26
-  ],
-  "raw_traces_backed_up_remotely": false
+  "qualification": "Recovery amendment authorized after partial outcomes were observed; not original unamended frozen confirmation."
 }

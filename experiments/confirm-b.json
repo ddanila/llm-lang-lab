@@ -28,9 +28,10 @@
   "protocol_version": 2,
   "model_digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977",
   "case_timeout_policy": "candidate_failure",
+  "recovery_amendment": "jsonl-recovery-2026-10-09",
   "schedule_seed": 51002,
   "sampling_seed": 60000000,
   "replication": "B",
   "purpose": "confirmation",
-  "study_id": "c-go-checkpointed-v3"
+  "study_id": "c-go-recovered-v3a"
 }

@@ -26,7 +26,8 @@ from checkpoints import check_environment, read_jsonl, resume_rows, seal, write 
 
 ROOT = Path(__file__).resolve().parent
 SOURCE_FILES = ["bench.py", "judge.py", "tasks.py", "extra_tasks.py", "pi/benchmark.ts",
-                "analysis.py", "experiments/study.json", "Modelfile", "checkpoints.py"]
+                "analysis.py", "experiments/study.json", "Modelfile", "checkpoints.py",
+                "recovery.py", "experiments/recovery-prefix.json"]
 SYSTEM = """You are solving a programming benchmark. Use only the requested language
 and its standard library. Your only tool is submit_source: send the entire source
 file to compile and test. Use its feedback to repair failures. When public tests
@@ -332,7 +333,9 @@ def summarize(results, config):
             "mean_output_tokens": statistics.mean(r["tokens"]["output"] for r in rows),
             "mean_submissions": statistics.mean(r["submissions"] for r in rows),
             "infrastructure_errors": sum(r["infrastructure_error"] for r in rows),
-            "median_seconds": statistics.median(r["elapsed_seconds"] for r in rows),
+            "median_seconds": (statistics.median(r["elapsed_seconds"] for r in rows)
+                               if all(r["elapsed_seconds"] is not None for r in rows) else None),
+            "missing_timing_runs": sum(r["elapsed_seconds"] is None for r in rows),
         }
     by_pair = defaultdict(dict)
     for r in results:
@@ -373,6 +376,9 @@ def main():
         validate_config(config)
     if config.get("purpose") == "confirmation" and (args.tasks or args.repeats is not None):
         parser.error("Confirmation profiles are fixed; create a new preregistered study to change them.")
+    if (args.command == "run" and config.get("recovery_amendment")
+            and config.get("replication") == "A" and not args.batch):
+        parser.error("Amended A requires the prepared recovery checkpoint via --batch; never regenerate its prefix.")
     if args.command == "plan":
         jobs = schedule(config)
         print(json.dumps({"config": config, "trials": len(jobs), "pairs": len(jobs)//2,

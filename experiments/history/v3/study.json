@@ -1,5 +1,5 @@
 {
-  "study_id": "c-go-recovered-v3a",
+  "study_id": "c-go-checkpointed-v3",
   "run_settings": {
     "model": "llm-lang-lab-qwen35-9b",
     "ollama_url": "http://127.0.0.1:11434",
@@ -29,8 +29,7 @@
     "max_seconds": 600,
     "protocol_version": 2,
     "model_digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977",
-    "case_timeout_policy": "candidate_failure",
-    "recovery_amendment": "jsonl-recovery-2026-10-09"
+    "case_timeout_policy": "candidate_failure"
   },
   "replications": {
     "A": {

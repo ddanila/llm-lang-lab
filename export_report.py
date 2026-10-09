@@ -43,6 +43,8 @@ def export(batch, destination):
                   "size_bytes": model["size"], "details": environment["model"]["details"],
                   "parameters": environment["model"]["parameters"]},
     }
+    if (batch / "recovery.json").exists():
+        payload["recovery"] = json.loads((batch / "recovery.json").read_text())
     (destination / "results.json").write_text(json.dumps(payload, indent=2) + "\n")
     lines = ["# Local C/Go experiment", "",
              f"Batch: {batch.name}. Model: {config['model']}.", "",
@@ -55,9 +57,11 @@ def export(batch, destination):
     for language, stats in summary["languages"].items():
         tokens = stats["output_tokens_per_success"]
         token_text = f"{tokens:.1f}" if tokens is not None else "undefined"
+        median = stats["median_seconds"]
+        median_text = f"{median:.1f}" if median is not None else "incomplete timing"
         lines.append(f"| {language} | {stats['successes']}/{stats['runs']} | "
                      f"{stats['first_submission_successes']}/{stats['runs']} | "
-                     f"{stats['mean_submissions']:.2f} | {token_text} | {stats['median_seconds']:.1f} |")
+                     f"{stats['mean_submissions']:.2f} | {token_text} | {median_text} |")
     lines.extend(["", "See results.json for all settings, per-run metrics, model digest, and source hashes.",
                   "First-source scoring is independent of whether the agent later finishes successfully."])
     if config.get("protocol_version") == 2:
@@ -67,6 +71,10 @@ def export(batch, destination):
         lines.extend(["Effort includes any unnecessary resubmissions after public tests pass.",
                       "This historical protocol asked the agent to stop but did not force it."])
     lines.append("")
+    if config.get("recovery_amendment"):
+        lines.extend(["This is the amended JSONL recovery study, not the original frozen confirmation.",
+                      "A retains 320 original results and one recovered trial with missing timing.",
+                      "Timing aggregates affected by that missing value are not presented as complete.", ""])
     (destination / "README.md").write_text("\n".join(lines))
     return destination
 

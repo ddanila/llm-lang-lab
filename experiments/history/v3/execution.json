@@ -1,0 +1,49 @@
+{
+  "study_id": "c-go-checkpointed-v3",
+  "registered_utc": "2026-10-08T17:35:54.811469+00:00",
+  "previous_invalid_batch": "20261008T165022880692Z",
+  "source_sha256": {
+    "bench.py": "77205c76a524bedb6d881a5d8859c89575ff76cc7f6df1e412f085b56fb26145",
+    "judge.py": "8934214aab0f915d29bcdc198b2340471b855d21d17422d61b628eeb814d988e",
+    "tasks.py": "e417dc76c1f02fa0eaed873ea9ddc3498dc8003b63625001d635373cd0ad20eb",
+    "extra_tasks.py": "e2d55a666320c1a059bc4912107b668249b5d06c024958f5e26ac9137cf89874",
+    "pi/benchmark.ts": "2065b7f78d70267598a4d590055edec07aa575328f1ab96d5bd6695444ed60e5",
+    "analysis.py": "5fdbfa114a08cf866fa4c7bebd55e82eb39702920dc81f76a419cb2806d3e9fb",
+    "experiments/study.json": "4b76b5ab2fc92ab5a6f2d2621429046c700b3024e9911e9a3e08166930d5079f",
+    "Modelfile": "09a4faef37eef6afe2c9b9edc7cf8318029a51660c0fc6c5c38d8a8b8722a422",
+    "checkpoints.py": "13c1c1c9f2d4941ef679fdc954c5ebfa36e07d9dc975716f231d50f0348b1dac"
+  },
+  "supporting_sha256": {
+    "run_study.py": "9089bb6b4bd831699cd990abee214879e6c15ec8d65cc42df700ea7c441e90cf",
+    "audit_batch.py": "d9b9338f683f9487d7c7f1c519b014f5f3fcf67442e60195a86ea1836fd51722",
+    "export_report.py": "25ec4e7d35943fce7454a478e80fec64a91e08c675731355d725fb187d519e22",
+    "experiments/confirm-a.json": "eed0015e4ade08626e9f7520ccf5d084c0d815a00851784609370a9ebb526ee2",
+    "experiments/confirm-b.json": "07005ba53221fdbb8e5fc70b63497f1b9bf22f03188494fd8b86f3e0947b8d96"
+  },
+  "validation": {
+    "offline_tests_passed": 48,
+    "test_log_sha256": "cdc31e480e324399b521560fcd89867fcee2af6757108972eebe359b9f581f3f",
+    "runner_recheck_tests_passed": 8
+  },
+  "checkpoint_seconds": 3600,
+  "first_checkpoint": "After first complete C/Go pair; startup pause/resume verifies publication and recovery before continuous hourly segments.",
+  "trial_count": 800,
+  "schema_protocol_version": 2,
+  "case_timeout_policy": "candidate_failure",
+  "unchanged_from_v2": [
+    "tasks and hidden tests",
+    "model and quantization",
+    "generation budgets and sampling parameters",
+    "20 repeats per language per workload",
+    "decision thresholds and statistical methods"
+  ],
+  "new_seed_bases": {
+    "A": 50000000,
+    "B": 60000000
+  },
+  "planning_hours": [
+    20,
+    26
+  ],
+  "raw_traces_backed_up_remotely": false
+}

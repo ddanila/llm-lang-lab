@@ -7,10 +7,12 @@ import json
 from pathlib import Path
 import random
 import statistics
+from recovery import validate_prefix
 
 ROOT = Path(__file__).resolve().parent
 REQUIRED_SOURCES = {"bench.py", "judge.py", "tasks.py", "extra_tasks.py", "pi/benchmark.ts",
-                    "analysis.py", "experiments/study.json", "Modelfile", "checkpoints.py"}
+                    "analysis.py", "experiments/study.json", "Modelfile", "checkpoints.py",
+                    "recovery.py", "experiments/recovery-prefix.json"}
 
 def interval(values):
     values = sorted(values)
@@ -139,11 +141,12 @@ def load_batch(path):
         payload = json.loads((path if path.is_file() else path/"results.json").read_text())
         return {"name": payload["batch"], "config": payload["config"], "rows": payload["runs"],
                 "environment": payload["environment"], "model_digest": payload["model"]["digest"],
-                "status": payload.get("batch_status")}
+                "status": payload.get("batch_status"), "recovery": payload.get("recovery")}
     env = json.loads((path/"environment.json").read_text())
     return {"name": path.name, "config": json.loads((path/"config.json").read_text()),
             "environment": env, "model_digest": env.get("model_digest"),
             "status": json.loads((path/"status.json").read_text()) if (path/"status.json").exists() else None,
+            "recovery": json.loads((path/"recovery.json").read_text()) if (path/"recovery.json").exists() else None,
             "rows": [json.loads(p.read_text()) for p in sorted(path.glob("*/result.json"))]}
 
 def validate_batch(batch, study):
@@ -169,7 +172,7 @@ def validate_batch(batch, study):
     fingerprints = env.get("source_sha256", {})
     if set(fingerprints) != REQUIRED_SOURCES:
         raise ValueError("Missing/unexpected protocol source hashes.")
-    for name in ("analysis.py", "experiments/study.json"):
+    for name in ("analysis.py", "experiments/study.json", "recovery.py", "experiments/recovery-prefix.json"):
         if fingerprints[name] != hashlib.sha256((ROOT/name).read_bytes()).hexdigest():
             raise ValueError("Use the frozen analysis/study revision for these batches.")
     expected_keys = {(task, repeat, language) for task in config["tasks"]
@@ -186,6 +189,7 @@ def validate_batch(batch, study):
         if row["sampling_seed"] != expected_seed:
             raise ValueError("Unexpected sampling seed.")
     pair_rows(rows)
+    validate_prefix(config, rows, batch.get("recovery"))
 
 def compare(a, b, study, draws=10000):
     validate_batch(a, study); validate_batch(b, study)
@@ -201,10 +205,15 @@ def compare(a, b, study, draws=10000):
     replicated = decisions[0] == decisions[1] and decisions[0] in {
         "go_accuracy_advantage", "c_accuracy_advantage", "go_effort_advantage",
         "c_effort_advantage", "practical_tie"}
-    return {"study_id": study["study_id"], "batches": [a["name"],b["name"]],
+    result = {"study_id": study["study_id"], "batches": [a["name"],b["name"]],
             "status": "replicated_on_frozen_suite" if replicated else "inconclusive",
             "decision": decisions[0] if replicated else None, "reports": reports,
             "scope": "Conditional on this fixed workload suite, model, prompt, and budgets; not a universal language ranking."}
+    if study["run_settings"].get("recovery_amendment"):
+        result["status"] = "replicated_under_recovery_amendment" if replicated else "inconclusive_under_recovery_amendment"
+        result["recovery_amendment"] = study["run_settings"]["recovery_amendment"]
+        result["scope"] += " Recovery amendment: A includes 320 retained observations and one recovered trial with missing timing. This is not the original unamended frozen confirmation."
+    return result
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)

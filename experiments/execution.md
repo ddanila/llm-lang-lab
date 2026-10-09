@@ -1,104 +1,27 @@
-# Overnight study v3: execution and recovery
+# Amended study execution
 
-## Current status
+The user authorized the [JSONL recovery amendment](recovery-amendment.md).
+A new batch contains 320 unchanged observations and one recovered failed trial
+with missing elapsed time and return code. The original invalid batch stays intact.
+The next model call is trial 322, then the remaining A schedule and all 400 B trials.
+No prior model answer is regenerated. The original 800-trial schedule is retained.
 
-V3 stopped during post-processing after trial 321; 320 complete records were pushed.
-The parser is fixed, with 53 tests passing, and trial 321's sources/usage are preserved.
-The old invalid batch remains stopped. [Recovery limits](../checkpoints/c-go-checkpointed-v3/20261008T173711298748Z/parser-incident.md).
-This document and execution.json describe the original registration; its fingerprints
-have not been rewritten to conceal the later fix.
+The imported prefix and original raw evidence are pinned in recovery-prefix.json.
+Current code fingerprints are recorded in execution.json and each new environment
+snapshot, alongside explicit imported-harness provenance. The original registration
+is preserved under history/v3/. Do not modify either registration during execution.
 
-## Why this is a new study
-
-The v2 confirmation attempt `20261008T165022880692Z` stopped after 5/400 trials,
-when a generated Go RPN program entered an infinite allocation loop and exhausted
-its ten-second test watchdog. The v2 rule treated any candidate wall timeout as
-infrastructure failure. [Evidence and diagnosis](../checkpoints/c-go-controlled-v2/20261008T165022880692Z/diagnosis.md)
-are preserved; v2 B never started and no valid A/B conclusion exists.
-
-V3 registers a new operational endpoint: candidate code must pass each case within
-its execution budget. A candidate wall timeout fails that test/submission; it is
-ordinary repair feedback, not a reason to invalidate the whole study. Compiler
-wall timeouts, provider errors, and the 600-second agent watchdog still stop the
-batch. Machine scheduling can affect this operational endpoint. No hidden tests
-were changed and no observed solution was patched into a benchmark candidate.
-
-This change follows a diagnosed execution failure, not a search for a language
-winner. V3 starts both replications anew with disjoint sampling seeds 50,000,000
-and 60,000,000, and schedule seeds 51001 and 51002. No v2 rows are reused. The ten
-workloads, 20 repeats per language/workload, model, sampling parameters, generation
-budgets, accuracy margins, statistical methods, and decision thresholds remain
-unchanged. Historical registration files are preserved under `history/v2/` and in
-Git commit `c4b5866ae9e01c81f4b3776f8bce3c4459cfb70d`.
-
-## Hourly execution segments
-
-A and B each still require 400 trials. Execution is split at a complete C/Go pair
-boundary after roughly 3,600 seconds, including model warmup and post-trial judging.
-The first pair gets an early checkpoint to verify end-to-end publication. No trial
-is interrupted to meet the clock. Normal overshoot is a few minutes; the configured
-pair budget permits up to 20 minutes of agent time plus judging. Checkpoint segments
-are not new independent replications and are not analyzed to select a winner.
-
-At each boundary the runner:
-
-1. Checks source/model/tool fingerprints and seals the complete evidence prefix.
-2. Exports every recorded trial, failures included, and every saved source revision.
-3. Scans the portable export, commits it, and pushes it to GitHub. Git history
-   retains earlier snapshots. Raw logs, agent configuration, binaries, and weights
-   remain local; raw-log hashes are included in the portable backup.
-4. Starts a fresh runner process for the next exact scheduled pair, verifying
-   config, schedule, model, compiler/tool versions, and sealed evidence first.
-
-A push failure gets two retries, then stops execution at the checkpoint. An
-infrastructure failure gets an explicitly invalid progress snapshot before stopping.
-No failed row is selectively rerun. All 800 trials and final integrity checks are
-required before the usual analysis, final report commit, and push.
-
-## Runtime and validation
-
-Historical full-suite calibration completed twenty trials in 25.4 minutes, with
-C 4/10 and Go 6/10; it was neither an overall floor nor ceiling. Its extrapolation
-is 16.9 hours for 800 trials. Plan for 20–26 hours, not a guaranteed overnight finish.
-The changed timeout policy and hourly warmups/publication mean this is an estimate,
-not a measured v3 duration or statistical prediction interval.
-
-The pre-launch validation suite has **48 offline tests**. It includes a two-segment
-run proving that failed rows are preserved and not replayed, rejection of tampered
-source, changed environments and incomplete trials, portable checkpoint labeling,
-and real pi with fake completions checking candidate versus compiler timeouts.
-No model inference is used by these tests. `execution.json` records fingerprints
-and validation evidence before the new confirmation launch.
-
-## Operate and recover
-
-The actual overnight run is detached, with idle-sleep prevention and its process
-group in `.local/confirmation.pid`. Equivalent foreground invocation:
-
-```sh
-mkdir -p .local
-caffeinate -i python3 -u run_study.py --publish --checkpoint-seconds 3600 --first-checkpoint-seconds 1 > .local/confirmation.log 2>&1
-```
-
-The first checkpoint occurs after the first pair; later ones target an hour.
-Keep the laptop powered and open. Inspect `.local/study-run.json` and
-`.local/confirmation.log` for progress and the latest pushed checkpoint commit.
-Only a clean sealed checkpoint may resume:
+The amended batch starts at its registered recovery checkpoint. A short first
+segment finishes trial 322 and publishes that complete pair, then the standard
+hourly runner continues. Its process group is recorded in .local/confirmation.pid;
+status and log are .local/study-run.json and .local/confirmation.log. The old driver's
+state and log are retained under .local/archive/.
 
 ```sh
 caffeinate -i python3 -u run_study.py --resume --publish --checkpoint-seconds 3600 >> .local/confirmation.log 2>&1
 ```
 
-An unfinished/running/invalid batch is rejected rather than replayed. A crash
-mid-segment requires inspection and can require a new whole batch. Existing commits
-and local evidence are never discarded or rewritten to rescue a comparison. Do not
-edit tracked files during execution: unrelated modifications block publication.
-
-[Intermediate backups](../checkpoints/README.md) are explicitly not final results.
-The [joint report](../reports/c-go-checkpointed-v3/README.md) appears only after both
-complete replications validate. Publish an inconclusive outcome as inconclusive;
-do not keep sampling until a preferred winner appears.
-
-For deliberate one-segment execution, add `--pause-after-checkpoint`. It exits
-cleanly after publishing that segment; a later `--resume` continues without
-replaying trials. The overnight invocation omits this flag after startup validation.
+Hourly backups, failure stops, privacy checks and final publication still apply.
+Keep the laptop powered and open. A future interrupted or invalid batch does not
+inherit this recovery exception automatically. Only the registered imported prefix
+has special handling. Final output must disclose the amendment and missing timing.

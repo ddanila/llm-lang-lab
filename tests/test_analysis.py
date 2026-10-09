@@ -6,10 +6,13 @@ from analysis import ROOT, analyze, compare, posterior, pair_rows, effort_interv
 from bench import source_hashes, schedule, validate_config
 
 STUDY = json.loads((ROOT/"experiments/study.json").read_text())
+# Pure statistical fixtures test the unamended framework; recovery has separate tests.
+STUDY["run_settings"].pop("recovery_amendment", None)
 POLICY = STUDY["decision_policy"]
 
 def fixture(phase="A", c_success=True, go_success=True, c_tokens=100, go_tokens=100):
     config = json.loads((ROOT/f"experiments/confirm-{phase.lower()}.json").read_text())
+    config.pop("recovery_amendment", None)
     rows = []
     for job in schedule(config):
         is_c = job["language"] == "c"

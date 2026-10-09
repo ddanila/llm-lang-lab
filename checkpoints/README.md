@@ -14,3 +14,7 @@ selectively rerun. The final A/B analysis requires two full valid 400-trial batc
 - [Invalid v2 attempt and diagnosis](c-go-controlled-v2/20261008T165022880692Z/diagnosis.md)
 - V3 snapshots appear under `c-go-checkpointed-v3/BATCH_ID/` as checkpoints are reached.
 - [Protocol and recovery instructions](../experiments/README.md)
+
+The current study is **c-go-recovered-v3a**, using the authorized
+[recovery amendment](../experiments/recovery-amendment.md). Original v3 checkpoints
+remain unchanged; amended checkpoints live under their own study directory.

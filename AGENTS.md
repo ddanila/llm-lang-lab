@@ -28,3 +28,12 @@ Do not commit raw runs/, credentials, model weights, executables, or local pi st
 Publish only reviewed portable reports and selected generated sources. Hourly
 checkpoint publication is authorized for the current overnight study; keep raw
 traces and local agent state off GitHub. Clearly label interim/invalid evidence.
+
+The user explicitly authorized the JSONL recovery amendment on 2026-10-09:
+retain all 320 completed observations, recover trial 321 from existing submissions
+with missing timing disclosed, and continue at trial 322. This is implemented as
+a new amended batch with a hash-registered imported prefix; the original invalid
+batch remains unchanged. Only that registered odd prefix may be sealed/resumed.
+Do not generalize this exception to other invalid batches or replay any answers.
+Final reports must identify the amendment, original harness provenance and missing
+timing; do not describe the result as the original frozen confirmation.

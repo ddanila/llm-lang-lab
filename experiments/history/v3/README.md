@@ -1,14 +1,20 @@
-# C versus Go: amended recovery study v3a
+# C versus Go: checkpointed study v3
 
-Status: **authorized recovery; continue at trial 322**. The original invalid batch
-is preserved. The amended batch imports 320 unchanged results and one recovered
-trial with explicitly missing timing. No model generation is replayed.
+Status: **v3 stopped after 320 completed trials; parser fix validated, no resume**.
+[Incident and recovery limits](../checkpoints/c-go-checkpointed-v3/20261008T173711298748Z/parser-incident.md).
+The original v3 registration below remains historical; current source fingerprints
+differ after the fix and cannot be substituted into the old manifests. The earlier v2 confirmation
+attempt stopped after 5/400 trials. Its [portable evidence and diagnosis](../checkpoints/c-go-controlled-v2/20261008T165022880692Z/diagnosis.md)
+are retained; none of those trials enter this study. The [v2 calibration](../reports/20261008T162135502883Z/README.md)
+remains exploratory. [Execution plan](execution.md), [progress backups](../checkpoints/README.md).
 
-Read the [recovery amendment](recovery-amendment.md) for the exception, exact evidence
-hashes, missing measurements, and analysis qualification. Seeds, tasks, limits,
-repeats and decision thresholds below are unchanged from v3. Final results will be
-[reported as amended](../reports/c-go-recovered-v3a/README.md), not as the original
-unamended frozen confirmation. Historical registration is under history/v3/.
+V3 adds approximately hourly, resumable pair-boundary checkpoints and explicitly
+scores candidate execution-time exhaustion as a failed submission/test. Provider,
+compiler, and agent failures still invalidate a batch. The new study uses disjoint
+seeds; tasks, hidden tests, model, generation budgets, sample size, and decision
+thresholds are unchanged. The on-disk schema remains `protocol_version: 2`.
+The [joint confirmation report](../reports/c-go-checkpointed-v3/README.md) is created
+only after both complete 400-trial batches validate.
 
 ## The question
 
@@ -39,7 +45,7 @@ When execution is wanted, the corresponding commands are:
 
 ```sh
 python3 bench.py run --config experiments/pilot.json
-python3 bench.py run --config experiments/confirm-a.json --batch runs/AMENDED_A_CHECKPOINT
+python3 bench.py run --config experiments/confirm-a.json
 python3 bench.py run --config experiments/confirm-b.json
 python3 analysis.py runs/BATCH_A runs/BATCH_B
 ```
@@ -51,7 +57,7 @@ not an independent statistical replication. A and B still require 400 trials eac
 
 ```sh
 mkdir -p .local
-caffeinate -i python3 -u run_study.py --resume --publish --checkpoint-seconds 3600 --first-checkpoint-seconds 1 > .local/confirmation.log 2>&1
+caffeinate -i python3 -u run_study.py --publish --checkpoint-seconds 3600 --first-checkpoint-seconds 1 > .local/confirmation.log 2>&1
 ```
 
 The early first checkpoint verifies publication after the first pair. Later segments
@@ -75,8 +81,6 @@ caffeinate -i python3 -u run_study.py --resume --publish --checkpoint-seconds 36
 ```
 
 Resume verifies the complete evidence prefix, model, tool versions, and protocol.
-The registered 321-row recovery boundary is the sole exception to even pair counts;
-it continues with the missing partner, not a replay of the previous row.
 It refuses running/invalid batches or any unfinished trial; it never replays rows
 or rolls back to an older checkpoint and drops newly observed results. A crash in
 the middle of a segment requires inspection, and can require a new whole batch.

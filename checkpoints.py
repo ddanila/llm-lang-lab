@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+from recovery import recovery_boundary, validate_raw_prefix
 
 ENV_KEYS = ("source_sha256", "model_digest", "pi", "clang", "go", "python",
             "ollama", "hardware", "platform", "machine")
@@ -32,6 +33,8 @@ def digest(path):
 
 def evidence_hashes(batch):
     paths = [batch / name for name in ("config.json", "environment.json", "schedule.json")]
+    paths += [p for p in (batch / "recovery.json", batch / "original-environment.json",
+                         batch / "original-config.json", batch / "original-status.json") if p.exists()]
     for trial in sorted(p for p in batch.iterdir() if p.is_dir()):
         if not (trial / "result.json").exists():
             raise ValueError("Unfinished trial exists; refusing to replay it")
@@ -49,7 +52,7 @@ def check_environment(original, current):
 
 
 def seal(batch, completed, snapshot):
-    if completed <= 0 or completed % 2:
+    if completed <= 0 or (completed % 2 and not recovery_boundary(batch, completed)):
         raise ValueError("Checkpoint requires complete C/Go pairs")
     write(batch / "checkpoint.json", {"completed_trials": completed,
           "evidence_sha256": evidence_hashes(batch)})
@@ -72,7 +75,8 @@ def resume_rows(batch, config, current, jobs):
         raise ValueError("Checkpoint evidence changed")
     paths = sorted(batch.glob("*/result.json"))
     count = len(paths)
-    if count != status["completed_trials"] or count != manifest["completed_trials"] or count % 2 or not 0 < count < len(jobs):
+    if (count != status["completed_trials"] or count != manifest["completed_trials"]
+            or (count % 2 and not recovery_boundary(batch, count)) or not 0 < count < len(jobs)):
         raise ValueError("Invalid checkpoint prefix")
     rows = []
     for i, path in enumerate(paths):
@@ -81,6 +85,7 @@ def resume_rows(batch, config, current, jobs):
         if path.parent.name != expected or any(row[k] != v for k, v in job.items()) or row["infrastructure_error"]:
             raise ValueError("Invalid checkpoint trial")
         rows.append(row)
+    validate_raw_prefix(batch, config, rows)
     return rows
 
 
@@ -114,6 +119,8 @@ def export_progress(batch, destination):
                "environment": {k: environment[k] for k in ENV_KEYS + ("git_commit",) if k in environment},
                "event_log_sha256": hashes,
                "note": "Progress backup only; incomplete/invalid data cannot establish a language ranking. Raw traces remain local."}
+    if (batch / "recovery.json").exists():
+        payload["recovery"] = read(batch / "recovery.json")
     write(destination / "progress.json", payload)
     (destination / "README.md").write_text(
         f"# Study progress: {batch.name}\n\n"
@@ -124,4 +131,9 @@ def export_progress(batch, destination):
         "and portable metrics are backed up here; raw traces and local agent state remain\n"
         "on the laptop. Raw-trace hashes allow later integrity checks. Each Git commit\n"
         "preserves the previous checkpoint. No individual failed trials are rerun.\n")
+    if config.get("recovery_amendment"):
+        with (destination / "README.md").open("a") as stream:
+            stream.write("\nThis study uses the documented JSONL recovery amendment. A imports 320\n"
+                         "unchanged results and one recovered trial with missing elapsed time.\n"
+                         "It is not the original unamended frozen confirmation.\n")
     return destination

@@ -83,7 +83,17 @@ def report_markdown(result, batches, audits):
               "Reproduce the analysis without inference:", "", "```sh",
               f"python3 analysis.py reports/{batches[0]['name']} reports/{batches[1]['name']}",
               "```", ""]
-    return "\n".join(lines)
+    report = "\n".join(lines)
+    if result.get("recovery_amendment"):
+        report = report.replace("# Frozen C/Go confirmation results", "# Amended C/Go recovery study results")
+        report = report.replace("Both complete batches used the preregistered settings and decision rule.",
+            "Both batches use the documented recovery amendment and unchanged decision rule.\n"
+            "A imports 320 unchanged results and one recovered trial with missing elapsed time\n"
+            "and process return code. B is newly generated. No model answers were replayed.")
+        report = report.replace("cross-batch environments passed the frozen validator.",
+                               "continuation environments and the imported prefix passed amendment validation.")
+        report += "\nWall hours include the original A start and recovery downtime. They are not active inference hours.\n"
+    return report
 
 
 def main():
@@ -113,6 +123,8 @@ def main():
     configs = [json.loads(p.read_text()) for p in profiles]
     for config in configs:
         validate_config(config)
+    if study["run_settings"].get("recovery_amendment") and not args.resume:
+        raise ValueError("Amended study requires --resume from its prepared recovery checkpoint")
     destination = ROOT / "reports" / study["study_id"]
     if destination.exists():
         raise ValueError("Study report destination already exists; refusing to overwrite evidence")
@@ -179,13 +191,15 @@ def main():
             print(command(["git", "push", "origin", branch]), flush=True)
         state.pop("error", None)
         batches, audits = [], []
+        first_segment = True
         for phase_index, (profile, config) in enumerate(zip(profiles, configs)):
             if source_hashes() != frozen or json.loads(profile.read_text()) != config:
                 raise ValueError("Protocol/profile changed before replication")
             update("running_" + config["replication"])
             batch_path = ROOT / "runs" / state["batches"][phase_index] if len(state["batches"]) > phase_index else None
             while batch_path is None or read(batch_path / "status.json")["state"] != "complete":
-                seconds = args.first_checkpoint_seconds if batch_path is None and phase_index == 0 else args.checkpoint_seconds
+                seconds = args.first_checkpoint_seconds if first_segment else args.checkpoint_seconds
+                first_segment = False
                 invocation = [sys.executable, "-u", "bench.py", "run", "--config", str(profile),
                               "--chunk-seconds", str(seconds)]
                 if batch_path is not None:
