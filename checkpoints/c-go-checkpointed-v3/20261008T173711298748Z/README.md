@@ -2,7 +2,7 @@
 
 Study: `c-go-checkpointed-v3`; replication: A.
 
-**304/400 trials recorded. Local state: checkpoint.**
+**320/400 trials recorded. Local state: interrupted_or_invalid.**
 
 This is a progress backup, not a confirmation result or language ranking.
 Every completed trial is retained, including failures. Generated source revisions
