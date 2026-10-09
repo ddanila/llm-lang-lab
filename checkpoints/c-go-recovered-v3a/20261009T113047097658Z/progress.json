@@ -8069,15 +8069,40 @@
         "generation_replayed": false,
         "grading": "Post-trial hidden checks completed during recovery; original public feedback unchanged."
       }
+    },
+    {
+      "task": "word_counts",
+      "language": "c",
+      "repeat": 16,
+      "sampling_seed": 50000036,
+      "tokens": {
+        "input": 3627,
+        "output": 3307,
+        "cacheRead": 4619,
+        "cacheWrite": 0
+      },
+      "assistant_turns": 4,
+      "tool_calls": 4,
+      "usage_missing": false,
+      "stop": "submission_budget",
+      "returncode": 0,
+      "infrastructure_error": false,
+      "elapsed_seconds": 169.833453916,
+      "submissions": 4,
+      "compile_failures": 0,
+      "success": false,
+      "first_submission_passed": false,
+      "usage_complete": true,
+      "par2_seconds": 1200
     }
   ],
   "batch_status": {
     "state": "checkpoint_only_not_confirmation",
     "local_batch_state": "checkpoint"
   },
-  "completed_trials": 321,
+  "completed_trials": 322,
   "planned_trials": 400,
-  "updated_utc": "2026-10-09T11:40:02.439768+00:00",
+  "updated_utc": "2026-10-09T11:43:35.033843+00:00",
   "environment": {
     "source_sha256": {
       "bench.py": "1511ee91336ac5170c364a126aa539f1ff27c20c4efc386797a70b40a992cdc2",
@@ -8430,7 +8455,8 @@
     "317-edit_distance-c-r15": "e2f5322d778cc7698a0defc276ceb9c8a7b4857c37d84d0e862fa15bf5a5d8f3",
     "318-grid_distance-go-r15": "1e4cd35ea44f7c1202fa4b7217d09e8a2770c1070840459841d1d608f8529048",
     "319-grid_distance-c-r15": "ded31c6923f996fbc17b910720d31f15b973518b521aaa330bd30505499f8cd4",
-    "320-word_counts-go-r16": "ee00c1efd4f950ad86a7703a3de4e4a4060f6205a11fb61f663c4caf3de0a159"
+    "320-word_counts-go-r16": "ee00c1efd4f950ad86a7703a3de4e4a4060f6205a11fb61f663c4caf3de0a159",
+    "321-word_counts-c-r16": "50890808c9391db00aecff7db67853465c4c5cf376957e62f91b19b9e9995bed"
   },
   "note": "Progress backup only; incomplete/invalid data cannot establish a language ranking. Raw traces remain local.",
   "recovery": {
