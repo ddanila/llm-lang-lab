@@ -46,6 +46,15 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(len(result["checks"][0]["event_log_sha256"]), 64)
         self.assertEqual(result["incomplete_usage_trials"], 0)
 
+    def test_audit_handles_unicode_separators_in_both_jsonl_streams(self):
+        log = self.trial / "events.jsonl"
+        event = json.loads(log.read_text())
+        event["message"]["content"] = "a\u0085b\u2028c\u2029d"
+        log.write_text(json.dumps(event, ensure_ascii=False) + "\n")
+        (self.work / "attempts.jsonl").write_text(json.dumps(
+            {"passed": True, "stdout": "a\u0085b\u2028c\u2029d"}, ensure_ascii=False) + "\n")
+        self.assertEqual(audit(self.batch)["trials"], 1)
+
     def test_audit_rejects_changed_usage(self):
         self.row["tokens"]["output"] += 1
         self.save_row()

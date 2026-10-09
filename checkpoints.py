@@ -13,6 +13,12 @@ def read(path):
     return json.loads(Path(path).read_text())
 
 
+def read_jsonl(path):
+    """Read physical JSONL lines; Unicode separators inside strings are data."""
+    with Path(path).open(encoding="utf-8") as stream:
+        return [json.loads(line) for line in stream]
+
+
 def write(path, value):
     path = Path(path)
     temporary = path.with_name(path.name + ".tmp")
@@ -31,7 +37,7 @@ def evidence_hashes(batch):
             raise ValueError("Unfinished trial exists; refusing to replay it")
         paths += [trial / name for name in ("result.json", "events.jsonl", "prompt.txt", "system.txt")]
         paths += list((trial / "work/revisions").glob("*"))
-        paths += [p for p in (trial / "work/attempts.jsonl", trial / "work/main.c",
+        paths += [p for p in (trial / "agent_completion.json", trial / "work/attempts.jsonl", trial / "work/main.c",
                               trial / "work/main.go") if p.exists()]
     return {str(p.relative_to(batch)): digest(p) for p in sorted(paths)}
 

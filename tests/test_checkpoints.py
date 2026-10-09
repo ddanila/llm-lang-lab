@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 import bench
-from checkpoints import ENV_KEYS, export_progress, read, resume_rows, write
+from checkpoints import ENV_KEYS, export_progress, read, read_jsonl, resume_rows, write
 
 
 class CheckpointTests(unittest.TestCase):
@@ -104,6 +104,18 @@ class CheckpointTests(unittest.TestCase):
         self.assertEqual(payload["batch_status"]["state"], "checkpoint_only_not_confirmation")
         self.assertFalse(any(row["success"] for row in payload["runs"]))
         self.assertEqual(len(list(target.glob("sources/*/*"))), 2)
+
+    def test_jsonl_preserves_unicode_separators_and_crlf_records(self):
+        rows = [{"stdout": "a\u0085b\u2028c\u2029d"}, {"stdout": "escaped\nnewline"}]
+        path = self.root / "events.jsonl"
+        path.write_bytes(("\r\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\r\n").encode())
+        self.assertEqual(read_jsonl(path), rows)
+
+    def test_jsonl_still_rejects_actual_corruption(self):
+        path = self.root / "events.jsonl"
+        path.write_text('{"ok": true}\n{"truncated": "value')
+        with self.assertRaises(json.JSONDecodeError):
+            read_jsonl(path)
 
 
 if __name__ == "__main__":

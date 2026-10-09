@@ -1,5 +1,13 @@
 # Overnight study v3: execution and recovery
 
+## Current status
+
+V3 stopped during post-processing after trial 321; 320 complete records were pushed.
+The parser is fixed, with 53 tests passing, and trial 321's sources/usage are preserved.
+The old invalid batch remains stopped. [Recovery limits](../checkpoints/c-go-checkpointed-v3/20261008T173711298748Z/parser-incident.md).
+This document and execution.json describe the original registration; its fingerprints
+have not been rewritten to conceal the later fix.
+
 ## Why this is a new study
 
 The v2 confirmation attempt `20261008T165022880692Z` stopped after 5/400 trials,

@@ -33,6 +33,10 @@ based on historical calibration rather than a guarantee for the revised study.
 both complete batches validate. Until then there is no confirmation conclusion.
 Historical studies and incomplete checkpoints are never pooled with v3.
 
+**Current status:** v3 stopped after 320 completed trials because a JSONL parser
+misread Unicode diagnostic output. The reader is fixed and 53 tests pass, but the
+invalid batch has not been resumed or relabeled. [Incident and recovery limits](checkpoints/c-go-checkpointed-v3/20261008T173711298748Z/parser-incident.md).
+
 ## Run locally
 
 Requirements: Python 3.9+, pi 1.1.0 with extension support, Ollama, Clang, Go.

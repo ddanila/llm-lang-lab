@@ -154,5 +154,28 @@ class PiAdapter(unittest.TestCase):
         self.assertTrue(result["infrastructure_error"])
         self.assertFalse(result["success"])
 
+    def test_unicode_output_does_not_split_submission_records(self):
+        source = '#include <stdio.h>\nint main(void){puts("\\302\\205\\342\\200\\250\\342\\200\\251");}'
+        result, requests, _ = self.run_script([[source]], max_submissions=1)
+        self.assertEqual(result["stop"], "submission_budget")
+        self.assertFalse(result["success"])
+        self.assertFalse(result["infrastructure_error"])
+        self.assertTrue(result["usage_complete"])
+        self.assertEqual(len(requests), 1)
+
+    def test_terminal_measurements_survive_postprocessing_failure(self):
+        observed = []
+        def fail_after_completion(path):
+            terminal = json.loads((path.parent.parent / "agent_completion.json").read_text())
+            self.assertEqual(terminal["stop"], "submission_budget")
+            self.assertGreater(terminal["elapsed_seconds"], 0)
+            self.assertIn("returncode", terminal)
+            observed.append(terminal)
+            raise RuntimeError("simulated postprocessing failure")
+        with patch("bench.read_jsonl", side_effect=fail_after_completion):
+            with self.assertRaisesRegex(RuntimeError, "simulated postprocessing"):
+                self.run_script([[BAD]], max_submissions=1)
+        self.assertEqual(len(observed), 1)
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,32 @@
+{
+  "incident": "Unicode separator split inside valid JSONL string",
+  "trial": "320-word_counts-go-r16",
+  "completed_results_reconciled": 320,
+  "submission_records": 4,
+  "controller_stop": "submission_budget",
+  "attempt_kinds": [
+    "tests",
+    "compile_error",
+    "tests",
+    "compile_error"
+  ],
+  "final_public_passed": false,
+  "tokens": {
+    "input": 2732,
+    "output": 2278,
+    "cacheRead": 4043,
+    "cacheWrite": 0
+  },
+  "assistant_turns": 4,
+  "usage_missing": false,
+  "measured_elapsed_seconds": null,
+  "formal_result_reconstructed": false,
+  "generation_replayed": false,
+  "original_batch_status_unchanged": true,
+  "raw_evidence_sha256": {
+    "events.jsonl": "ee00c1efd4f950ad86a7703a3de4e4a4060f6205a11fb61f663c4caf3de0a159",
+    "work/attempts.jsonl": "1d38bcc83b8a307211e24b1c35833dda1be88db4c265df0778b19c2cd864f20e",
+    "work/main.go": "277e939583b9a868aabbb2b5294065ecdca296ce68f478eeb9664a281b7ce346"
+  },
+  "note": "All four submissions finished; post-processing failed before result.json and hidden judging. Exact agent elapsed time/return code were not persisted by the old runner. No timing value has been invented. Original raw artifacts remain unchanged."
+}

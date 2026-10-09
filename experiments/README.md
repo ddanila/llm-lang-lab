@@ -1,6 +1,9 @@
 # C versus Go: checkpointed study v3
 
-Status: **registered for a fresh overnight A/B run**. The earlier v2 confirmation
+Status: **v3 stopped after 320 completed trials; parser fix validated, no resume**.
+[Incident and recovery limits](../checkpoints/c-go-checkpointed-v3/20261008T173711298748Z/parser-incident.md).
+The original v3 registration below remains historical; current source fingerprints
+differ after the fix and cannot be substituted into the old manifests. The earlier v2 confirmation
 attempt stopped after 5/400 trials. Its [portable evidence and diagnosis](../checkpoints/c-go-controlled-v2/20261008T165022880692Z/diagnosis.md)
 are retained; none of those trials enter this study. The [v2 calibration](../reports/20261008T162135502883Z/README.md)
 remains exploratory. [Execution plan](execution.md), [progress backups](../checkpoints/README.md).

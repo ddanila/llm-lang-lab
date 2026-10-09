@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+from checkpoints import read_jsonl
 
 
 def require(condition, message):
@@ -28,7 +29,7 @@ def audit(batch):
         results.append(row)
         require(all(row[k] == v for k, v in job.items()), "Trial differs from schedule")
         log = path.parent / "events.jsonl"
-        events = [json.loads(line) for line in log.read_text().splitlines()]
+        events = read_jsonl(log)
         messages = [e["message"] for e in events if e["type"] == "message_end"
                     and e.get("message", {}).get("role") == "assistant"]
         for key, value in row["tokens"].items():
@@ -43,7 +44,7 @@ def audit(batch):
             source = work / ("main.c" if row["language"] == "c" else "main.go")
             require(source.read_bytes() == revisions[-1].read_bytes(), "Final source changed")
         attempts_path = work / "attempts.jsonl"
-        attempts = [json.loads(line) for line in attempts_path.read_text().splitlines()] if attempts_path.exists() else []
+        attempts = read_jsonl(attempts_path) if attempts_path.exists() else []
         require(len(attempts) <= len(revisions), "Feedback without saved source")
         if row["stop"] in ("public_pass", "submission_budget"):
             require(len(attempts) == len(revisions), "Missing completed submission feedback")

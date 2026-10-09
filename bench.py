@@ -22,7 +22,7 @@ from urllib.parse import urlparse
 
 from judge import evaluate
 from tasks import SPECS, cases
-from checkpoints import check_environment, resume_rows, seal, write as atomic_write
+from checkpoints import check_environment, read_jsonl, resume_rows, seal, write as atomic_write
 
 ROOT = Path(__file__).resolve().parent
 SOURCE_FILES = ["bench.py", "judge.py", "tasks.py", "extra_tasks.py", "pi/benchmark.ts",
@@ -263,9 +263,13 @@ def run_one(batch, config, job, index):
             reader.join(timeout=1)
             proc.stdout.close()
     elapsed = time.monotonic() - started
+    # Preserve measured terminal facts before any fallible post-processing/judging.
+    # This record is evidence, not permission to replay or auto-resume an invalid trial.
+    dump(trial / "agent_completion.json", {**job, "stop": stop,
+         "returncode": proc.returncode, "elapsed_seconds": elapsed})
     metrics = parse_events(events)
     attempts_file = work / "attempts.jsonl"
-    attempts = [json.loads(line) for line in attempts_file.read_text().splitlines()] if attempts_file.exists() else []
+    attempts = read_jsonl(attempts_file) if attempts_file.exists() else []
     # Held-out tests are never returned to pi and run only after its process exits.
     hidden = evaluate(work, job["language"], job["task"], hidden=True)
     first = {"passed": False}
