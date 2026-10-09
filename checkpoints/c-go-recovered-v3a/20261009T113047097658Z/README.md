@@ -2,7 +2,7 @@
 
 Study: `c-go-recovered-v3a`; replication: A.
 
-**364/400 trials recorded. Local state: checkpoint.**
+**400/400 trials recorded. Local state: complete.**
 
 This is a progress backup, not a confirmation result or language ranking.
 Every completed trial is retained, including failures. Generated source revisions
