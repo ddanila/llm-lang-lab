@@ -1,0 +1,130 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	reader := bufio.NewReader(os.Stdin)
+	
+	// Read all input into a single string
+	input, _ := reader.ReadString('\n')
+	fields := strings.Fields(input)
+	
+	// If not enough fields, try reading more
+	for len(fields) < 2 {
+		line, _ := reader.ReadString('\n')
+		fields = append(fields, strings.Fields(line)...)
+	}
+
+	if len(fields) < 2 {
+		fmt.Println("ERROR")
+		return
+	}
+
+	n, err := strconv.Atoi(fields[0])
+	if err != nil {
+		fmt.Println("ERROR")
+		return
+	}
+
+	m, err := strconv.Atoi(fields[1])
+	if err != nil {
+		fmt.Println("ERROR")
+		return
+	}
+
+	// Handle N=0 case
+	if n == 0 {
+		fmt.Println("")
+		return
+	}
+
+	// Build graph
+	inDegree := make([]int, n)
+	graph := make([][]int, n)
+
+	idx := 2
+	for i := 0; i < m; i++ {
+		if idx+1 >= len(fields) {
+			fmt.Println("ERROR")
+			return
+		}
+		u, err := strconv.Atoi(fields[idx])
+		if err != nil {
+			fmt.Println("ERROR")
+			return
+		}
+		v, err := strconv.Atoi(fields[idx+1])
+		if err != nil {
+			fmt.Println("ERROR")
+			return
+		}
+
+		if u >= n || v >= n {
+			fmt.Println("ERROR")
+			return
+		}
+
+		graph[u] = append(graph[u], v)
+		inDegree[v]++
+		idx += 2
+	}
+
+	// Kahn's algorithm with a min-heap simulation using sorted slice
+	queue := make([]int, 0)
+	result := make([]int, 0)
+
+	for i := 0; i < n; i++ {
+		if inDegree[i] == 0 {
+			queue = append(queue, i)
+		}
+	}
+
+	// Keep queue sorted by always inserting at correct position
+	for len(queue) > 0 {
+		// Get the first (smallest) element
+		u := queue[0]
+		// Remove first element
+		queue = queue[1:]
+
+		result = append(result, u)
+
+		// Process neighbors
+		for _, v := range graph[u] {
+			inDegree[v]--
+			if inDegree[v] == 0 {
+				// Insert v into queue in sorted order using binary search-like approach
+				insertIndex := len(queue)
+				for i := 0; i < len(queue); i++ {
+					if queue[i] > v {
+						insertIndex = i
+						break
+					}
+				}
+				queue = append(queue, 0) // placeholder at end
+				copy(queue[insertIndex+1:], queue[insertIndex:])
+				queue[insertIndex] = v
+			}
+		}
+	}
+
+	if len(result) != n {
+		fmt.Println("ERROR")
+		return
+	}
+
+	fmt.Print(strings.Join(toStringSlice(result), " ") + "\n")
+}
+
+func toStringSlice(slice []int) []string {
+	result := make([]string, len(slice))
+	for i, v := range slice {
+		result[i] = strconv.Itoa(v)
+	}
+	return result
+}
