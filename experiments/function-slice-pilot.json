@@ -1,0 +1,23 @@
+{
+  "study_id": "function-slice-development-v1",
+  "status": "draft_requires_pi_integration",
+  "purpose": "adapter and throughput calibration, not a language ranking",
+  "tasks": ["lower_bound", "edit_distance"],
+  "languages": ["c", "go"],
+  "repeats": 2,
+  "planned_trials": 8,
+  "model": "llm-lang-lab-qwen35-9b",
+  "model_digest": "38e1616f323cffe5aeb09448d655068759ed6989b1b884754f16f72e4e75a977",
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "context": 16384,
+  "max_output_per_turn": 2048,
+  "max_turns": 4,
+  "max_submissions": 4,
+  "max_seconds": 600,
+  "schedule_seed": 71001,
+  "sampling_seed": 70000000,
+  "primary": "first-source held-out correctness",
+  "secondary": ["final held-out correctness", "all output tokens", "repair count", "timing breakdown"],
+  "decision": "none; development calibration only"
+}

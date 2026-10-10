@@ -37,6 +37,11 @@ short function-level screens and selective held-out confirmation, with a
 reproducible diagnostic script. These are proposals for a new experiment; the
 completed study's rules and results remain unchanged.
 
+An initial [function-level development slice](experiments/function-slice.md) now
+provides C/Go adapters, independent oracle checks and compiler-tested reference
+solutions and mutants. Its eight-trial pilot is a draft awaiting pi integration;
+it has not been run and is not the proposed full screening benchmark.
+
 ## Run locally
 
 Requirements: Python 3.9+, pi 1.1.0 with extension support, Ollama, Clang, Go.
