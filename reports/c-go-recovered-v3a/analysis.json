@@ -1,0 +1,213 @@
+{
+  "study_id": "c-go-recovered-v3a",
+  "batches": [
+    "20261009T113047097658Z",
+    "20261009T134522238478Z"
+  ],
+  "status": "inconclusive_under_recovery_amendment",
+  "decision": null,
+  "reports": [
+    {
+      "decision": "inconclusive",
+      "observed_success": {
+        "c": 0.45,
+        "go": 0.47
+      },
+      "go_minus_c_success_by_task": {
+        "csv_fields": 0,
+        "dependency_order": 0,
+        "edit_distance": 0,
+        "grid_distance": -0.2,
+        "lower_bounds": -0.65,
+        "merge_intervals": 0.4,
+        "rational_sum": -0.05,
+        "rpn": 0.25,
+        "transaction_ledger": 0.2,
+        "word_counts": 0.25
+      },
+      "success_posteriors": [
+        {
+          "prior_per_category": 0.5,
+          "go_minus_c_success_95_credible": [
+            -0.0611039161499079,
+            0.09584144042136838
+          ],
+          "c_success_95_credible": [
+            0.400056040645495,
+            0.5096624583432124
+          ],
+          "go_success_95_credible": [
+            0.41919927758928943,
+            0.5295502649717966
+          ]
+        },
+        {
+          "prior_per_category": 1.0,
+          "go_minus_c_success_95_credible": [
+            -0.06066012301218243,
+            0.09113063954339606
+          ],
+          "c_success_95_credible": [
+            0.4052925089338812,
+            0.5135296663487269
+          ],
+          "go_success_95_credible": [
+            0.4207214990285527,
+            0.528390988421443
+          ]
+        }
+      ],
+      "go_over_c_tokens_per_success": 0.8797313580462801,
+      "go_over_c_tokens_per_success_95_bootstrap": [
+        0.6952429682025565,
+        1.1108268783293338
+      ],
+      "leave_one_task_out": {
+        "csv_fields": {
+          "go_minus_c_success": 0.022222222222222223,
+          "go_over_c_tokens_per_success": 0.898036267886873
+        },
+        "dependency_order": {
+          "go_minus_c_success": 0.022222222222222223,
+          "go_over_c_tokens_per_success": 0.8532902372965662
+        },
+        "edit_distance": {
+          "go_minus_c_success": 0.022222222222222223,
+          "go_over_c_tokens_per_success": 0.8601956288795229
+        },
+        "grid_distance": {
+          "go_minus_c_success": 0.044444444444444446,
+          "go_over_c_tokens_per_success": 0.8086166469243296
+        },
+        "lower_bounds": {
+          "go_minus_c_success": 0.09444444444444444,
+          "go_over_c_tokens_per_success": 0.6815778959977862
+        },
+        "merge_intervals": {
+          "go_minus_c_success": -0.022222222222222223,
+          "go_over_c_tokens_per_success": 1.0164680841113831
+        },
+        "rational_sum": {
+          "go_minus_c_success": 0.027777777777777776,
+          "go_over_c_tokens_per_success": 0.8152049000069633
+        },
+        "rpn": {
+          "go_minus_c_success": -0.005555555555555556,
+          "go_over_c_tokens_per_success": 1.0070853206776533
+        },
+        "transaction_ledger": {
+          "go_minus_c_success": 0,
+          "go_over_c_tokens_per_success": 0.938910275033895
+        },
+        "word_counts": {
+          "go_minus_c_success": -0.005555555555555556,
+          "go_over_c_tokens_per_success": 0.9786583176511062
+        }
+      },
+      "tasks": 10,
+      "pairs": 200
+    },
+    {
+      "decision": "inconclusive",
+      "observed_success": {
+        "c": 0.47,
+        "go": 0.505
+      },
+      "go_minus_c_success_by_task": {
+        "csv_fields": 0,
+        "dependency_order": -0.05,
+        "edit_distance": 0,
+        "grid_distance": -0.05,
+        "lower_bounds": -0.55,
+        "merge_intervals": 0.05,
+        "rational_sum": -0.2,
+        "rpn": 0.4,
+        "transaction_ledger": 0.25,
+        "word_counts": 0.5
+      },
+      "success_posteriors": [
+        {
+          "prior_per_category": 0.5,
+          "go_minus_c_success_95_credible": [
+            -0.042743573874188534,
+            0.10535425087839323
+          ],
+          "c_success_95_credible": [
+            0.42111118868508723,
+            0.524420562377581
+          ],
+          "go_success_95_credible": [
+            0.44927008245380945,
+            0.5608527122253091
+          ]
+        },
+        {
+          "prior_per_category": 1.0,
+          "go_minus_c_success_95_credible": [
+            -0.04543105578298395,
+            0.10345723268137996
+          ],
+          "c_success_95_credible": [
+            0.4213982063538388,
+            0.5265743548834728
+          ],
+          "go_success_95_credible": [
+            0.44756277931605565,
+            0.5593779884809119
+          ]
+        }
+      ],
+      "go_over_c_tokens_per_success": 0.8146840167035245,
+      "go_over_c_tokens_per_success_95_bootstrap": [
+        0.6621208187286339,
+        1.0045786377236559
+      ],
+      "leave_one_task_out": {
+        "csv_fields": {
+          "go_minus_c_success": 0.03888888888888889,
+          "go_over_c_tokens_per_success": 0.8408411705372838
+        },
+        "dependency_order": {
+          "go_minus_c_success": 0.044444444444444446,
+          "go_over_c_tokens_per_success": 0.7574062911040166
+        },
+        "edit_distance": {
+          "go_minus_c_success": 0.03888888888888889,
+          "go_over_c_tokens_per_success": 0.8059021081536574
+        },
+        "grid_distance": {
+          "go_minus_c_success": 0.044444444444444446,
+          "go_over_c_tokens_per_success": 0.7379885950725673
+        },
+        "lower_bounds": {
+          "go_minus_c_success": 0.1,
+          "go_over_c_tokens_per_success": 0.651152804646783
+        },
+        "merge_intervals": {
+          "go_minus_c_success": 0.03333333333333333,
+          "go_over_c_tokens_per_success": 0.8345727326422776
+        },
+        "rational_sum": {
+          "go_minus_c_success": 0.06111111111111111,
+          "go_over_c_tokens_per_success": 0.7406640457457483
+        },
+        "rpn": {
+          "go_minus_c_success": -0.005555555555555556,
+          "go_over_c_tokens_per_success": 0.9710430163205249
+        },
+        "transaction_ledger": {
+          "go_minus_c_success": 0.011111111111111112,
+          "go_over_c_tokens_per_success": 0.8847817388326173
+        },
+        "word_counts": {
+          "go_minus_c_success": -0.016666666666666666,
+          "go_over_c_tokens_per_success": 0.9755193064616029
+        }
+      },
+      "tasks": 10,
+      "pairs": 200
+    }
+  ],
+  "scope": "Conditional on this fixed workload suite, model, prompt, and budgets; not a universal language ranking. Recovery amendment: A includes 320 retained observations and one recovered trial with missing timing. This is not the original unamended frozen confirmation.",
+  "recovery_amendment": "jsonl-recovery-2026-10-09"
+}

@@ -1,0 +1,2439 @@
+{
+  "batch": "20261009T113047097658Z",
+  "trials": 400,
+  "checks": [
+    {
+      "trial": "000-merge_intervals-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "115bea85fb081f74ae3f83f6b4f4f815522c0f30f208cd5f4317324cfa2f2fff"
+    },
+    {
+      "trial": "001-merge_intervals-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "21eecc8a6269a0957e9ff061b3f5c52148488de2fb079d3be51d3b1f4c82bc3b"
+    },
+    {
+      "trial": "002-grid_distance-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4f92e91d54a15c038216c21a978343dbef223c99f05433a77bb8f9f09b79ee62"
+    },
+    {
+      "trial": "003-grid_distance-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7179ad89c4cb3ab9245e4a129bd9d1db7f4f42224acaf43277c3bb694e23193c"
+    },
+    {
+      "trial": "004-dependency_order-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7eeb5a02093e9f505d19c997db3dad67fed210da5c0a5b201ac22a0d9f2c75da"
+    },
+    {
+      "trial": "005-dependency_order-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8635437918706fbcb7722d84cab0c191e3318ff12d8b28406b4adf8b45e1dfae"
+    },
+    {
+      "trial": "006-rpn-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": true,
+      "event_log_sha256": "feb0ff1030ddeb59d1675f0541a138079a5884e5eaad5dc04b6a870f25cdd162"
+    },
+    {
+      "trial": "007-rpn-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "cc80449fe8d9fbbb7ccdaff9e10d299f35a6ea977f3690a581f514a5e45ffa95"
+    },
+    {
+      "trial": "008-edit_distance-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "5d69d7f164cdc0931dd75571e4375b3a191412474a399c19bce19bbd284cbe49"
+    },
+    {
+      "trial": "009-edit_distance-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0f71b27f3ec76a20f677c8158705faa3ab38cb4632d6510351867793cdfe41ed"
+    },
+    {
+      "trial": "010-word_counts-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": true,
+      "event_log_sha256": "abcb6f5734732eebe2eda5a93811525ea90859a9e0b8d3ba5083efe708cf9182"
+    },
+    {
+      "trial": "011-word_counts-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c8581ef1ed914875603ab89d7746e57d0dcd5f78fb7278dee3ffde2c6342f044"
+    },
+    {
+      "trial": "012-rational_sum-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "84b88597c8c458edc65136c87ab2c7f186dea84c56bbea30b99e824b8a37e45f"
+    },
+    {
+      "trial": "013-rational_sum-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "043b1e171df92dff4ba7e74492afae5201eb240aa931ae93ce5c52f01ff10007"
+    },
+    {
+      "trial": "014-lower_bounds-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1a617bd124e4002680356587788a409385d78359897b49344aa687acbc18bae9"
+    },
+    {
+      "trial": "015-lower_bounds-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8c8741c3cb55e3955d87ba6023847fc86f2376887579ae91da946ebd40db2fa2"
+    },
+    {
+      "trial": "016-csv_fields-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8a54ce31cb34807f979524e422c30ded0e69a0cd99e6098d049ae5f55436101b"
+    },
+    {
+      "trial": "017-csv_fields-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "3cbdcf7c136257c100640685cd87c47fec4f1767fb68e76fd4241de4ece7f0af"
+    },
+    {
+      "trial": "018-transaction_ledger-go-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b0bc2455432f8d3922be01ae741b0d074616b9e1dfdfcc93c13b21254efac491"
+    },
+    {
+      "trial": "019-transaction_ledger-c-r0",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6293cf0cb70fd18074e6120968bd716a43a2f1a962fd0cf1ed8890485dc0a74c"
+    },
+    {
+      "trial": "020-word_counts-c-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "22eec93f3960f88fc5abc3095a7971b9776be1878c17c08435119f4f75af68f9"
+    },
+    {
+      "trial": "021-word_counts-go-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6a84718e294bb875a743f08066e2fe28f0e1e02d09a143f4c216d67f9c6ea23f"
+    },
+    {
+      "trial": "022-grid_distance-go-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7dae1352286db1fa7dcc5dc74df4c56fdbb738e93db87f4cbf4b75c24e2daf44"
+    },
+    {
+      "trial": "023-grid_distance-c-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d48749aada46e06bf2274888aafdc5b4d02d9ab5698ac4a3859c52389e0e3567"
+    },
+    {
+      "trial": "024-dependency_order-go-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9cdc9905b0e361f25dfb79a3c31404408291f731693afc496e7be1f51b073463"
+    },
+    {
+      "trial": "025-dependency_order-c-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "277b6acda815c8b934c338bb7f254a4345d2d44c0ab55923017b4f8ce90b3080"
+    },
+    {
+      "trial": "026-lower_bounds-go-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "89c4cf76c09417af2fbf9b3c50e11e235c80f316e46d910e6e569ef1c1c8e9e9"
+    },
+    {
+      "trial": "027-lower_bounds-c-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2f1752eb453f04568897cde2d1ef846639959a23187036bcbe44c0be3d285629"
+    },
+    {
+      "trial": "028-merge_intervals-c-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2cd589ddc07a28fb62007e6ef2d5260bb3351b99d42cfc9cd3f68b7fdc17ee25"
+    },
+    {
+      "trial": "029-merge_intervals-go-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e33894ad7000e7dc21bc489304d0581255a07e42956f13bddf8f21f53dc83d6e"
+    },
+    {
+      "trial": "030-rational_sum-c-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2465ea64655eff776a1cd89b08939f960776bd88ef7170a689f00ba8c6ce1522"
+    },
+    {
+      "trial": "031-rational_sum-go-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d7ab7767030678e6686302d7978b5539c95355c33fbe3ee93963aa62b7993a2d"
+    },
+    {
+      "trial": "032-edit_distance-go-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "69992a542d18c2b37445d89ee43ed7eadfab72b0329b47e94ad66c5e8e03b901"
+    },
+    {
+      "trial": "033-edit_distance-c-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "584152be9c65899cea774c5659bb52a43cf3e984600729d7c19b64150d0684e7"
+    },
+    {
+      "trial": "034-transaction_ledger-c-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6292e231c7853735245c3919b4caee08a21cb1f86f315baede122930f855204f"
+    },
+    {
+      "trial": "035-transaction_ledger-go-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "016fbf5faa207f8b28d0e67243324c8c841d96e0cd514d1db7ae1711ee17108b"
+    },
+    {
+      "trial": "036-csv_fields-go-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8406b5bd264fb2887c06e838bcd9c0a24bc6edcd252c85a8e5988daf13484ad2"
+    },
+    {
+      "trial": "037-csv_fields-c-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "fa42e331a59fa51ebaba1cdf7ba19156b04ed986f780e8b8f261bb9f6ca788e2"
+    },
+    {
+      "trial": "038-rpn-c-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9f357c856d4d469b5e5d9d19de5b4db43e18483e338800cefce4a8edfec2a703"
+    },
+    {
+      "trial": "039-rpn-go-r1",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a7937a3787435c64489102eb7fee97178eee683ce93db59422140a0b4994fc7d"
+    },
+    {
+      "trial": "040-merge_intervals-go-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "38352b1595977c815be856fdc24f3034b40cc734f670ce4aa7a781b6f55bac50"
+    },
+    {
+      "trial": "041-merge_intervals-c-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "19acc52e68da76d315d6c6f43997e193125280e0f16a3ddf4f9c564b4471a081"
+    },
+    {
+      "trial": "042-grid_distance-c-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "274c037fc40af4fbf4ae7f00499d4dee8574be41345829e8f6528c69a8ab1b6e"
+    },
+    {
+      "trial": "043-grid_distance-go-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6485c4bca44e777df62f7c68292cd168ce8aeec85c9a726210e0b3a300f76a54"
+    },
+    {
+      "trial": "044-lower_bounds-c-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d6852f1b8dc57968cd6f0e4243bcff2b4bfece48344f82b8bc59cd32c6f7079b"
+    },
+    {
+      "trial": "045-lower_bounds-go-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "032b1c828036a23bd0843cdf6d43cf917543012a9c636e34f86ddd3c42bd9211"
+    },
+    {
+      "trial": "046-rational_sum-go-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "23313d3ef635c6e7897fc1d14b7d247fd28b108cc724c610dc921052ec624b81"
+    },
+    {
+      "trial": "047-rational_sum-c-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b4cf4c9b133961b2135baa93ec8dea1c96f7119604e20af309459a0820c728cf"
+    },
+    {
+      "trial": "048-transaction_ledger-go-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0a1323d5835ab6873dad2a79482006fa66421b80e9375022a61f424b642a65d6"
+    },
+    {
+      "trial": "049-transaction_ledger-c-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "310157d159f3067f29dc106228fe99dbe5f02ad3bd6b0958a64d13e0c9827731"
+    },
+    {
+      "trial": "050-csv_fields-c-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "fdeee6c4df9d58cbbf99dc9c72244d33a55a1b7848229fc6dfeb031ad7d92f5c"
+    },
+    {
+      "trial": "051-csv_fields-go-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e153fbf417d6302de5a3171b18e3508768cbd1c0a5bd7124a90f3b8283b92e63"
+    },
+    {
+      "trial": "052-edit_distance-c-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "76070294fc84220b5c4064e7a8241f01747f0b77c75399fe69c53935d9b927d2"
+    },
+    {
+      "trial": "053-edit_distance-go-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7a3244b5aa3c21237a899083dbfa1ef3f84f6b46bba07ee33d1e88ee0fd3c808"
+    },
+    {
+      "trial": "054-dependency_order-c-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c3fb34a82c6a7ada0fcdc4b2c1995eb9f4dbf6f1f80ff6481943b5265e8a9204"
+    },
+    {
+      "trial": "055-dependency_order-go-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0ae8587e4ef17809b4d2842b5323f63e2d9bbf50407e1393c19817189f124404"
+    },
+    {
+      "trial": "056-word_counts-go-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "979b5e94d6e8e287f274f7d5a7b1984893bd15aaea620ddaadb13a6a9c997f00"
+    },
+    {
+      "trial": "057-word_counts-c-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b2b0757fedc947b4b009ad8167676f86d25944bb64ca045b751e3396ecdd4c1b"
+    },
+    {
+      "trial": "058-rpn-go-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "85769a6481d24158dd5d048d3c1887e5eb9dbbfb250b93afce5522eb893b068a"
+    },
+    {
+      "trial": "059-rpn-c-r2",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a9b13f822f7ec68c506d39391d75da38d23dcca224e5f994496db4f0f13ad56f"
+    },
+    {
+      "trial": "060-rational_sum-c-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f293e4e072af3a43d70a0a4b27ab6786972b217b07d5b70fa71a058448da8200"
+    },
+    {
+      "trial": "061-rational_sum-go-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "5b7c457821c182914ea3f93b4e003675e3a4e1e271ce8b927890e03f64720564"
+    },
+    {
+      "trial": "062-transaction_ledger-c-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8cf1b71a57e698d668d779edd706fba9a5d857812222eafefdb560304425bd6b"
+    },
+    {
+      "trial": "063-transaction_ledger-go-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "069b36e0cf3dd2dd75dddeb245ad4d9fdce860a89fbf85759a1e047d1a732be2"
+    },
+    {
+      "trial": "064-word_counts-c-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6555a608372982499e8bafddca0e03a672dda1350513cd0c5f9c2ebf7e0b9edd"
+    },
+    {
+      "trial": "065-word_counts-go-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": true,
+      "event_log_sha256": "227bd5b649ca820122ecfc29530ef5d1b39a5f618c5f66fa08fa4fb81445a74a"
+    },
+    {
+      "trial": "066-dependency_order-go-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": true,
+      "event_log_sha256": "ec2694a3c12003625c0e753a3c4fd7d4ed007b0fc25261a243e03c45ed4af7b9"
+    },
+    {
+      "trial": "067-dependency_order-c-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "418e446150d6c811cf5da4f02d78cfe908f434743e718ef9fd4c47df8fe5357a"
+    },
+    {
+      "trial": "068-lower_bounds-go-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "bdf2355df923e8a336c529dd90b792eb24d09da9b343623b6aeffd9d88042187"
+    },
+    {
+      "trial": "069-lower_bounds-c-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "407452bf0ae8dd17a813ada58cda45634279f093a293f67bae19bdca27a7adac"
+    },
+    {
+      "trial": "070-grid_distance-go-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "08307e0ed3e26119946ac50e1f7ef486f18f1da7cfd05d2b49efa71052a94a07"
+    },
+    {
+      "trial": "071-grid_distance-c-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "172e0831909e0d4542ab1a13c0056c923f1d42ef4ef3f7ed47d864f5a33eeebb"
+    },
+    {
+      "trial": "072-csv_fields-go-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": true,
+      "event_log_sha256": "150d50b95510762b3686dfe22e1dc8bcac57433bb50051c2f2aafc23163ab4ff"
+    },
+    {
+      "trial": "073-csv_fields-c-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7689570606e1b0b80ac3b60469fb97b67353320236ad3363a37a8be01e765296"
+    },
+    {
+      "trial": "074-edit_distance-go-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7659972a6f8e4f871f58241074e68484816f8a476b18e3f7c5d65166ea3a0c17"
+    },
+    {
+      "trial": "075-edit_distance-c-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "3207b3d8f4c4ae759a4b5f2a97ead4ec96399b8ec9542b014a1489db020afa93"
+    },
+    {
+      "trial": "076-rpn-c-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b3eb6391327c42a75f3d5a5dae8cbaf2f2cdb8a5df77c9e38feab51d0b8b4f00"
+    },
+    {
+      "trial": "077-rpn-go-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c8a0a7bdb441944bdf42b2b8cb296fb086a3eee1e4d6e1c79b2d67a61fff82e2"
+    },
+    {
+      "trial": "078-merge_intervals-c-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d4cf2b34883fb54affe7f38c13949465e860c01c4c939ab2fe1f857c00816e38"
+    },
+    {
+      "trial": "079-merge_intervals-go-r3",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c2b47eb6ad7f992cb9eb072396a8eb64e0eed81b78df8b03d69dcd0c5a7e30c2"
+    },
+    {
+      "trial": "080-lower_bounds-c-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d9e134a4fd52ad2a9aa49be8d66be7732ef0101085845f97e4be0bde4ec90e48"
+    },
+    {
+      "trial": "081-lower_bounds-go-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b0e3ae78ecd10c3b90a21033ec493528f86da8c8a2cd06ed5c20b84f45db16be"
+    },
+    {
+      "trial": "082-dependency_order-c-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "30dc6a42a6f73c245418e3804a661cb1fadee809222c3382d054d537d34473b8"
+    },
+    {
+      "trial": "083-dependency_order-go-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "571d73faee26b80cb8a4e157236d8e55b6cd25b919f091bd5922df475b673a35"
+    },
+    {
+      "trial": "084-transaction_ledger-go-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9d3bb17e1e850422d7e428ca53056f139fd5d5c9ec05cbd4c9a939e20460b45a"
+    },
+    {
+      "trial": "085-transaction_ledger-c-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f3a7061666cd58923c52efcd73f936137164b6653a35e90922e729dd6cdda563"
+    },
+    {
+      "trial": "086-merge_intervals-go-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6291c6e59c4888f37f6b463eb485ae5ae0596041b58ce41448af029bfa4a7bc1"
+    },
+    {
+      "trial": "087-merge_intervals-c-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "20a9c4f90f17e1a885093ed945a2aaae1a852968b36a9412f98055ccd29d5417"
+    },
+    {
+      "trial": "088-rpn-go-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9b8bb9fdc7ac8f64acc34ddf9e6807fb9f7f023691288d921cf7dddeda653190"
+    },
+    {
+      "trial": "089-rpn-c-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e9a254ca21ed69a0b75bedd24eda743cd9271bc400655813470a5f7934b9b350"
+    },
+    {
+      "trial": "090-csv_fields-c-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "091db0fe90cec6c1dddb5abb19c0b1f0874b1ffb241686d8f0ebc199f7c2dd53"
+    },
+    {
+      "trial": "091-csv_fields-go-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "78581bf07890b525dba30f49bf774a483cdf1ae79db586ba2fa17159e52a906c"
+    },
+    {
+      "trial": "092-grid_distance-c-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c082f23daf29e3898a0da6ffa355f00321407815b2ba2a4e32b34c4803c0c0bf"
+    },
+    {
+      "trial": "093-grid_distance-go-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "71a8fee02187f072bb1eab1dbecb411f3d54a5bf48b2ae7fc9d8f860d5b49c1f"
+    },
+    {
+      "trial": "094-edit_distance-c-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b655e5b1e64ced6f467c756d80ecbcfa4d8f541adef2f64eebf6d1774cfabfd8"
+    },
+    {
+      "trial": "095-edit_distance-go-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "857928a42ea04dcb49e3738adb509a562aa4a3455d6cf63d4d272dda216c4f7c"
+    },
+    {
+      "trial": "096-word_counts-go-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c3ce35865b2c665b29507d2d9b70168dc9c83d8bbae19f5095bc65b084fa8664"
+    },
+    {
+      "trial": "097-word_counts-c-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e7701ecdb303e37423a4171686bb5083c4f9284e5e42252d9bf713717bfa0f95"
+    },
+    {
+      "trial": "098-rational_sum-go-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "85303ed4d00fa685f7bd054f62f05cd13d59600ac8926d43298124e1b40be1f6"
+    },
+    {
+      "trial": "099-rational_sum-c-r4",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "52935492266e244e6475ed09c455f3226719faba2519631ef58775ed51f5e93b"
+    },
+    {
+      "trial": "100-rpn-c-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "88ffa413ee29a945c99b3d0eadf96e0f913404046210fe8baf5cd634c160a6cf"
+    },
+    {
+      "trial": "101-rpn-go-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "214829f7887e40a003e563d67b00cc72a17cbb296028d16c580ffdb595ff2107"
+    },
+    {
+      "trial": "102-transaction_ledger-c-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4c2be3a23af679516c5eef566a3d74aadef2c6e5b583021d6b1b1ae731ba13a3"
+    },
+    {
+      "trial": "103-transaction_ledger-go-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0a28c98aae3a7b58fa5018bd388e68331753de6fad1322ac48bc302a2b09cf2e"
+    },
+    {
+      "trial": "104-lower_bounds-go-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "60e97765bf5f63c786c64b5269a5eda8ed98ec7ac2ab02fa3ad1064751d63ebc"
+    },
+    {
+      "trial": "105-lower_bounds-c-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e72f1a3e81e05ca0c4ddec69aa4554563975db619dc7e9c5042f59a26c2c352d"
+    },
+    {
+      "trial": "106-merge_intervals-c-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4919b2af802d7eed57c0194526e6136c91131c8e63781ef56e320e30545d9d6a"
+    },
+    {
+      "trial": "107-merge_intervals-go-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "42c1f5d0a24d070de5249cdaaebc878ab7d2445e2fd3a3f63776309caccf0572"
+    },
+    {
+      "trial": "108-edit_distance-go-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b0f8c0daa9fc62f7baa55c671e3bf9a515b9ce3cdde138019d528b9f63a342a1"
+    },
+    {
+      "trial": "109-edit_distance-c-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "19a89f734e3d816edea90d96979ef084c95fd2ee37fb4d0edb2a571cf8cc686a"
+    },
+    {
+      "trial": "110-dependency_order-go-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "21d2e5e6b5e6ebfc762f85dca232b09928d6b71805c1ac16a00b640c96f63b18"
+    },
+    {
+      "trial": "111-dependency_order-c-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "31422061d637f4f37fae806c6664c8765c4ffebb231c871052079fe8be1f607c"
+    },
+    {
+      "trial": "112-rational_sum-c-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "36e651a7dec1da6a1a20710516c142e663bdc21c6ccb9dc6ab56c2aca90e6f2f"
+    },
+    {
+      "trial": "113-rational_sum-go-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c72dc8c4903f6c9188c50d94ee2821e86edf09590d212d374ca2885262a91f08"
+    },
+    {
+      "trial": "114-grid_distance-go-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "65df2e026eb3b340b24fc0bc3a91fc5d4ca72ca4bf77f8dde79aa0d12a58274b"
+    },
+    {
+      "trial": "115-grid_distance-c-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "bac1f79cae92138d724dbeb8bc7541d9bcde383b1f5f25e97fefc4bf67206883"
+    },
+    {
+      "trial": "116-csv_fields-go-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6ac00ef2589fba80b01cc94fd5c26e8cd5a08d0ed17f654be0130c78cef61ac8"
+    },
+    {
+      "trial": "117-csv_fields-c-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e21dc70f04b712a64264869e022e5fb4a06756e2060979aa4dfe2aebe69dea3a"
+    },
+    {
+      "trial": "118-word_counts-c-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "83bcee3b8cd84fdb5caed956ac8b4b5fbb7b3020b2f3e8e15a0e84908093fb59"
+    },
+    {
+      "trial": "119-word_counts-go-r5",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "374c61f64092fc6828eda76320384aac67c28a4c62d45ecd0a1cc7292b244981"
+    },
+    {
+      "trial": "120-dependency_order-c-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0ec572c54bf6306391400f66f5f3f021771b7a9b7511bf8a2046abeaa79d460e"
+    },
+    {
+      "trial": "121-dependency_order-go-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d55d59e7a987f27869fdd30526db5f714229689fef07e1b5614fdfcc90b0900d"
+    },
+    {
+      "trial": "122-merge_intervals-go-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c720eaa3bbd96215e4e518adbdfb1c76dd369de09138cf38f4d6b185656fb771"
+    },
+    {
+      "trial": "123-merge_intervals-c-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "382a1979755293e4836c09cd082d66979cb6ae7ac29ac4384fec35891361190d"
+    },
+    {
+      "trial": "124-lower_bounds-c-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b414a549acc1e70b571c8cc421ad33799752c9ca18831dd9c1a94258a7063dac"
+    },
+    {
+      "trial": "125-lower_bounds-go-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "79743ec1e6bd79be509b5f04a1fb5608aafcbdacae4e1f2d3fa292e58fff2243"
+    },
+    {
+      "trial": "126-rpn-go-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": true,
+      "event_log_sha256": "98dd2825c151b126058ec7e5c91216f58f272f942cc4b72d46be823487164ea5"
+    },
+    {
+      "trial": "127-rpn-c-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "50193bbd632ef3abfba4ab49751b1a679969929ab80989a9656f939cf8633d6f"
+    },
+    {
+      "trial": "128-transaction_ledger-go-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "87cf367615c58f807baf6b6510386e03d8d387a20c9882ffcda20cb5b7af3367"
+    },
+    {
+      "trial": "129-transaction_ledger-c-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "dc31af20de6958e7c066a6719f9a663133c1b467f56a85fd1e55e7e531b2fcde"
+    },
+    {
+      "trial": "130-rational_sum-go-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ab0fd4cd660acdf6f36415e6a47bba0f6d7f06110cf35193186b2300aafa8d75"
+    },
+    {
+      "trial": "131-rational_sum-c-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8641c66b3386120bcd7a40446dab355cad65906ced27545c4f2ba9dae36212f1"
+    },
+    {
+      "trial": "132-word_counts-go-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9afc70eb4e367bb6145cd71d1668aa582df84fbb626b62f38d7315a4a1bbf2a7"
+    },
+    {
+      "trial": "133-word_counts-c-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "43161561bce68c440bd31d476144384c7b7e824e6afced860bfa110963a77148"
+    },
+    {
+      "trial": "134-csv_fields-c-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "41d8b712e2df2014e944c7ecb6a4554cbe89e904846e9c13d8791f0874689d4c"
+    },
+    {
+      "trial": "135-csv_fields-go-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "71fd7e30dbc502c66cad1e013a06ab586ac5453f7d54cc3f49d0070e2f76bb58"
+    },
+    {
+      "trial": "136-edit_distance-c-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8982e86b9563d49204222b68950f3dcb0d4cd8fd2286037a8f8cdfe6c09cba37"
+    },
+    {
+      "trial": "137-edit_distance-go-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d993c0c8c424b391eaa948802ec2ca826fc0b8d55de04365627005af851a0f39"
+    },
+    {
+      "trial": "138-grid_distance-c-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "5545903b2341ee9df58b32775e0264e89d93f3189ce84dea6216ee32e56580f6"
+    },
+    {
+      "trial": "139-grid_distance-go-r6",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6945a3b5954a67d7ee55af3ec54f3e6606b330b3a80f21aa55f2cce0dfbf90f8"
+    },
+    {
+      "trial": "140-word_counts-c-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "dccb243a375babba7efcb13b6fbb0f6a6124746ca2718768bf0c35eed090ab7a"
+    },
+    {
+      "trial": "141-word_counts-go-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9e9fac4743e7e4d64705a7583ce560daf68d4576c8435505c60c6e86725bfe47"
+    },
+    {
+      "trial": "142-rpn-c-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "04fbc97db650ea11372006a9b9b1828159ab97942bf38887f04a9a24f3ce0bb1"
+    },
+    {
+      "trial": "143-rpn-go-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "58d8eab34ff5fe624289c672508e30ca0506501fce2ebbc650a80a7001260deb"
+    },
+    {
+      "trial": "144-edit_distance-go-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "5ecc85ab6dcdfab9939f771aff94704007b90ffe196c9928625715685b3ccef2"
+    },
+    {
+      "trial": "145-edit_distance-c-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6c2937479964bd188233023040fc98ad374641c9d1c5d3da73ae0cf28740c990"
+    },
+    {
+      "trial": "146-merge_intervals-c-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0ab80f133879d2b752b7938e9c17db5e600a667de10aca20fa8e3757ca7edcd7"
+    },
+    {
+      "trial": "147-merge_intervals-go-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a2da755521a27eedbb2d0d7f3fabbecf4f0b810a728d561c4c577c4d15e6ccb6"
+    },
+    {
+      "trial": "148-dependency_order-go-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "3bdd5d55a2324a5c0857422b1c1782418ed851fd6297c7a56974598577add9e6"
+    },
+    {
+      "trial": "149-dependency_order-c-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "82ffbd190ea8d593b34ab277a5b0e2301ab145e0524d736583dc5370d5dca449"
+    },
+    {
+      "trial": "150-lower_bounds-go-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "869d6a6f1b26d7297484e94df98997f409fcaf99bb09d2f3d8d7c932102665c5"
+    },
+    {
+      "trial": "151-lower_bounds-c-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d98d66d128ffc387e7104c5bb9028aceac74d3b5057f9318d74e366a62b838db"
+    },
+    {
+      "trial": "152-csv_fields-go-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0f6c31ac7c3f4173d3514f3781b2dc73e069ecabf8d86005b9332b09b0ae0611"
+    },
+    {
+      "trial": "153-csv_fields-c-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9647f321cd3200085a6668212219560892ddfa14a8b4bb592e1c654a569a1bc2"
+    },
+    {
+      "trial": "154-transaction_ledger-c-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "42e014a691b68b6780c6abbabc771d79467da287c5d79721bcd4d0be7732e3f1"
+    },
+    {
+      "trial": "155-transaction_ledger-go-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "30d4ec393537f7a97a3dc660693624584c945a2a643f7e089427127cf3667347"
+    },
+    {
+      "trial": "156-grid_distance-go-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ec3f9e3cb004fbdc1fbec9ab89b675770c17a892385e0727c2eafdfb73a3b02a"
+    },
+    {
+      "trial": "157-grid_distance-c-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "01c9f5e4b3d0fb76414e6108495711c1a5b79dc1adcfbac4caa636adef03d101"
+    },
+    {
+      "trial": "158-rational_sum-c-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0410629782df1e80cba6cd3ee5467c1fffbffec39cc431da94f520140f4619fa"
+    },
+    {
+      "trial": "159-rational_sum-go-r7",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e96501e412d02ec2d83310288816ffe723446b2b48e00d030ae5b4d69ea77839"
+    },
+    {
+      "trial": "160-transaction_ledger-go-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "35ca3269c87b1870cbb927746536e79893a7d4b135a69232f4f9215b7af84c0c"
+    },
+    {
+      "trial": "161-transaction_ledger-c-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6ac73282bd04a49bf854d93bd769db2c0971dd2993e917c68b0d6d374b7a310b"
+    },
+    {
+      "trial": "162-dependency_order-c-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e199a231a986c419c03bf28af868f6f4b37a5b33fe5d5709552ce092e534ab2f"
+    },
+    {
+      "trial": "163-dependency_order-go-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9af4c389866c2cfa3145f90caa7da6f0962c4ba275d4e35e182594f8b6222f82"
+    },
+    {
+      "trial": "164-rational_sum-go-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8d56741e1cdd94acd6c21202a72192adf0fb6c7c686104141b45015bead11bc5"
+    },
+    {
+      "trial": "165-rational_sum-c-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2d467e006338b917447f26fba2eedbd27794ef7a9068c9f7f12781fa12540033"
+    },
+    {
+      "trial": "166-merge_intervals-go-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "33038cd97358cf1c8e48819fcaf1b2df36317d9b96db803e974d1799c23205f3"
+    },
+    {
+      "trial": "167-merge_intervals-c-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "400b1f7f5c216c88b0e9ae52f9df56f54469a71e5d83c25e26593fe8f0675ed0"
+    },
+    {
+      "trial": "168-rpn-go-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d0f37aef359f6ddc54979c65f27cca2055bf6ca773fa47eeb7c54cc300724e06"
+    },
+    {
+      "trial": "169-rpn-c-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "de147d119426a7b63af26db8cbcc755dc34bedf8dbc3b6d7300c2666a109d318"
+    },
+    {
+      "trial": "170-csv_fields-c-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1a4d2f33566cf5c71cf30a219c379ef470f867898a86a1f2a1a5536cabaa6145"
+    },
+    {
+      "trial": "171-csv_fields-go-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "63c7d531507322a77a34e5e5d146d93a8361e7831132e9446680472a0573acd2"
+    },
+    {
+      "trial": "172-lower_bounds-c-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1e416c0560fa0c7aaa9911a3ed6ecf7d87c2dd5ce311b7944cbd338253edfe8a"
+    },
+    {
+      "trial": "173-lower_bounds-go-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f2887f35c89be40cfa68ea720d8285ddafd56c7920c5eceacf41bef0b54157e1"
+    },
+    {
+      "trial": "174-word_counts-go-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b56cef835af9d943b01a3c9a4a21caf4d4f0c46049566a380eeec961bb001a2a"
+    },
+    {
+      "trial": "175-word_counts-c-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "732881fea37e23493e70642356cb0616103a8fd602ab1b35cbf3d5cc7827eaaa"
+    },
+    {
+      "trial": "176-grid_distance-c-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "bfc598ec0f8cdf7941baa07fd287de7b00edf7c3b052ab6a80d9e33f61c42b72"
+    },
+    {
+      "trial": "177-grid_distance-go-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f9b41e207e37e6520f6131a350d5fdb293beaa9ea2247b191a7a440f254ebfda"
+    },
+    {
+      "trial": "178-edit_distance-c-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0d696663dfd64c55da5a498f31644587b4f2aa8247c33d40f3e12d7cbd604e2a"
+    },
+    {
+      "trial": "179-edit_distance-go-r8",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": true,
+      "event_log_sha256": "e6ebfcdb8f554f5a73d54d3a58f2e10c18fe6894b97511df767d9c2a3931005f"
+    },
+    {
+      "trial": "180-merge_intervals-c-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9adb9fa697a18f8b7920f21c49bbe9db891e2268148a2445ba5a10b20b392adc"
+    },
+    {
+      "trial": "181-merge_intervals-go-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b693ba1cee2ad04438b6893e6d1cc5a4cd7bd7073305b01160eb47477d0b7f00"
+    },
+    {
+      "trial": "182-rational_sum-c-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c7279a5ccbf440d0e6ffde0ca6abb31b708c16e9552f865fe1c468f6cd050f1e"
+    },
+    {
+      "trial": "183-rational_sum-go-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7e5b8307b29ba35bfe9a41eb689ea9cb2cdabdacad361e7ed3a623d224ba8c2d"
+    },
+    {
+      "trial": "184-transaction_ledger-c-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4f80bcbc61ce45b64c6b1233e4a638882bb757498da4dc5508f8399bf655b7e2"
+    },
+    {
+      "trial": "185-transaction_ledger-go-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "da9cf5dee99c65e95b8045b29911902be166bf3ce04cfa7acab5facb7f16b5c4"
+    },
+    {
+      "trial": "186-grid_distance-go-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9f6bd3493833b0efa1b2ea0b439fffdd455bb7e1aba3334665c1f6d01b8a9399"
+    },
+    {
+      "trial": "187-grid_distance-c-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6ad560fb23188759e7c3148116c83d33b6c9b636a67f667ab5ee35bc95869661"
+    },
+    {
+      "trial": "188-csv_fields-go-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "301bfd12f156e1950e491d9c6b9f488610410dbcf9ea9e349918fa6070f0c75c"
+    },
+    {
+      "trial": "189-csv_fields-c-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f6a764029cbbf1ae853e1ed1ea4c667c4dd3f54ca1e40cd92ca5ad6d4be292ab"
+    },
+    {
+      "trial": "190-lower_bounds-go-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a5db2b9864b67d3841391b131ac1ba0d838276217ce086a597c1ba4a1f0b85d1"
+    },
+    {
+      "trial": "191-lower_bounds-c-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d67986ddc6716a166ac5eca55e7897f2c3bbb2c22359441fbb4d8dafdc388a4a"
+    },
+    {
+      "trial": "192-edit_distance-go-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "3ec6be82cc92e7f56aa63dd1649b9fa669017faf5b3ab0160763f1dddc3a6082"
+    },
+    {
+      "trial": "193-edit_distance-c-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "20d1ccb82ea0c97f598f67236ced950d596e43bfab85781d9040dc922db138cb"
+    },
+    {
+      "trial": "194-dependency_order-go-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "93006cbc008f3a7fb801bd0ebd2a09697c248106d933f93beafa54910f2a8133"
+    },
+    {
+      "trial": "195-dependency_order-c-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ec82d5dd5117740ccb5b96212129348ccc4d9fbbeb20270d56072b56fe8d3df7"
+    },
+    {
+      "trial": "196-word_counts-c-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ba28e8b656378cf5c968cda3f17293d6144ef2c615d8db7bcf22280168e43658"
+    },
+    {
+      "trial": "197-word_counts-go-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ccbc6bba49088453427e577a685bcdf8b949ad209c0a103b2fa2666a5f3a19bb"
+    },
+    {
+      "trial": "198-rpn-c-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b5f74271d5ea643ae60ca1a60113dfc04fd1c101714fd39a555d2f1d2257804e"
+    },
+    {
+      "trial": "199-rpn-go-r9",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "918bfe1bbef902459194153770f45d28de576f130d72cc9e5af3195d87cb5677"
+    },
+    {
+      "trial": "200-rational_sum-go-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b1ff97d7952a217acbcfe5be57b669f20946e85cf9a36bb25f0aceca5e724411"
+    },
+    {
+      "trial": "201-rational_sum-c-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "29f580e4b6567f323c754c6e43bdf224cc983bb521657c3e4af2fe0942624cd1"
+    },
+    {
+      "trial": "202-word_counts-go-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6734da9266a57b2eb95b3ecd7c0d708c425ee9d13b65126995df2c3093d3542c"
+    },
+    {
+      "trial": "203-word_counts-c-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "42cb04dadeeb479d430b0c3f9da826622fdf85d0557321b991dcc1fd2c0775fa"
+    },
+    {
+      "trial": "204-transaction_ledger-go-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "93f28cde215a0e448097f95b8da7f24fdc5989bd9c05d16213527978f8007ef6"
+    },
+    {
+      "trial": "205-transaction_ledger-c-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ef200ca502ba01a6154b9a16f51705ab446c23a8cdbecf05837ed89ee48420e7"
+    },
+    {
+      "trial": "206-csv_fields-c-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ac941b095bee069e158ddb651990828b835c75bd5519a1bff381e3f334849a79"
+    },
+    {
+      "trial": "207-csv_fields-go-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "3a0a450758ee87c4a3e926c2c27ac81559fc92d3dec46f951ac07f07364bb5e8"
+    },
+    {
+      "trial": "208-rpn-go-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e4d4f71d5c490ff085221070d2e3bdca30dec87863027a3809770568fb422a7b"
+    },
+    {
+      "trial": "209-rpn-c-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a3ea3d30e585c9af8a47ebdf7ed60dd08d567bb156d8448bdedf2703bd7b45d6"
+    },
+    {
+      "trial": "210-edit_distance-c-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4d80d36179fc9afeb7f75d5dafe755a83e0f96821bcf0d6cc08089cc45fdaeed"
+    },
+    {
+      "trial": "211-edit_distance-go-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b073592d96005f63103cacb9f99320f1921e8065ccf3057a84ee5c203b9e2897"
+    },
+    {
+      "trial": "212-lower_bounds-c-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6d5783802e6d9efdd1b697d7cef0fe2a35c297ba88e102c8efb32414454794eb"
+    },
+    {
+      "trial": "213-lower_bounds-go-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "070379edc64ad2cefd759b0f0810465a6b457c5eb07087706a2d1ad2da24948a"
+    },
+    {
+      "trial": "214-dependency_order-c-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1324e1c6805a2816a6f7f95a564c9e48fcaf523f98a82f8b16ad8dfe76759dd4"
+    },
+    {
+      "trial": "215-dependency_order-go-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ee5b23dbbdfa7686327026feb51c143bf6ea2810e8afb98114b0cb6580005b28"
+    },
+    {
+      "trial": "216-grid_distance-c-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "20c047b2fe8ee699947c18c54d500dc3fdcd63b043de69ed0df322b53ca85bc0"
+    },
+    {
+      "trial": "217-grid_distance-go-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a9762ae058ff5ea8b3be8d1148c6c17091b0903bb23cf852172c660d38e6c7cf"
+    },
+    {
+      "trial": "218-merge_intervals-go-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "73bd1ca862f9b88b2046ee24bb7233a3fb12805a82caf1a1577b24c9f18ddf18"
+    },
+    {
+      "trial": "219-merge_intervals-c-r10",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "df3a0daf7e0bc085a96296727279c4f20b6aed62d6b9dc7d8279c4644fb1cb16"
+    },
+    {
+      "trial": "220-lower_bounds-go-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "14949c241338c7a1fc6693026d5970689323641044a22cd3e4912684d61cee49"
+    },
+    {
+      "trial": "221-lower_bounds-c-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "496d538044c7698abb40cd1de6c3c85f62c3e281072251c5fcdd0b93bfa9a97d"
+    },
+    {
+      "trial": "222-merge_intervals-c-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7c31d2cbe9a9f2b98679a1f470a65f0d2929966d7b0700c775c468ee49c70985"
+    },
+    {
+      "trial": "223-merge_intervals-go-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "555660fc788e3f95f7df6419bab28d1a634201f1fd0dd0404c75c1db863d4873"
+    },
+    {
+      "trial": "224-rational_sum-c-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7bb7c5d283090190d9499206acefac6ce84f257f3e4a9c941af78fbb79e5da4f"
+    },
+    {
+      "trial": "225-rational_sum-go-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ff559e0134d213d5556521a90af8c45d9990f0f8dbb45356ff5e9f88f515abfc"
+    },
+    {
+      "trial": "226-transaction_ledger-c-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6d22336590cb97e4f4ee36601ece8c278b0fcf011f9dc45e1fce479645250806"
+    },
+    {
+      "trial": "227-transaction_ledger-go-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "cdb747db6534efbc33d4da2f97c6bfc39350362946e189b7dd947c47321d4388"
+    },
+    {
+      "trial": "228-edit_distance-go-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "60726de46f72fb30143ea6d7e849ab7e9c105a9f812935c76c4beff0d2388094"
+    },
+    {
+      "trial": "229-edit_distance-c-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a5820eec07b18ccc35be1a908bf75e8c8aa61b6d03fd6e00a176d09631baca36"
+    },
+    {
+      "trial": "230-rpn-c-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "5bb5b6debf1c30cfe2c5a42dd5755919713f59e162c527e72ea8527fe255a955"
+    },
+    {
+      "trial": "231-rpn-go-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "37132c5f0309ce72a2e44dff78fd408e3aa99846101e9e1544e43d12fd7b3717"
+    },
+    {
+      "trial": "232-word_counts-c-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "65c2f98d104ae263e438c1e9f7a61a971f55f569b20b1eb7ae9d716c729815d1"
+    },
+    {
+      "trial": "233-word_counts-go-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "473c1f56c745252d6e837204a305fb05185f7564cf675bbb3a5730f60747ff84"
+    },
+    {
+      "trial": "234-csv_fields-go-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a5e86fa77643854645147fdd15bd6d55dd89f1cf61b02038bd9bcd692296c7b1"
+    },
+    {
+      "trial": "235-csv_fields-c-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9bcfbbce05073285b362fea784b30b83fd35535320b825e1341f1f9507dbd5c2"
+    },
+    {
+      "trial": "236-dependency_order-go-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e796bf6bc1f66acce7080e7589264522a4a19a626566ecdeedf39c6a34eeee15"
+    },
+    {
+      "trial": "237-dependency_order-c-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "bfcc2a50ff50bba64c5e409debf12f5cf53fac7eacade95e0b44897aaa71360e"
+    },
+    {
+      "trial": "238-grid_distance-go-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "80b001ce86cd6e35269dc0c050d8bd3bfa51611fbbf2cbb8161ffeeb00746b6d"
+    },
+    {
+      "trial": "239-grid_distance-c-r11",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1f062de6208c7ea444f619afdf47413ccdc6f81af13463cb912deeb649666ad2"
+    },
+    {
+      "trial": "240-grid_distance-c-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d7358693a5eb3322bb6aad358f945e61ae09b0bd61bc8e6885dec80f0ef3827e"
+    },
+    {
+      "trial": "241-grid_distance-go-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6f537537f1f54c3281474f372aad3cf6631a34d2a266ef607b88acbe4e18355f"
+    },
+    {
+      "trial": "242-merge_intervals-go-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1544e270999e6810611ea402c74422d57a387415b5da7339d3ab64aaab98b25b"
+    },
+    {
+      "trial": "243-merge_intervals-c-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d4823158ede26be794c87cff81609af48d4e31ce308eaec16556e0e692723957"
+    },
+    {
+      "trial": "244-transaction_ledger-go-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "24fc19dfd07a4d89abcef5c2387da6920253ceee6ea19b9e933aa3ffad9b0cb0"
+    },
+    {
+      "trial": "245-transaction_ledger-c-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "51ab536ee7ab494cb54adfe8dde1f53db5a08bbc14d82d1184724ec34952649b"
+    },
+    {
+      "trial": "246-csv_fields-c-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "80a9fea90b5d3a4582afd3a8977cb88eb688699477a7c6921b9affae8a21105f"
+    },
+    {
+      "trial": "247-csv_fields-go-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f54e835cea48a9c816f0bbe20cabe9196d9b20807f28909d37b9480b1ee28ed2"
+    },
+    {
+      "trial": "248-edit_distance-c-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1b42b2637af0b997234d8d64d27686e5500cdf07a38f1687f809a2ba16a3df74"
+    },
+    {
+      "trial": "249-edit_distance-go-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8518b67a7f6e7c278cb87939a21e4519f553e3f5abdd8058d5b21b9323bebbaa"
+    },
+    {
+      "trial": "250-rational_sum-go-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f2aed3fa65c8f036fe5089da422b9b9869a43ecddd49b933964b3fbc208b2ba5"
+    },
+    {
+      "trial": "251-rational_sum-c-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d3b193b37e5be84f1f858f95c5eac7d627b18ee443226eb44b976b65c80958f2"
+    },
+    {
+      "trial": "252-word_counts-go-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "32ede99191c9cf73aa773b1b37a6415df5f753a0f3d49ace878570609e64fb10"
+    },
+    {
+      "trial": "253-word_counts-c-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "fad236345609b9580fb71d69ee51877eb98560dd3a49b5a725c2cbaf19e7b6dc"
+    },
+    {
+      "trial": "254-dependency_order-c-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2d0a70a7e5b6ce2e13e13f3549d6a9721684e1c5d6acbe70b7f541564338884c"
+    },
+    {
+      "trial": "255-dependency_order-go-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "74d0d38f374bb837e27d567b1bf63879ab0cc17d74041f1fb7f212a11682b8d8"
+    },
+    {
+      "trial": "256-rpn-go-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9c41ff44afe5cf6191c088996d64c8851cb09b20b14a3d0cdcc2724df3dcb420"
+    },
+    {
+      "trial": "257-rpn-c-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2b7ab01091c6cea29457fa040ef924e23dfb6e44ecb31ff4c490d4b1ab8c0aa4"
+    },
+    {
+      "trial": "258-lower_bounds-c-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2f8f684d30fde1d19f32ab3036aac4d991217a29fd4417e665d0bb73f1e97adf"
+    },
+    {
+      "trial": "259-lower_bounds-go-r12",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6433dc43262235e21f5e73451628caa858184b1958c8e5275151ec81980d7300"
+    },
+    {
+      "trial": "260-grid_distance-go-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "232a16dc6da91f82068399d1659d5559f502fbed1d95261757ed4d5ac1265a5e"
+    },
+    {
+      "trial": "261-grid_distance-c-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "64a1a08660b0149d02052720fb936b9a3353ee928d11eba9006efef04b0012a7"
+    },
+    {
+      "trial": "262-merge_intervals-c-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0702bf0263e0805bfec4bfb307d32116d6d571acd2e37026906a338bff964935"
+    },
+    {
+      "trial": "263-merge_intervals-go-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "af6a715d5a35d9f06a08110cd40d06d813c9b308dbc978174629add372b55ccf"
+    },
+    {
+      "trial": "264-edit_distance-go-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e87147128b8f80fd1a4266582dc854f344ee15de1dfa7c64b2754f24187cd927"
+    },
+    {
+      "trial": "265-edit_distance-c-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f214182f6cfff25ddadd46d4f6b9dc1983c953218b3dc061eb7ca5aba1e59174"
+    },
+    {
+      "trial": "266-csv_fields-go-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "bbe6b69a7eaeba8dfa8a2a4d98429a18c98cde98fd8dc0f82612e1212f4c0de8"
+    },
+    {
+      "trial": "267-csv_fields-c-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1656926cecf1adb6bedd3eecbe4de850866281a08ec4df352b74118a42baa807"
+    },
+    {
+      "trial": "268-rational_sum-c-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a2580dc6f6e186c2a2f2cf2104e377ab6fb27dde5f3a4aea091b647b35e20c76"
+    },
+    {
+      "trial": "269-rational_sum-go-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "acd6a4d8cda137518793c9a26373bb4cf7fce613b1b56fd595c210a99b43f163"
+    },
+    {
+      "trial": "270-dependency_order-go-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "09bca88e0182a2c20ceb7bd2efbdee722f855446f0c412becfb33d5f90e4601d"
+    },
+    {
+      "trial": "271-dependency_order-c-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "726e6beaea5154af35bb60c80f0142b645da81ab5bbaf752ce497921ae5872d3"
+    },
+    {
+      "trial": "272-lower_bounds-go-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7793039ee3c2fa72384f06374132d07ccacb8de1716d6f4702ac5010c4c38a01"
+    },
+    {
+      "trial": "273-lower_bounds-c-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8e30ecd9db70232c473b0c70b0d75cbf84e65ca0f80478b8af2e477ba087b6ec"
+    },
+    {
+      "trial": "274-transaction_ledger-c-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "22955275a13d687f8893d0eab7f35128823d39e4f205d2f4ea5d1e752e1d347f"
+    },
+    {
+      "trial": "275-transaction_ledger-go-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b396d0f0e5ea371ed09019b62cc3f7e7dc110355811f90ed66a61c800cdfdfa5"
+    },
+    {
+      "trial": "276-rpn-c-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "49b2d21274b7dd281597c2333790deb419467168b6e2dda2eafcb45123fb7c9d"
+    },
+    {
+      "trial": "277-rpn-go-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "3ea56cb95c46df0b9f3bb28c485488692a7aa7409ce363a65c4180ec027df03d"
+    },
+    {
+      "trial": "278-word_counts-c-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e27ae769cf3bf0617ef448811b6248482a03794b45375bccb8e84f1dfdae4aca"
+    },
+    {
+      "trial": "279-word_counts-go-r13",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "335f0c45d81b1d29f75e5dfada15f74bd31b2907594b9444cc443e580eff11f7"
+    },
+    {
+      "trial": "280-csv_fields-c-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7db1e86a541f6f76f75d3f1ab950029aff664dc912e6038ee96a95be31d4ef02"
+    },
+    {
+      "trial": "281-csv_fields-go-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": true,
+      "event_log_sha256": "9801bcbed8a5c25992d597c9732b53474d5a2759a1de16e1ebb5878632ab8c65"
+    },
+    {
+      "trial": "282-lower_bounds-c-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "551711191064851eb64c2fe90bd742300e546d4fb26db006babe206755837c0e"
+    },
+    {
+      "trial": "283-lower_bounds-go-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f2333cbedb611e13eec932e7be3a6ce8e679e57b8ea2992f4a37632aade665b9"
+    },
+    {
+      "trial": "284-dependency_order-c-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "69ee60dd95ccfebf3ba4346ff9d20e1a10298cdc4605d093d3ac61615c36d5e7"
+    },
+    {
+      "trial": "285-dependency_order-go-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4a206e9b4ef5e53f373d80b468d48d04bd836fb4211b881b95a13a322579e82f"
+    },
+    {
+      "trial": "286-rpn-go-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c0c74d046f35fb6ae4016ef81edd019589e0a7ba241a537acd4413e4af8f5ba5"
+    },
+    {
+      "trial": "287-rpn-c-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "907fb79171472f77ae5c03496af2fca0402c63893f8e32760ca96722b10ca3ad"
+    },
+    {
+      "trial": "288-rational_sum-go-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6e4b864364880ea46fc87238d8ecf39227b6785b746657334100b5c529b02b57"
+    },
+    {
+      "trial": "289-rational_sum-c-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "34a5e073902ecbb9ada8927373f8afb49e07a418d1fd82c9a865419a9ef6f4fa"
+    },
+    {
+      "trial": "290-grid_distance-c-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "14a7d63dfedc6ac11624eccea936a603797cf3e3fa5ff3cc22e01a7766e28763"
+    },
+    {
+      "trial": "291-grid_distance-go-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "23c2db9d59ebffa54d9f1f9bc9f306e4d4b8ce86d23318ab83293a4fdf7b5f08"
+    },
+    {
+      "trial": "292-edit_distance-c-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "beba9a461d7b57bf9c9769b35baae3edafa851b142068249d9cd9f8cd17cf12c"
+    },
+    {
+      "trial": "293-edit_distance-go-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "229e88888f894a5569f1615602c05f2f438757ebdbc38fcda9116da5609dfdcb"
+    },
+    {
+      "trial": "294-word_counts-go-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d77d992e70e5583f55d847d486349314a48b69ce53de78afcfb3f25a9c1b10ce"
+    },
+    {
+      "trial": "295-word_counts-c-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f1f8475c5cd3eed8bc3d2193d1a7f4da0313e24e870ed988c038eec214e1e6af"
+    },
+    {
+      "trial": "296-merge_intervals-go-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8cb334251da3c879378dd53a9610683a40df946923089de51177e1aadc248a4e"
+    },
+    {
+      "trial": "297-merge_intervals-c-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4bb22efaf2374499421edce18dc6672820aa70a7a83ccadb7c60b154fbc53231"
+    },
+    {
+      "trial": "298-transaction_ledger-go-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "de842c3676b491ff71a55fcc980a8a9b3e620c780da7fe6bf3e73b8127bb4fcb"
+    },
+    {
+      "trial": "299-transaction_ledger-c-r14",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "948d03a8696fa00783e3edbe6d5555d8c4d305d76cc4d2900464b391971cbcca"
+    },
+    {
+      "trial": "300-word_counts-c-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6d935599005414317d72fac5c5edc76f4f991ded1b42a5f4a6b2c33276dffbaa"
+    },
+    {
+      "trial": "301-word_counts-go-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2fdc6c081df9238e20fa68340747fe640a967beaa97c0aa6417c49d25da742a1"
+    },
+    {
+      "trial": "302-rational_sum-c-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "87906d564d07749e909d65912426572a007aca0a06bab7f7db5296f16b693c00"
+    },
+    {
+      "trial": "303-rational_sum-go-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "92efd69e76459509b0a4a7d0957156f7ad93992a7cffc7663a2115dc0b939ea8"
+    },
+    {
+      "trial": "304-merge_intervals-c-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4154e92f9bb227c0fcfdc4533f02063b8c9b2d90bb088060fa1fb9dd8355b8aa"
+    },
+    {
+      "trial": "305-merge_intervals-go-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b8750fa988d38221b966c4c0fbb561f9bb4e15381178de81e51c6fc8ce23aca6"
+    },
+    {
+      "trial": "306-csv_fields-go-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": true,
+      "event_log_sha256": "9cccfe5eff8ef9d5c1ea68e4f0967039050a80973930bda1f51b1ea72468398b"
+    },
+    {
+      "trial": "307-csv_fields-c-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a3c0bd2ad44f1157ca9b317ae57ec3f8dd4cf1944047ccb1ba59c7765e1d9706"
+    },
+    {
+      "trial": "308-transaction_ledger-c-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ee6f53eaa08b61c7102bd440e903b3e24eb2fb47788a789c09ff58c361314ade"
+    },
+    {
+      "trial": "309-transaction_ledger-go-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ba6b9bf31925a14c566073c5242eab3e9ad295b0adc938f3ebcc45b5651620ae"
+    },
+    {
+      "trial": "310-lower_bounds-go-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "04e392cf6188a46b4ec7fd0291ec2724a371bd46a72a2923f0cb8d1edc39e18d"
+    },
+    {
+      "trial": "311-lower_bounds-c-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "86b7996ff39060440cc8ec1be0db9f040f8973e58fd3deb238f363e312bdbb93"
+    },
+    {
+      "trial": "312-dependency_order-go-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8d42b25c9f9d4d77d5ec8d94274ebc75ad774e8c68bf3f345652dfbab1365829"
+    },
+    {
+      "trial": "313-dependency_order-c-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7cb0e7e8a9c33e9aff3959c1483ab071e026e04980edeac2a09f68404fef7f79"
+    },
+    {
+      "trial": "314-rpn-c-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ac932e711893745cf9b67fa9b96e8613ba2b4ece44ef30da2f37e4f517103801"
+    },
+    {
+      "trial": "315-rpn-go-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7ece0f3f52b504365d31cea6905e19c97a25ba25a534192f1b00699d43563de1"
+    },
+    {
+      "trial": "316-edit_distance-go-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d5d8a049f6cfa79e56cce160400dee50cac7f1e150d505f870843fcc1ff7654f"
+    },
+    {
+      "trial": "317-edit_distance-c-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e2f5322d778cc7698a0defc276ceb9c8a7b4857c37d84d0e862fa15bf5a5d8f3"
+    },
+    {
+      "trial": "318-grid_distance-go-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1e4cd35ea44f7c1202fa4b7217d09e8a2770c1070840459841d1d608f8529048"
+    },
+    {
+      "trial": "319-grid_distance-c-r15",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ded31c6923f996fbc17b910720d31f15b973518b521aaa330bd30505499f8cd4"
+    },
+    {
+      "trial": "320-word_counts-go-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ee00c1efd4f950ad86a7703a3de4e4a4060f6205a11fb61f663c4caf3de0a159"
+    },
+    {
+      "trial": "321-word_counts-c-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "50890808c9391db00aecff7db67853465c4c5cf376957e62f91b19b9e9995bed"
+    },
+    {
+      "trial": "322-grid_distance-c-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f1219d0fe026f86703deb977afe246b0c0fb9947c84c9a6632ef0030a844ac56"
+    },
+    {
+      "trial": "323-grid_distance-go-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "000e9a6415d722b5d2358e320ff56e56751a31257d02ab9410647b9b0bf4aeb1"
+    },
+    {
+      "trial": "324-dependency_order-c-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "90341a1252162a0ccb6ef02e8ec37d3d4c01961199da20c9b5c84bdbdcf4415b"
+    },
+    {
+      "trial": "325-dependency_order-go-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b50c389615ab243052dc2231a6c4d4fb32725d81920a2556ad756c20c2786bf5"
+    },
+    {
+      "trial": "326-edit_distance-c-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "cd619754dd274f755bc341d7221241644be6333e7d8a6a4d07fa09be1201591b"
+    },
+    {
+      "trial": "327-edit_distance-go-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f731291b597df8da358b57e9334b3a58d8771fb58b0b0335900d104c3de9d468"
+    },
+    {
+      "trial": "328-rational_sum-go-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "6a2efe4032707fb116c717675a7df75a739bbaaa7ba1e9d42a5a95281f192356"
+    },
+    {
+      "trial": "329-rational_sum-c-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b7c325c6d9d4e10d44c02ed80f37715ec5718558593bd0b102842dc35c30a29f"
+    },
+    {
+      "trial": "330-lower_bounds-c-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "5587af5d29c52e30f30f08903dbb2fe77842ff0b8dcce0d4feaba84fb2b7b7b0"
+    },
+    {
+      "trial": "331-lower_bounds-go-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "65b35e9e5e7816a63a1e8401c161e1fd059f81350a83b523ea84b1c6cb6a748c"
+    },
+    {
+      "trial": "332-rpn-go-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "23ee8bcb6489106c9bdae7ba6ce0c6f3101bef30d9bf2bad190c9d472aa79abd"
+    },
+    {
+      "trial": "333-rpn-c-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "b6609b29bdee222c6b8d3f67c62129093e79d325dc17ea96d0f4b868df4bcc5d"
+    },
+    {
+      "trial": "334-csv_fields-c-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "94046bf07164aedb5165f33a505e9d79ca5b8b0227d8e4ed06c920eba85c1c23"
+    },
+    {
+      "trial": "335-csv_fields-go-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7ddcef21a6e2cefd075f71f80fa21f1ae6f1f9470495af27589fa50ed84a583a"
+    },
+    {
+      "trial": "336-merge_intervals-go-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7e80e5363b3d8bf72c3a563748dbaee2a2e4298396aff889ded59f05f8486f32"
+    },
+    {
+      "trial": "337-merge_intervals-c-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "11a9e5d0fad36216e4e658572d7f3d9490352144b3f7e1455362b2d8d8bc9f9f"
+    },
+    {
+      "trial": "338-transaction_ledger-go-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "96c96a17b6d2fbeb7c3d966a1798f8ec710f06f0a21aa31eeaa00045e8770d41"
+    },
+    {
+      "trial": "339-transaction_ledger-c-r16",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d8b077bc569284492eca81d5935499c907441f152df43245b9b92e9303c8439e"
+    },
+    {
+      "trial": "340-word_counts-c-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "07dfa55bea3d1406e9e9f486a8195fa5e5afbb385dbcb63dd3c8bde91550415d"
+    },
+    {
+      "trial": "341-word_counts-go-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4782756640c6d3f1cae14f0cad3ea81f73f844b240620982b2bbf9cc74e669bf"
+    },
+    {
+      "trial": "342-transaction_ledger-c-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "759dc61438860cdda8955186059462b9f788e406ab36a419ae89f89f392b32c4"
+    },
+    {
+      "trial": "343-transaction_ledger-go-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "109b60a9605352c9eea01cbf7ee9c398d975fcad822b9c72f75c66b6c8e69b23"
+    },
+    {
+      "trial": "344-edit_distance-go-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9b038ca8ca3885a96f6e27e511aeed866cf3b37de79067ebf355b207bafe9017"
+    },
+    {
+      "trial": "345-edit_distance-c-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8d1b15bf351339c52cd63ae29912326bcf06dc8851049a14abc7793692715393"
+    },
+    {
+      "trial": "346-rational_sum-c-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c529a814d341acf17dc7c80520e54e98c92dff1fb126b36d9e5a2ebd941b0b20"
+    },
+    {
+      "trial": "347-rational_sum-go-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "826af4edb8ae2862263c671e34cf3604f690cd077532425025397a98401c18dd"
+    },
+    {
+      "trial": "348-csv_fields-go-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "42c78ec9bd55e21e63f2fe156e74bab7568825aae8f405ea3e577d83c1b3cbb7"
+    },
+    {
+      "trial": "349-csv_fields-c-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "d81df6afb1388505c28ac14583d992602fa038335ddea7190c1c786c8b0109c3"
+    },
+    {
+      "trial": "350-grid_distance-go-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "010646251bf496bc2efdbc73fa197a0ae41aed5b38f096eba10a46aa4fb51185"
+    },
+    {
+      "trial": "351-grid_distance-c-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1768956ec67e83d35f76f8dc83fb2a434d0437f8ca3915955b64e231d8d9383e"
+    },
+    {
+      "trial": "352-dependency_order-go-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "80bdfe50b637c71bb047d17b7669ddf7314c4eded1253ba221be5919d6502f9e"
+    },
+    {
+      "trial": "353-dependency_order-c-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "621153304cd19efb98bec6d36a0ca9925597c8ba7d369bd79c99cf5680ab7fe4"
+    },
+    {
+      "trial": "354-rpn-c-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "371f47dae9d7d86d41ba237fa3703ffae8b3c404174dfd41e0d6d047c8f6043f"
+    },
+    {
+      "trial": "355-rpn-go-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8865940a8db55d54486f6428f6db65c18b48cba4fb16f804654fd28b92f18fb9"
+    },
+    {
+      "trial": "356-lower_bounds-go-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "9758254a45358368f19c6813d064b028a98bc66cecd0e7e48372ee9aa30a50d5"
+    },
+    {
+      "trial": "357-lower_bounds-c-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "edce60fe469ef9537ec63490ca21026b60d01ccad990a16cbb4f32fe7652ed1e"
+    },
+    {
+      "trial": "358-merge_intervals-c-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a243fcecbc6917fec5bd0242e1ccdfa6f483de300ea1236f09f9fe7e0a40a695"
+    },
+    {
+      "trial": "359-merge_intervals-go-r17",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "214adf61d9fc756ef305c10d8a31f54ee0d1894d4d141146120bb968c03fc036"
+    },
+    {
+      "trial": "360-transaction_ledger-go-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2c979473fb191cba72a80149b13d09bce74c40f0003578317fef42a0007d972c"
+    },
+    {
+      "trial": "361-transaction_ledger-c-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "47e45a8bec63e7a2ee433eecdf94890312ec1c0ffa08162740ebdcfaaad5ef00"
+    },
+    {
+      "trial": "362-word_counts-go-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "34ca1a45d46e1cd1a6225d85d2f89645d80c8a906272eb67f052dc35d791424f"
+    },
+    {
+      "trial": "363-word_counts-c-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a8c906ef86e4ab66ce5a70b9e0c8ea76abf80e06dcf5f5e7ec631d38250b54fa"
+    },
+    {
+      "trial": "364-lower_bounds-c-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "cfc8c5a2248e22af086596286980492a58e8347b61eb145f457775be73022e8f"
+    },
+    {
+      "trial": "365-lower_bounds-go-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "cccf7e56a2f82896e81279d6c11d4dc48b3e15ad2b551eef47e781bc481cc8ac"
+    },
+    {
+      "trial": "366-merge_intervals-go-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "bfc73bda972f98e184b2fc3c1fd29540353a46691d637a62baff588906ce3191"
+    },
+    {
+      "trial": "367-merge_intervals-c-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "131b35872d8482b38ba715daefb6c56a06a54152183c6e3af7c18fd7a1c637e2"
+    },
+    {
+      "trial": "368-dependency_order-c-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0262f1d999f261f56c615a5af0cbbadb993d24d2183dae5764d7cc03594c8774"
+    },
+    {
+      "trial": "369-dependency_order-go-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "1838f8d31391a31b2c55cb8d33e15c2e5c5b2f03e8738e131ac9a3bbd2d412a9"
+    },
+    {
+      "trial": "370-csv_fields-c-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0c5eed47eef20fb9684c99cc7c41313b5fa0e6f8a305e4e6980e815a8ce10038"
+    },
+    {
+      "trial": "371-csv_fields-go-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "69bde2f29c03ae61fbcbd8332c452a1547715598f4e36beff1b6cc4dfb48d699"
+    },
+    {
+      "trial": "372-rpn-go-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "37e41814647d9b1db7731c0246a9763ffe1a89d0ab3e73c77a7f43cc5e478178"
+    },
+    {
+      "trial": "373-rpn-c-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8bb528fb1fb80203922eb8c9d13731e9da5c180ceedc49a21529417cb99eff31"
+    },
+    {
+      "trial": "374-grid_distance-c-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "16f1cb5c151c6bb34c516b7b332e1a776a48aeb4a795a8d0822a16a265236cf5"
+    },
+    {
+      "trial": "375-grid_distance-go-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "58456ae812baaedabfbe1973d0e5990e64a113ddff39749899ab556c49e8cf55"
+    },
+    {
+      "trial": "376-rational_sum-go-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f08b7c1668f551829838dd52e6a7747804fd499e5a05325249b43b02a547008a"
+    },
+    {
+      "trial": "377-rational_sum-c-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "c33c093e4a034a16e9c5e8ef80d19384395debedc621efcb33d1b438a089bdbb"
+    },
+    {
+      "trial": "378-edit_distance-c-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "818a9236aa025fcd2e382850a225564d9ad3a66d03e8b21f4ae2b5f9d5ecf116"
+    },
+    {
+      "trial": "379-edit_distance-go-r18",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "a18897222e42267455334d1b109147bdfc299f67e3842888ef23f7c0e87778e4"
+    },
+    {
+      "trial": "380-csv_fields-go-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "53eeee5e16294df52933715cefd42303975c4c92bff46aa1713eb4b800c43bf0"
+    },
+    {
+      "trial": "381-csv_fields-c-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2083f8a8570f6b69e9c50a7ae0604fdb3b034e4fcef7dda6fe3397c56b596d7b"
+    },
+    {
+      "trial": "382-word_counts-c-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "e8c393f5383159aa27233d0a53fa7568f84ed1d19c1aca71a7bb1630ca9afa85"
+    },
+    {
+      "trial": "383-word_counts-go-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "4273a3b164970b66e58bd6f31d21c8b1df8fde5afcf501bed5563a4ceeb3ba2a"
+    },
+    {
+      "trial": "384-lower_bounds-go-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "74000be5956c333047f4b216fe48e3789de899122974351725531c6a6545d7c0"
+    },
+    {
+      "trial": "385-lower_bounds-c-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f88e206bc20e41c904667750aaae57c4e74944e28f7cce23866580dcb1bd3c8d"
+    },
+    {
+      "trial": "386-transaction_ledger-c-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "f692a4a50382a4a9050210741c1b2070547e8b878900eddfdbc297552b98da16"
+    },
+    {
+      "trial": "387-transaction_ledger-go-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "7a4ec637ab86fb0ddb18bd35bbddbc97135972c3292ac27aea9c989abbd37490"
+    },
+    {
+      "trial": "388-edit_distance-go-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "677a3055d4a993e6f1564b2aeab6b657e0254f9da4053a188053432c79a4c39e"
+    },
+    {
+      "trial": "389-edit_distance-c-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "db7fa42c258733483ddb07b518ad0b22d852b7af2cb477684feb05acac8fdaf4"
+    },
+    {
+      "trial": "390-dependency_order-go-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "8e64ce170e1002b31fa7e149647619b3b24cccb13d6e3d58a04686a47dcf89f9"
+    },
+    {
+      "trial": "391-dependency_order-c-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "697908369bb217f71c47ecc0f962df02ab9d6751b46ae895627a2411a8a57661"
+    },
+    {
+      "trial": "392-grid_distance-go-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "34e9b9132f999bd8ea3f2c39f339e16a1c7f70de96fe141eff4474c68d4be11b"
+    },
+    {
+      "trial": "393-grid_distance-c-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "eca997d7bde8befa03399d82f6cdfff992386709d7e44c0c222757efe84983c6"
+    },
+    {
+      "trial": "394-rpn-c-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "08fd6fb951909bd343b71c216f49a5e3d9e69f1622c23fb2a8421d7d6e812817"
+    },
+    {
+      "trial": "395-rpn-go-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "ecd4d27c7d413d277e8ffc4410386d883ccb0291330fc23b382598fadb979a54"
+    },
+    {
+      "trial": "396-rational_sum-c-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "2186a03e7b0f7b270f53c6e9c95da0d47b37839ea56719e241ed601be03d2a23"
+    },
+    {
+      "trial": "397-rational_sum-go-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "5f05331c861250e5552dc6938245f944b5f4754bf557bec27c9475fbc5763a90"
+    },
+    {
+      "trial": "398-merge_intervals-c-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "0534c74bd49a20e67d851f9b4539b2a58c90f62bdd6cea5789e5f33e099ebd24"
+    },
+    {
+      "trial": "399-merge_intervals-go-r19",
+      "schedule_usage_source_stop_checks": "passed",
+      "compiler_or_case_wall_timeout": false,
+      "event_log_sha256": "458ce85d474f57c9b4f557eedb7db7d5961dfd89372393a3ce9ae1920f1f9597"
+    }
+  ],
+  "batch_unchanged": false,
+  "recovery": {
+    "amendment": "jsonl-recovery-2026-10-09",
+    "original_batch": "20261008T173711298748Z",
+    "original_registration_commit": "c25122721195e3a34cde3a09a1c25d28007c12df",
+    "original_source_sha256": {
+      "bench.py": "77205c76a524bedb6d881a5d8859c89575ff76cc7f6df1e412f085b56fb26145",
+      "judge.py": "8934214aab0f915d29bcdc198b2340471b855d21d17422d61b628eeb814d988e",
+      "tasks.py": "e417dc76c1f02fa0eaed873ea9ddc3498dc8003b63625001d635373cd0ad20eb",
+      "extra_tasks.py": "e2d55a666320c1a059bc4912107b668249b5d06c024958f5e26ac9137cf89874",
+      "pi/benchmark.ts": "2065b7f78d70267598a4d590055edec07aa575328f1ab96d5bd6695444ed60e5",
+      "analysis.py": "5fdbfa114a08cf866fa4c7bebd55e82eb39702920dc81f76a419cb2806d3e9fb",
+      "experiments/study.json": "4b76b5ab2fc92ab5a6f2d2621429046c700b3024e9911e9a3e08166930d5079f",
+      "Modelfile": "09a4faef37eef6afe2c9b9edc7cf8318029a51660c0fc6c5c38d8a8b8722a422",
+      "checkpoints.py": "13c1c1c9f2d4941ef679fdc954c5ebfa36e07d9dc975716f231d50f0348b1dac"
+    },
+    "imported_results_unchanged": 320,
+    "recovered_trial": "320-word_counts-go-r16",
+    "recovered_prefix_count": 321,
+    "missing_elapsed_seconds_trials": 1,
+    "missing_returncode_trials": 1,
+    "generation_replayed": false,
+    "qualification": "Amended recovery study; not the original unamended frozen confirmation."
+  },
+  "agent_seconds": null,
+  "recorded_agent_seconds": 34264.77312520906,
+  "missing_timing_trials": 1,
+  "wall_seconds_approx": 72486.58671188354,
+  "timeouts": 0,
+  "compiler_or_case_wall_timeout_trials": 9,
+  "incomplete_usage_trials": 0,
+  "infrastructure_errors": 0,
+  "note": "Usage checks reconcile completed messages only. Wall time uses the original batch start, including recovery downtime if applicable. Missing agent time is not imputed."
+}

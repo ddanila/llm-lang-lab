@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int N;
+    if (scanf("%d", &N) != 1) return 0;
+
+    long balance = 0;
+    long *saved_balances = NULL;
+    int top = -1; // stack pointer, empty when top == -1
+
+    for (int i = 0; i < N; i++) {
+        char cmd[64];
+        if (scanf("%s", cmd) != 1) break;
+
+        if (cmd[0] == 'A' && cmd[1] == 'D' && cmd[2] == 'D') { // ADD
+            int x;
+            scanf("%d", &x);
+            balance += x;
+        } else if (cmd[0] == 'B' && cmd[1] == 'E' && cmd[2] == 'G' && cmd[3] == 'I' && cmd[4] == 'N') { // BEGIN
+            saved_balances = realloc(saved_balances, ++top + 1);
+            if (saved_balances) saved_balances[top] = balance;
+        } else if (cmd[0] == 'R' && cmd[1] == 'O' && cmd[2] == 'L' && cmd[3] == 'L' && cmd[4] == 'B' && cmd[5] == 'A' && cmd[6] == 'C' && cmd[7] == 'K') { // ROLLBACK
+            if (top < 0) {
+                printf("ERROR\n");
+            } else {
+                balance = saved_balances[top];
+                top--;
+            }
+        } else if (cmd[0] == 'C' && cmd[1] == 'O' && cmd[2] == 'M' && cmd[3] == 'M' && cmd[4] == 'I' && cmd[5] == 'T') { // COMMIT
+            if (top < 0) {
+                printf("ERROR\n");
+            } else {
+                top--;
+            }
+        } else if (cmd[0] == 'P' && cmd[1] == 'R' && cmd[2] == 'I' && cmd[3] == 'N' && cmd[4] == 'T') { // PRINT
+            printf("%ld\n", balance);
+        }
+    }
+
+    free(saved_balances);
+    return 0;
+}

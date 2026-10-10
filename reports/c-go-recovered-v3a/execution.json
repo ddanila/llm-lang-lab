@@ -1,0 +1,35 @@
+{
+  "stage": "validated",
+  "study_id": "c-go-recovered-v3a",
+  "started_utc": "2026-10-09T11:40:36.972627+00:00",
+  "updated_utc": "2026-10-10T00:23:02.806609+00:00",
+  "registration_commit": "b4bc944c3fa40a3a4c1d15f6e46035f8b6a9997c",
+  "batches": [
+    "20261009T113047097658Z",
+    "20261009T134522238478Z"
+  ],
+  "publish_requested": true,
+  "source_sha256": {
+    "bench.py": "1511ee91336ac5170c364a126aa539f1ff27c20c4efc386797a70b40a992cdc2",
+    "judge.py": "8934214aab0f915d29bcdc198b2340471b855d21d17422d61b628eeb814d988e",
+    "tasks.py": "e417dc76c1f02fa0eaed873ea9ddc3498dc8003b63625001d635373cd0ad20eb",
+    "extra_tasks.py": "e2d55a666320c1a059bc4912107b668249b5d06c024958f5e26ac9137cf89874",
+    "pi/benchmark.ts": "2065b7f78d70267598a4d590055edec07aa575328f1ab96d5bd6695444ed60e5",
+    "analysis.py": "67eac6b36f07ca1eeb1099d23fc214c62530f042b9f5499465805d769c1ad9b8",
+    "experiments/study.json": "bebb2cf037d88d04a0fdeba0478b41a136971ad041f398e03e182c5f5cc61cf9",
+    "Modelfile": "09a4faef37eef6afe2c9b9edc7cf8318029a51660c0fc6c5c38d8a8b8722a422",
+    "checkpoints.py": "b1be4b89425f272aa2a4aa2c468e31b147b8557895911a5c1f73d0d12579cf16",
+    "recovery.py": "e766c16e8760aad2072583b604ca7f846573eae8bb7a8e02f61506f3c6e80069",
+    "experiments/recovery-prefix.json": "4fe395e1aa173d9dd63f80d19a2ac81c31523d0d976cee5588ecd3340b3f05e1"
+  },
+  "checkpoint_seconds": 3600,
+  "checkpoints_published": 14,
+  "last_publication_commit": "c4cb2fd8af236b26401223272acea5d6804546ce",
+  "last_checkpoint": {
+    "batch": "20261009T134522238478Z",
+    "completed_trials": 400,
+    "report": "checkpoints/c-go-recovered-v3a/20261009T134522238478Z"
+  },
+  "recovery_amendment": "jsonl-recovery-2026-10-09",
+  "original_driver_archive": ".local/archive/v3-20261008T173711298748Z"
+}
