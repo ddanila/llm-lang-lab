@@ -24,10 +24,18 @@ bug. The user authorized a [recovery amendment](experiments/recovery-amendment.m
 retain those results, recover trial 321 without another model call, and continue
 at trial 322. Its missing timing is explicit. Original evidence remains unchanged.
 
-The amended study keeps the original 800-trial schedule and decision thresholds,
-with hourly [progress backups](checkpoints/README.md). The final
-[joint report](reports/c-go-recovered-v3a/README.md) will identify the amendment;
-it will not claim to be the original unamended frozen confirmation.
+The amended study completed all **800 trials**, with hourly
+[progress backups](checkpoints/README.md). The
+[joint report](reports/c-go-recovered-v3a/README.md) is **inconclusive under the
+recovery amendment**: Go scored slightly higher in both batches, but neither
+established an advantage or equivalence. It is not the original unamended
+frozen confirmation.
+
+The [post-study analysis](reports/c-go-recovered-v3a/poststudy/README.md) examines
+task effects, repair behavior and the limits of one-hour comparisons. It proposes
+short function-level screens and selective held-out confirmation, with a
+reproducible diagnostic script. These are proposals for a new experiment; the
+completed study's rules and results remain unchanged.
 
 ## Run locally
 
