@@ -66,6 +66,11 @@ python3 bench.py plan                # inspect the 12-trial pilot without infere
 python3 bench.py run                 # explicitly launch that pilot
 ```
 
+The adapter tests drive a real pi process against a fake local provider with a
+30-second budget per trial. If several of them fail together with
+"pi trial did not finish normally", the pi process stalled on this machine and
+the message carries its stderr; rerun the suite before suspecting the harness.
+
 Model selection is intentionally modest: the initial machine is an Apple M3 Pro
 with 36 GiB unified RAM. The existing model occupies about 6.6 GB on disk.
 The smoke test reported about 6 GB loaded, 100% GPU, with a 16,384-token context.

@@ -12,6 +12,9 @@ from bench import ROOT, run_one
 
 BAD = '#include <stdio.h>\nint main(void){puts("0");}'
 OVERFIT = '#include <stdio.h>\nint main(void){int n;scanf("%d",&n);if(n==3)puts("2\\n1 4\\n7 9");else if(n==0)puts("0");else puts("2\\n1 2\\n3 4");}'
+# Stops that mean the agent process or its event stream failed, not the candidate.
+INFRASTRUCTURE_STOPS = ("timeout", "shutdown_timeout", "invalid_event_stream", "infrastructure_error")
+
 CORRECT = """
 #include <stdio.h>
 #include <stdlib.h>
@@ -82,8 +85,19 @@ class PiAdapter(unittest.TestCase):
                 result = run_one(Path(d),config,{
                     "language":"c","task":"merge_intervals","repeat":0,"sampling_seed":123
                 },0)
-                work=next(Path(d).glob("*/work"))
+                trial=next(Path(d).glob("*-merge_intervals-c-r0"))
+                work=trial/"work"
                 source=(work/"main.c").read_text() if (work/"main.c").exists() else None
+                if result["stop"] in INFRASTRUCTURE_STOPS:
+                    # The trial never reached a controlled stop. Report the agent-side
+                    # evidence before the temporary directory disappears, so a stalled
+                    # pi process or event stream is not mistaken for a protocol bug.
+                    stderr=(trial/"stderr.txt").read_text(errors="replace")[-4000:]
+                    self.fail(f"pi trial did not finish normally: stop={result['stop']} "
+                              f"elapsed={result['elapsed_seconds']:.1f}s of {config['max_seconds']}s "
+                              f"returncode={result['returncode']} fake_provider_requests={len(requests)} "
+                              f"assistant_turns={result['assistant_turns']} errors={result['errors']}\n"
+                              f"pi stderr (tail):\n{stderr or '<empty>'}")
             return result,requests,source
         finally:
             server.shutdown(); server.server_close(); thread.join()
