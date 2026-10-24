@@ -1,12 +1,17 @@
 # C versus Go: amended recovery study v3a
 
-Status: **authorized recovery; continue at trial 322**. The original invalid batch
-is preserved. The amended batch imports 320 unchanged results and one recovered
-trial with explicitly missing timing. No model generation is replayed.
+Status: **completed 2026-10-10; result inconclusive under the recovery amendment**.
+Both batches finished all 400 trials; see the
+[joint report](../reports/c-go-recovered-v3a/README.md) and the
+[post-study analysis](../reports/c-go-recovered-v3a/poststudy/README.md).
+The registration below is kept as written at the 2026-10-09 recovery point and
+is not to be edited; the execution commands are historical. The original invalid
+batch is preserved. The amended batch imported 320 unchanged results and one
+recovered trial with explicitly missing timing. No model generation was replayed.
 
 Read the [recovery amendment](recovery-amendment.md) for the exception, exact evidence
 hashes, missing measurements, and analysis qualification. Seeds, tasks, limits,
-repeats and decision thresholds below are unchanged from v3. Final results will be
+repeats and decision thresholds below are unchanged from v3. Final results are
 [reported as amended](../reports/c-go-recovered-v3a/README.md), not as the original
 unamended frozen confirmation. Historical registration is under history/v3/.
 

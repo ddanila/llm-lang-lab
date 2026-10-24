@@ -220,6 +220,9 @@ VM/container before evaluating untrusted models or sources.
 `audit_batch.py` reconciles raw traces; `checkpoints.py` seals and exports progress.
 `run_study.py` runs the frozen A/B sequence
 and can publish validated reports when explicitly invoked with `--publish`.
+`recovery.py` validates the registered recovery prefix; `poststudy.py` computes the
+exploratory post-study diagnostics; `function_bench.py` is the function-level
+development slice, with no pi runner yet.
 `config.json` and `Modelfile` specify the pilot; `experiments/` freezes confirmation.
 
 References:

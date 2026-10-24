@@ -1,5 +1,10 @@
 # Amended study execution
 
+**Completed 2026-10-10.** Both batches reached 400 trials and the
+[joint report](../reports/c-go-recovered-v3a/README.md) is published. The text
+below is the execution record as registered on 2026-10-09; its commands are not
+to be rerun against the finished batches.
+
 The user authorized the [JSONL recovery amendment](recovery-amendment.md).
 A new batch contains 320 unchanged observations and one recovered failed trial
 with missing elapsed time and return code. The original invalid batch stays intact.
