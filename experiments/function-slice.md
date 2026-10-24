@@ -57,6 +57,9 @@ The next implementation step is a separate pi submission adapter and runner that
 4. Preserves the completion record and clean pair-boundary checkpoints, with
    fake-provider tests before any real model pilot.
 
+The [plan of 2026-10-24](plan.md) places the broader task bank ahead of this
+runner work; the two tasks here are the first entries of that bank.
+
 Then run the small calibration, compare measured token counts and timings with
 the corresponding whole-program tasks descriptively, and decide whether to build
 the broader 40-trial screen. A causal claim about speedup requires fresh randomized

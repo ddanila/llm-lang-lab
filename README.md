@@ -37,6 +37,11 @@ short function-level screens and selective held-out confirmation, with a
 reproducible diagnostic script. These are proposals for a new experiment; the
 completed study's rules and results remain unchanged.
 
+The [plan of 2026-10-24](experiments/plan.md) orders the next work: a broader
+verified task bank first, a second model in the screening stage, controlled
+feature-on/off variants of an existing language before any new language, and a
+decision rule chosen by simulation. Nothing in it is registered yet.
+
 An initial [function-level development slice](experiments/function-slice.md) now
 provides C/Go adapters, independent oracle checks and compiler-tested reference
 solutions and mutants. Its eight-trial pilot is a draft awaiting pi integration;

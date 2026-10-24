@@ -1,5 +1,8 @@
 # Post-study analysis and a faster A/B method
 
+Follow-up ordering and a first feature experiment are in the
+[plan of 2026-10-24](../../../experiments/plan.md). This report is unchanged.
+
 2026-10-10. Exploratory analysis of the completed 800 observations. The frozen
 result remains **inconclusive under the recovery amendment**. A and B are
 reported separately throughout; no pooled test is used to rescue a winner.
